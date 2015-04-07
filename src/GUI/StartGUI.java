@@ -25,15 +25,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-
-public class StartMenyGUI extends JPanel implements ActionListener{
+/**
+ * Start menu GUI
+ * @author Anders Frid
+ *
+ */
+public class StartGUI extends JPanel implements ActionListener{
 	private JButton jbtSingle, jbtMulti, jbtClose, jbtMusic, jbtFx;
 	private JLabel lblLogo;
 	private JPanel pnlCenter = new JPanel();
 	private JFrame frame = new JFrame();
 	private StartBGMusic sm = new StartBGMusic();
 	
-	public StartMenyGUI()
+	public StartGUI()
 	{
 		
 		JPanel bgpanel = new BgPanel(); 
@@ -43,16 +47,16 @@ public class StartMenyGUI extends JPanel implements ActionListener{
 		pnlCenter.setBounds(0, 0, 1000, 700);
 		pnlCenter.setOpaque(false);
 
-		ImageIcon iconLogo = new ImageIcon("Images/text.png");
+		ImageIcon iconLogo = new ImageIcon("Images/logo_big_800x275.png");
 		lblLogo = new JLabel(iconLogo);
 		
-		ImageIcon iconSingle = new ImageIcon("Images/singleplayer.png");
+		ImageIcon iconSingle = new ImageIcon("Images/b_singelplayer310x100.png");
 		jbtSingle = new JButton(iconSingle);
 		
-		ImageIcon iconMulti = new ImageIcon("Images/multiplayer.png");
+		ImageIcon iconMulti = new ImageIcon("Images/b_multiplayer_310x100.png");
 		jbtMulti = new JButton(iconMulti);
 		
-		ImageIcon iconClose = new ImageIcon("Images/exit.png");
+		ImageIcon iconClose = new ImageIcon("Images/b_exit_640x100.png");
 		jbtClose = new JButton(iconClose);
 		
 		ImageIcon iconMusic = new ImageIcon("Images/music.jpg");
@@ -141,7 +145,7 @@ public class StartMenyGUI extends JPanel implements ActionListener{
     	SwingUtilities.invokeLater(new Runnable(){
             public void run()
             {
-                new StartMenyGUI();
+                new StartGUI();
             }
         });
     }
