@@ -1,27 +1,29 @@
 package GUI;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 public class RoundButton extends JButton {
-	public RoundButton(String label) {
-
+	private Shape icon;
+	public RoundButton(Shape iconKogg) {
+		this.icon = iconKogg;
 	}
 
 
 	protected void paintComponent(Graphics g) {
 		if (getModel().isArmed()) {
 			
-			g.setColor(Color.GREEN);
+			g.setClip(icon);
 		} else {
-			g.setColor(getBackground());
+//			g.setColor(getBackground());
 		}
 		g.fillOval(0, 0, 50, 50);
 
 	}
 
 	protected void paintBorder(Graphics g) {
-		g.setColor(Color.WHITE);
+		g.setClip((Shape) icon);
 		g.drawOval(0, 0, 50, 50);
 	}
 }

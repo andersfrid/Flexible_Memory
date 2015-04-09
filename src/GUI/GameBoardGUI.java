@@ -1,13 +1,13 @@
 package GUI;
 
 import java.awt.BorderLayout;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.LayoutManager;
+import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -42,22 +42,33 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		
 		MainPanel.add(northPanel, BorderLayout.NORTH);
 		//labels
-		playerOneName = new JLabel("PLAYER ONE");
-		playerOneName.setBounds(150, 10, 250, 100);
+		ImageIcon iconPlayer1 = new ImageIcon("Images/txt_player1_150x50.png");
+		playerOneName = new JLabel(iconPlayer1);
+		playerOneName.setBounds(50, 10, 150, 50);
+		
 		ImageIcon iconLogo = new ImageIcon("Images/logo_smal_550x75.png");
 		logo = new JLabel(iconLogo);
-		logo.setBounds(300, 10, 550, 75);
-		playerTwoName = new JLabel("PLAYER TWO");
-		playerTwoName.setBounds(550, 10, 750, 100);
-		scorePlayerOne = new JLabel("Score: 0");
-		scorePlayerOne.setBounds(160, 100, 250, 100);
-		level = new JLabel("Vilken nivå du spelar");
-		level.setBounds(300, 100, 500, 100);
-		scorePlayerTwo = new JLabel("Score: 10");
-		scorePlayerTwo.setBounds(550, 100, 750, 100);
+		logo.setBounds(225, 10, 550, 75);
+		
+		ImageIcon iconPlayer2 = new ImageIcon("Images/txt_player2_150x50.png");
+		playerTwoName = new JLabel(iconPlayer2);
+		playerTwoName.setBounds(800, 10, 150, 50);
+		
+		ImageIcon iconScore1 = new ImageIcon("Images/txt_score_150x50.png");
+		scorePlayerOne = new JLabel(iconScore1);
+		scorePlayerOne.setBounds(50, 100, 150, 50);
+		
+		ImageIcon iconLevel = new ImageIcon("Images/txt_hard_200x50.png");
+		level = new JLabel(iconLevel);
+		level.setBounds(400, 100, 200, 50);
+		
+		ImageIcon iconScore2 = new ImageIcon("Images/txt_score_150x50.png");
+		scorePlayerTwo = new JLabel(iconScore2);
+		scorePlayerTwo.setBounds(800, 100, 150, 50);
 		//button
-		button = new RoundButton("KUGGHJUL");
-		button.setBounds(50, 75, 50, 50);
+//		ImageIcon iconKogg = new ImageIcon("Images/kogg.jpg");
+//		button = new JButton(iconKogg);
+//		button.setBounds(50, 75, 50, 50);
 		
 		northPanel.add(playerOneName);
 		northPanel.add(logo);
@@ -65,7 +76,7 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		northPanel.add(scorePlayerOne);
 		northPanel.add(level);
 		northPanel.add(scorePlayerTwo);
-		northPanel.add(button);
+//		northPanel.add(button);
 		//frame
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
