@@ -81,7 +81,8 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		frame.add(MainPanel);
+		frame.setContentPane(MainPanel);
+		frame.add(northPanel);
 		frame.pack();
 		frame.setVisible(true);
 	}

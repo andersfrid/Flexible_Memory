@@ -5,6 +5,7 @@ import java.applet.AudioClip;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -25,6 +26,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import com.sun.prism.paint.Color;
+
 /**
  * Start menu GUI
  * @author Anders Frid
@@ -36,6 +39,9 @@ public class StartGUI extends JPanel implements ActionListener{
 	private JPanel pnlCenter = new JPanel();
 	private JFrame frame = new JFrame();
 	private StartBGMusic sm = new StartBGMusic();
+	private ControllerGUI controller;
+	private ChooseGameGUI cgGUI;
+	private StartGUI sGUI;
 	
 	public StartGUI()
 	{
@@ -59,19 +65,36 @@ public class StartGUI extends JPanel implements ActionListener{
 		ImageIcon iconClose = new ImageIcon("Images/b_exit_640x100.png");
 		jbtClose = new JButton(iconClose);
 		
-		ImageIcon iconMusic = new ImageIcon("Images/music.jpg");
+		ImageIcon iconMusic = new ImageIcon("Images/b_volume_on_50x50.png");
 		jbtMusic = new JButton(iconMusic);
 		
-		ImageIcon iconFx = new ImageIcon("Images/fx.png");
+		ImageIcon iconFx = new ImageIcon("Images/b_sfx_on_50x50.png");
 		jbtFx = new JButton(iconFx);
 		
 		lblLogo.setBounds(0, 0, 1000, 300);
-		jbtSingle.setBounds(180, 400, 310, 100);
-		jbtMulti.setBounds(510, 400, 310, 100);
-		jbtClose.setBounds(180, 550, 640, 100);
-		jbtMusic.setBounds(10, 600, 40, 40);
-		jbtFx.setBounds(70, 600, 40, 40);
 		
+		jbtSingle.setBounds(180, 400, 310, 100);
+		jbtSingle.setBorderPainted(false);
+		
+		jbtMulti.setBounds(510, 400, 310, 100);
+		jbtMulti.setBorderPainted(false);
+		
+		jbtClose.setBounds(180, 520, 640, 100);
+		jbtClose.setBorderPainted(false);
+		
+		jbtMusic.setBounds(10, 600, 50, 50);
+		jbtMusic.setBorderPainted(false);
+		jbtMusic.setBorder(null);
+		jbtMusic.setFocusable(false);
+		jbtMusic.setMargin(new Insets(0,0,0,0));
+		jbtMusic.setContentAreaFilled(false	);
+		
+		jbtFx.setBounds(70, 600, 50, 50);
+		jbtFx.setBorderPainted(false);
+		jbtFx.setBorder(null);
+		jbtFx.setFocusable(false);
+		jbtFx.setMargin(new Insets(0,0,0,0));
+		jbtFx.setContentAreaFilled(false	);
 		
 		bgpanel.add(pnlCenter);
 		pnlCenter.add(lblLogo);
@@ -103,10 +126,10 @@ public class StartGUI extends JPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == jbtSingle){
-			
+
 		}
 		if(e.getSource() == jbtMulti){
-			
+			controller.chooseMulti();
 		}
 		if(e.getSource() == jbtClose){
 			System.exit(0);
@@ -134,20 +157,23 @@ public class StartGUI extends JPanel implements ActionListener{
     }
 	
 	private class BgPanel extends JPanel {
-	    Image bg = new ImageIcon("Images/mario.jpg").getImage();
+	    Image bg = new ImageIcon("Images/mario_1.jpg").getImage();
 	    @Override
 	    public void paintComponent(Graphics g) {
 	        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 	    }
 	}
 	
-    public static void main(String args[]){
-    	SwingUtilities.invokeLater(new Runnable(){
-            public void run()
-            {
-                new StartGUI();
-            }
-        });
-    }
+//    public static void main(String args[]){
+//    	SwingUtilities.invokeLater(new Runnable(){
+//            public void run()
+//            {
+//                new StartGUI();
+//            }
+//        });
+//    }
+	public static void main(String args[]){
+		new StartGUI();
+	}
 
 }
