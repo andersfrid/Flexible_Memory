@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -38,11 +39,19 @@ public class SettingsPanel extends JPanel{
 		ImageIcon iconMusic = new ImageIcon("Images/b_volume_on_50x50.png");
 		musicButton = new JButton(iconMusic);
 		musicButton.setBounds(125, 337, 50, 50);
-		musicButton.setOpaque(false);
+		musicButton.setBorderPainted(false);
+		musicButton.setBorder(null);
+		musicButton.setFocusable(false);
+		musicButton.setMargin(new Insets(0, 0, 0, 0));
+		musicButton.setContentAreaFilled(false);
 		ImageIcon iconSound = new ImageIcon("Images/b_sfx_on_50x50.png");
 		soundButton = new JButton(iconSound);
 		soundButton.setBounds(225, 337, 50, 50);
-		soundButton.setOpaque(false);
+		soundButton.setBorderPainted(false);
+		soundButton.setBorder(null);
+		soundButton.setFocusable(false);
+		soundButton.setMargin(new Insets(0, 0, 0, 0));
+		soundButton.setContentAreaFilled(false);
 		
 		panel.add(logo);
 		panel.add(restartButton);
