@@ -58,7 +58,7 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		scorePlayerOne = new JLabel(iconScore1);
 		scorePlayerOne.setBounds(50, 100, 150, 50);
 		
-		ImageIcon iconLevel = new ImageIcon("Images/txt_hard_200x50.png");
+		ImageIcon iconLevel = new ImageIcon("Images/txt_medium_200x50.png");
 		level = new JLabel(iconLevel);
 		level.setBounds(400, 100, 200, 50);
 		
