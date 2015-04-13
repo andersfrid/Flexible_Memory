@@ -25,7 +25,7 @@ import javax.swing.SwingUtilities;
  */
 public class GameBoardGUI extends JPanel implements ActionListener{
 	private JLabel playerOneName, playerTwoName, scorePlayerOne, scorePlayerTwo, level, logo;
-	private JPanel MainPanel, northPanel;
+	private JPanel MainPanel, northPanel, GameArea;
 	private JFrame frame;
 	private JButton button;
 	
@@ -41,12 +41,13 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		northPanel.setOpaque(false);
 		
 		MainPanel.add(northPanel, BorderLayout.NORTH);
+		
 		//labels
 		ImageIcon iconPlayer1 = new ImageIcon("Images/txt_player1_150x50.png");
 		playerOneName = new JLabel(iconPlayer1);
 		playerOneName.setBounds(50, 10, 150, 50);
 		
-		ImageIcon iconLogo = new ImageIcon("Images/logo_smal_550x75.png");
+		ImageIcon iconLogo = new ImageIcon("Images/logo_small_550x75.png");
 		logo = new JLabel(iconLogo);
 		logo.setBounds(225, 10, 550, 75);
 		
@@ -65,10 +66,19 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		ImageIcon iconScore2 = new ImageIcon("Images/txt_score_150x50.png");
 		scorePlayerTwo = new JLabel(iconScore2);
 		scorePlayerTwo.setBounds(800, 100, 150, 50);
+		
 		//button
 //		ImageIcon iconKogg = new ImageIcon("Images/kogg.jpg");
 //		button = new JButton(iconKogg);
 //		button.setBounds(50, 75, 50, 50);
+		
+		//Gamepanel
+		GameArea = new JPanel();
+//		GameArea.setLayout(new BorderLayout());
+		GameArea.setPreferredSize(new Dimension(100,100));
+		GameArea.setBackground(new Color(100,0,100));
+		MainPanel.add(GameArea, BorderLayout.CENTER);
+		
 		
 		northPanel.add(playerOneName);
 		northPanel.add(logo);
@@ -77,14 +87,14 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		northPanel.add(level);
 		northPanel.add(scorePlayerTwo);
 //		northPanel.add(button);
-		//frame
+		
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		frame.setContentPane(MainPanel);
-		frame.add(northPanel);
+		frame.add(MainPanel);
 		frame.pack();
 		frame.setVisible(true);
+
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -94,8 +104,10 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		
 	}
 	
+	
+	
 	private class BackgroundPanel extends JPanel {
-		private Image backGround = new ImageIcon("Images/mario.jpg").getImage();
+		private Image backGround = new ImageIcon("Images/mario_1.jpg").getImage();
 	 
 		public void paintComponent(Graphics g) {
 	        g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
