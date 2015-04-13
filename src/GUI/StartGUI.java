@@ -42,7 +42,8 @@ public class StartGUI extends JPanel implements ActionListener{
 	
 
 	
-	public StartGUI(){
+	public StartGUI(ControllerGUI controller){
+		this.controller = controller;
 		
 		JPanel bgPanel = new BgPanel(); 
 		bgPanel.setPreferredSize(new Dimension(1000,700));
@@ -116,9 +117,9 @@ public class StartGUI extends JPanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		int choose = 0;
+		
 		if(e.getSource() == jbtSingle){
-			choose = 1;
+			controller.chooseSingle();
 		}
 		if(e.getSource() == jbtMulti){
 			controller.chooseMulti();
@@ -132,7 +133,7 @@ public class StartGUI extends JPanel implements ActionListener{
 		if(e.getSource() == jbtFx){
 			
 		}
-		controller.chooseSingle(choose);
+		
 	}
 	
 //	private class StartBGMusic extends Applet { //Plays the background music
