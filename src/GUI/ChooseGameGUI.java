@@ -7,7 +7,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -19,82 +22,121 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
+
+
+
+
 
 
 import com.sun.prism.Image;
 
-public class ChooseGameGUI extends JPanel {
+
+/*
+ * @auth JGS
+ */
+
+public class ChooseGameGUI extends JPanel implements ActionListener {
 	
 	private JFrame frame = new JFrame("Flexible Memory");
-	private JPanel mainPanel, contentPanel, bg;
+	private JPanel mainPanel, contentPanel, bg, centerPanel;
 	private JButton btnEasy = new JButton("Easy");
 	private JButton btnMedium = new JButton("Medium");
 	private JButton btnHard = new JButton("Hard");
 	private JButton btnStart = new JButton("Start Game!");
-	private JLabel lblTitle = new JLabel("Flexible Memory");
-	private Font r28 = new Font("Rockwell", Font.PLAIN, 40);
-	private Font p28 = new Font("Papyrus", Font.BOLD, 50);
+	JButton btnSettings;
+	private JLabel lblTitle = new JLabel("Singleplayer");
+	private JLabel lblUsername = new JLabel("Enter your name below:");
+	private JTextField tfP1 = new JTextField();
+	private Font r60 = new Font("Rockwell", Font.PLAIN, 60);
+	private Font p50 = new Font("Papyrus", Font.BOLD, 50);
+	private Font r20 = new Font("Rockwell", Font.PLAIN, 20);
 	private Border blackline, raisedetched, loweredetched,
     raisedbevel, loweredbevel, empty;
 	
-	ChooseGameGUI() {
+	public ChooseGameGUI() {
 		
-		JPanel bgpanel = new BgPanel(); 
-		bgpanel.setLayout(null);
-		bgpanel.setBounds(0, 0, 1000, 700);
-			setPreferredSize(new Dimension(800, 800));
+//		JPanel bgpanel = new BgPanel(); 
+//		bgpanel.setLayout(null);
+//		bgpanel.setBounds(0, 0, 1000, 700);
+//			setPreferredSize(new Dimension(800, 800));
 			
 		//primaryPanel
 			mainPanel = new JPanel();
 			mainPanel.setLayout(null);
-			mainPanel.setPreferredSize(new Dimension(800, 800));
+			mainPanel.setPreferredSize(new Dimension(200, 200));
 			
 		
-		//secondaryPanel
-			bgpanel.add(contentPanel);
-			contentPanel = new JPanel();
+		//contentPanel
+			contentPanel = new BgPanel();
 			contentPanel.setLayout(null);
-			contentPanel.setPreferredSize( new Dimension(800, 800));
+			contentPanel.setPreferredSize( new Dimension(1000, 700));
 			
-			
-			btnEasy.setBounds(200, 200, 100, 40);
-			btnMedium.setBounds(350, 200, 100, 40);
-			btnHard.setBounds(500, 200, 100, 40);
-			btnStart.setBounds(225, 300, 370, 110);
-			lblTitle.setBounds(250, 30, 1000, 90);
-			lblTitle.setFont(r28);
-			btnStart.setFont(p28);
-			lblTitle.setBorder(blackline);
+			btnEasy.setBounds(311, 420, 100, 40);
+			btnMedium.setBounds(441, 420, 100, 40);
+			btnHard.setBounds(571, 420, 100, 40);
+			btnStart.setBounds(311, 540, 360, 110);
+			btnStart.setFont(p50);
 			ImageIcon iconSettings = new ImageIcon("Images/cog2.png");
-			JButton btnSettings = new JButton(iconSettings);
+			btnSettings = new JButton(iconSettings);
 			btnSettings.setBounds(10, 10, 50, 50);
 			
+
+		//set stuff invisible
+			btnSettings.setBorderPainted(false);
+			btnSettings.setBorder(null);
+			btnSettings.setFocusable(false);
+			btnSettings.setMargin(new Insets(0, 0, 0, 0));
+			btnSettings.setContentAreaFilled(false);
+				
+			tfP1.setBorder(null);
+			tfP1.setMargin(new Insets(0, 0, 0, 0));
+			tfP1.setOpaque(false);
 			
+		//mainPanel
+			mainPanel.setBounds(311, 30, 360, 400);
+			mainPanel.setOpaque(false);
+			lblUsername.setBounds(50, 150, 1500, 95);
+			lblUsername.setFont(r20);
+			lblTitle.setBounds(0, 0, 1000, 90);
+			lblTitle.setFont(r60);
+			tfP1.setBounds(100, 200, 150, 60);
+			
+			
+			//add components
 			contentPanel.add(btnEasy);
 			contentPanel.add(btnMedium);
 			contentPanel.add(btnHard);
-			contentPanel.add(lblTitle);
 			contentPanel.add(btnSettings);
 			contentPanel.add(btnStart);
-		//southPanel
+			contentPanel.add(mainPanel);
+			
+			mainPanel.add(lblTitle);
+			mainPanel.add(tfP1);
+			mainPanel.add(lblUsername);
+			
+//			if()
+//				contentPanel.add(singel)
+//			elsa
+//				contentPanel.add(multi);
 		
+			//actionListener
+			btnSettings.addActionListener(this);
 		
-		//mainPanel	
-			mainPanel.add(contentPanel);
+
+			
 		//Frame
 			frame = new JFrame("Flexible Memory");
 			frame.setPreferredSize(new Dimension(1000, 700));
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setContentPane(bgpanel);
 			frame.setVisible(true);
-			frame.add(mainPanel);
 			frame.add(contentPanel);
 			frame.pack();
 	}
 	
 	private class BgPanel extends JPanel {
-	    Image bg = new ImageIcon("Images/chooserBackground.png").getImage();
+	  private  java.awt.Image bg = new ImageIcon("Images/chooserBackground.jpg").getImage();
 	    @Override
 	    public void paintComponent(Graphics g) {
 	        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
@@ -102,8 +144,15 @@ public class ChooseGameGUI extends JPanel {
 	}
 	
 	
+	
 		
 	public static void main(String[] args) {
 		new ChooseGameGUI();
+	}
+
+	public void actionPerformed (ActionEvent e){
+		if (e.getSource() == btnSettings) {
+			System.out.println("David");
+		}
 	}
 }
