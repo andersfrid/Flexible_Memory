@@ -37,18 +37,17 @@ public class StartGUI extends JPanel implements ActionListener{
 	private JButton jbtSingle, jbtMulti, jbtClose, jbtMusic, jbtFx;
 	private JLabel lblLogo;
 	private JPanel pnlCenter = new JPanel();
-	private JFrame frame = new JFrame();
-	private StartBGMusic sm = new StartBGMusic();
+//	private StartBGMusic sm = new StartBGMusic();
 	private ControllerGUI controller;
-	private ChooseGameGUI cgGUI;
-	private StartGUI sGUI;
 	
-	public StartGUI()
-	{
+
+	
+	public StartGUI(){
 		
-		JPanel bgpanel = new BgPanel(); 
-		bgpanel.setLayout(null);
-		bgpanel.setBounds(0, 0, 1000, 700);
+		JPanel bgPanel = new BgPanel(); 
+		bgPanel.setPreferredSize(new Dimension(1000,700));
+		bgPanel.setLayout(null);
+		
 		pnlCenter.setLayout(null);
 		pnlCenter.setBounds(0, 0, 1000, 700);
 		pnlCenter.setOpaque(false);
@@ -96,7 +95,7 @@ public class StartGUI extends JPanel implements ActionListener{
 		jbtFx.setMargin(new Insets(0,0,0,0));
 		jbtFx.setContentAreaFilled(false	);
 		
-		bgpanel.add(pnlCenter);
+		bgPanel.add(pnlCenter);
 		pnlCenter.add(lblLogo);
 		pnlCenter.add(jbtSingle);
 		pnlCenter.add(jbtMulti);
@@ -110,23 +109,16 @@ public class StartGUI extends JPanel implements ActionListener{
 		jbtMusic.addActionListener(this);
 		jbtFx.addActionListener(this);
 		
-			
-		frame = new JFrame();
-		frame.setPreferredSize(new Dimension(1000, 700));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setContentPane(bgpanel);
-		frame.add(pnlCenter);
-		frame.setVisible(true);
-		frame.pack();
+//		sm.init();
 		
-		sm.init();
+		add(bgPanel);
 		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		int choose = 0;
 		if(e.getSource() == jbtSingle){
-
+			choose = 1;
 		}
 		if(e.getSource() == jbtMulti){
 			controller.chooseMulti();
@@ -135,26 +127,27 @@ public class StartGUI extends JPanel implements ActionListener{
 			System.exit(0);
 		}
 		if(e.getSource() == jbtMusic){
-			sm.audioClip.stop();
+			controller.init();
 		}
 		if(e.getSource() == jbtFx){
 			
 		}
+		controller.chooseSingle(choose);
 	}
 	
-	private class StartBGMusic extends Applet { //Plays the background music
-		AudioClip audioClip;	
-		
-		public void init(){
-			try {
-				audioClip = Applet.newAudioClip( new URL( "file:\\Users\\Anders\\Pictures\\gong.au"));
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			audioClip.loop();
-		}
-    }
+//	private class StartBGMusic extends Applet { //Plays the background music
+//		AudioClip audioClip;	
+//		
+//		public void init(){
+//			try {
+//				audioClip = Applet.newAudioClip( new URL( "file:\\Users\\Anders\\Pictures\\gong.au"));
+//			} catch (MalformedURLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			audioClip.loop();
+//		}
+//    }
 	
 	private class BgPanel extends JPanel {
 	    Image bg = new ImageIcon("Images/mario_1.jpg").getImage();
@@ -163,17 +156,4 @@ public class StartGUI extends JPanel implements ActionListener{
 	        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 	    }
 	}
-	
-//    public static void main(String args[]){
-//    	SwingUtilities.invokeLater(new Runnable(){
-//            public void run()
-//            {
-//                new StartGUI();
-//            }
-//        });
-//    }
-	public static void main(String args[]){
-		new StartGUI();
-	}
-
 }
