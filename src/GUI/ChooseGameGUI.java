@@ -30,7 +30,6 @@ import javax.swing.border.Border;
 
 
 
-import com.sun.prism.Image;
 
 
 /*
@@ -53,18 +52,15 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private JLabel lblUsernameP2 = new JLabel();
 	private JLabel lblTitle = new JLabel();
 	private JTextField tf = new JTextField();
-	private JTextField tfP1 = new JTextField();
-	private JTextField tfP2 = new JTextField();
+	private JTextField tfP1 = new JTextField("Enter Player 1's name");
+	private JTextField tfP2 = new JTextField("Enter Player 2's name");
 	private Font r60 = new Font("Rockwell", Font.PLAIN, 60);
 	private Font p50 = new Font("Papyrus", Font.BOLD, 50);
 	private Font r20 = new Font("Rockwell", Font.PLAIN, 20);
 	private Border blackline, raisedetched, loweredetched,
     raisedbevel, loweredbevel, empty;
-	private Boolean singlePlayer;
 	
-	public ChooseGameGUI(Boolean singlePlayer) {
-		
-		this.singlePlayer = singlePlayer;
+	public ChooseGameGUI() {
 		
 //		JPanel bgpanel = new BgPanel(); 
 //		bgpanel.setLayout(null);
@@ -93,7 +89,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			
 
 		//mainPanel
-			mainPanel.setBounds(311, 30, 360, 400);
+			mainPanel.setBounds(311, 30, 460, 400);
 			mainPanel.setOpaque(false);
 			lblUsername.setBounds(50, 150, 1500, 95);
 			lblUsername.setFont(r20);
@@ -117,12 +113,12 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			contentPanel.add(mainPanel);
 			
 		//singleplayer
-//			boolean singleplayer = true;
+			boolean singleplayer = false;
 			
-			if(singlePlayer == true) {	
-			lblTitle.setText("Singleplayer");
+			if(singleplayer == true) {	
+				lblTitle.setText("Singleplayer");
 			mainPanel.add(lblTitle);
-			lblUsername.setText("Enter your name below");
+				lblUsername.setText("Enter your name below");
 			mainPanel.add(tf);
 			mainPanel.add(lblUsername);
 			//set stuff invisible
@@ -135,10 +131,32 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			
 		//multiplayer	
 			else{
-				mainPanel.add(lblTitleP1);
-				mainPanel.add(lblTitleP2);
-				mainPanel.add(tfP1);
-				mainPanel.add(tfP2);
+				ImageIcon iconMP = new ImageIcon("Images/multiplayer.png");
+				
+				lblTitle.setIcon(iconMP);
+			mainPanel.add(lblTitle);
+			ImageIcon iconP1 = new ImageIcon("Images/txt_player1_150x50.png");
+			ImageIcon iconP2 = new ImageIcon("Images/txt_player2_150x50.png");
+			lblUsernameP1.setIcon(iconP1);
+			lblUsernameP2.setIcon(iconP2);
+			
+				lblUsernameP1.setBounds(0, 150, 150, 60);
+				lblUsernameP2.setBounds(225, 150, 150, 60);
+			mainPanel.add(tfP1);
+			mainPanel.add(tfP2);
+			
+			//set textfield invisible and bounds	
+				tfP1.setBounds(0, 200, 150, 60);
+				tfP1.setBorder(null);
+				tfP1.setMargin(new Insets(0, 0, 0, 0));
+				tfP1.setOpaque(false);
+			
+				tfP2.setBounds(225, 200, 150, 60);
+				tfP2.setBorder(null);
+				tfP2.setMargin(new Insets(0, 0, 0, 0));
+				tfP2.setOpaque(false);
+				
+				
 				mainPanel.add(lblUsernameP1);
 				mainPanel.add(lblUsernameP2);
 			}
@@ -147,16 +165,20 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			
 			//actionListener
 			btnSettings.addActionListener(this);
-		
+			btnEasy.addActionListener(this);
+			btnMedium.addActionListener(this);
+			btnHard.addActionListener(this);
+			btnStart.addActionListener(this);
+			
 			add(contentPanel);
 			
 		//Frame
-//			frame = new JFrame("Flexible Memory");
-//			frame.setPreferredSize(new Dimension(1000, 700));
-//			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//			frame.setVisible(true);
-//			frame.add(contentPanel);
-//			frame.pack();
+			frame = new JFrame("Flexible Memory");
+			frame.setPreferredSize(new Dimension(1000, 700));
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
+			frame.add(contentPanel);
+			frame.pack();
 	}
 	
 	private class BgPanel extends JPanel {
@@ -171,12 +193,31 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	
 		
 	public static void main(String[] args) {
-		new ChooseGameGUI(false);
+		new ChooseGameGUI();
 	}
 
 	public void actionPerformed (ActionEvent e){
 		if (e.getSource() == btnSettings) {
-			System.out.println("David");
+			System.out.println("Inställningar");
 		}
+		
+		if (e.getSource() == btnEasy) {
+			System.out.println("Lätt");
+			
+		}
+		if (e.getSource() == btnMedium) {
+			System.out.println("Medium");
+			
+		}
+		if (e.getSource() == btnHard) {
+			System.out.println("Svårt");
+			
+		}
+		if (e.getSource() == btnStart) {
+			System.out.println("Startar spelet.... INTE");
+			
+		}
+		
+		
 	}
 }
