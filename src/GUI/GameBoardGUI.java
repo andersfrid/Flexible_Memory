@@ -88,12 +88,14 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		northPanel.add(scorePlayerTwo);
 //		northPanel.add(button);
 		
-		frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.add(MainPanel);
-		frame.pack();
-		frame.setVisible(true);
+		add(MainPanel);
+		
+//		frame = new JFrame();
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.setResizable(false);
+//		frame.add(MainPanel);
+//		frame.pack();
+//		frame.setVisible(true);
 
 	}
 	
@@ -114,13 +116,13 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 	    }
 	}
 		
-	public static void main(String[]args){
-		SwingUtilities.invokeLater(
-				new Runnable(){
-					public void run(){
-						new GameBoardGUI();
-						
-			}
-		});	
-	}
+//	public static void main(String[]args){
+//		SwingUtilities.invokeLater(
+//				new Runnable(){
+//					public void run(){
+//						new GameBoardGUI();
+//						
+//			}
+//		});	
+//	}
 }

@@ -145,15 +145,15 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			//actionListener
 			btnSettings.addActionListener(this);
 		
-
+			add(contentPanel);
 			
 		//Frame
-			frame = new JFrame("Flexible Memory");
-			frame.setPreferredSize(new Dimension(1000, 700));
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setVisible(true);
-			frame.add(contentPanel);
-			frame.pack();
+//			frame = new JFrame("Flexible Memory");
+//			frame.setPreferredSize(new Dimension(1000, 700));
+//			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//			frame.setVisible(true);
+//			frame.add(contentPanel);
+//			frame.pack();
 	}
 	
 	private class BgPanel extends JPanel {
