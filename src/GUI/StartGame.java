@@ -9,7 +9,7 @@ public class StartGame {
 	private ControllerGUI controller = new ControllerGUI();
 	
 	public StartGame(){
-		controller.startGame();
+		controller.startFrame();
 	}
 	
 	public static void main(String[]args){

@@ -119,7 +119,7 @@ public class StartGUI extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == jbtSingle){
-			controller.chooseSingle();
+//			controller.chooseSingle();
 		}
 		if(e.getSource() == jbtMulti){
 			controller.chooseMulti();

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.Shape;
@@ -25,22 +26,24 @@ import javax.swing.SwingUtilities;
  */
 public class GameBoardGUI extends JPanel implements ActionListener{
 	private JLabel playerOneName, playerTwoName, scorePlayerOne, scorePlayerTwo, level, logo;
-	private JPanel MainPanel, northPanel, GameArea;
+	private JPanel mainPanel, northPanel, gameArea;
 	private JFrame frame;
 	private JButton button;
+	private JButton[] buttons = new JButton[40];
+	private int i;
 	
 	public GameBoardGUI(){
 		//panels
-		MainPanel = new BackgroundPanel();
-		MainPanel.setLayout(new BorderLayout());
-		MainPanel.setPreferredSize(new Dimension(1000,700));
+		mainPanel = new BackgroundPanel();
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.setPreferredSize(new Dimension(1000,700));
 		
 		northPanel = new JPanel();
 		northPanel.setPreferredSize(new Dimension(1000,200));
 		northPanel.setLayout(null);
 		northPanel.setOpaque(false);
 		
-		MainPanel.add(northPanel, BorderLayout.NORTH);
+		mainPanel.add(northPanel, BorderLayout.NORTH);
 		
 		//labels
 		ImageIcon iconPlayer1 = new ImageIcon("Images/txt_player1_150x50.png");
@@ -73,12 +76,19 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 //		button.setBounds(50, 75, 50, 50);
 		
 		//Gamepanel
-		GameArea = new JPanel();
-//		GameArea.setLayout(new BorderLayout());
-		GameArea.setPreferredSize(new Dimension(100,100));
-		GameArea.setBackground(new Color(100,0,100));
-		MainPanel.add(GameArea, BorderLayout.CENTER);
-		
+		gameArea = new JPanel();
+		gameArea.setLayout(new GridLayout(5,8,4,4));
+		gameArea.setPreferredSize(new Dimension(100,100));
+		gameArea.setOpaque(false);
+
+		ImageIcon cards = new ImageIcon("Images/card_95x120.jpg");
+		for(i =0; i<buttons.length; i++){
+			buttons[i] = new JButton(cards);
+			buttons[i].setSize(95, 120);
+			gameArea.add(buttons[i]);
+			
+		}
+		mainPanel.add(gameArea, BorderLayout.CENTER);
 		
 		northPanel.add(playerOneName);
 		northPanel.add(logo);
@@ -88,12 +98,13 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		northPanel.add(scorePlayerTwo);
 //		northPanel.add(button);
 		
-		add(MainPanel);
+		
+		add(mainPanel);
 		
 //		frame = new JFrame();
 //		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		frame.setResizable(false);
-//		frame.add(MainPanel);
+//		frame.add(mainPanel);
 //		frame.pack();
 //		frame.setVisible(true);
 

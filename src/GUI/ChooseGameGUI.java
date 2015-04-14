@@ -59,9 +59,13 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private Font r20 = new Font("Rockwell", Font.PLAIN, 20);
 	private Border blackline, raisedetched, loweredetched,
     raisedbevel, loweredbevel, empty;
+	private boolean singlePlayer;
+	private ControllerGUI controller;
 	
-	public ChooseGameGUI() {
+	public ChooseGameGUI(ControllerGUI controller) {
 		
+		this.singlePlayer = singlePlayer;
+		this.controller = controller;
 //		JPanel bgpanel = new BgPanel(); 
 //		bgpanel.setLayout(null);
 //		bgpanel.setBounds(0, 0, 1000, 700);
@@ -113,9 +117,9 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			contentPanel.add(mainPanel);
 			
 		//singleplayer
-			boolean singleplayer = false;
 			
-			if(singleplayer == true) {	
+			
+			if(singlePlayer == true) {	
 				lblTitle.setText("Singleplayer");
 			mainPanel.add(lblTitle);
 				lblUsername.setText("Enter your name below");
@@ -173,12 +177,12 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			add(contentPanel);
 			
 		//Frame
-			frame = new JFrame("Flexible Memory");
-			frame.setPreferredSize(new Dimension(1000, 700));
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setVisible(true);
-			frame.add(contentPanel);
-			frame.pack();
+//			frame = new JFrame("Flexible Memory");
+//			frame.setPreferredSize(new Dimension(1000, 700));
+//			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//			frame.setVisible(true);
+//			frame.add(contentPanel);
+//			frame.pack();
 	}
 	
 	private class BgPanel extends JPanel {
@@ -192,9 +196,9 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	
 	
 		
-	public static void main(String[] args) {
-		new ChooseGameGUI();
-	}
+//	public static void main(String[] args) {
+//		new ChooseGameGUI();
+//	}
 
 	public void actionPerformed (ActionEvent e){
 		if (e.getSource() == btnSettings) {
@@ -215,7 +219,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == btnStart) {
 			System.out.println("Startar spelet.... INTE");
-			
+			controller.startGame();
 		}
 		
 		
