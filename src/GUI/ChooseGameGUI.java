@@ -45,10 +45,16 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private JButton btnMedium = new JButton("Medium");
 	private JButton btnHard = new JButton("Hard");
 	private JButton btnStart = new JButton("Start Game!");
-	JButton btnSettings;
-	private JLabel lblTitle = new JLabel("Singleplayer");
-	private JLabel lblUsername = new JLabel("Enter your name below:");
+	private JButton btnSettings;
+	private JLabel lblTitleP1 = new JLabel();
+	private JLabel lblTitleP2 = new JLabel();
+	private JLabel lblUsername = new JLabel();
+	private JLabel lblUsernameP1 = new JLabel();
+	private JLabel lblUsernameP2 = new JLabel();
+	private JLabel lblTitle = new JLabel();
+	private JTextField tf = new JTextField();
 	private JTextField tfP1 = new JTextField();
+	private JTextField tfP2 = new JTextField();
 	private Font r60 = new Font("Rockwell", Font.PLAIN, 60);
 	private Font p50 = new Font("Papyrus", Font.BOLD, 50);
 	private Font r20 = new Font("Rockwell", Font.PLAIN, 20);
@@ -83,17 +89,6 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			btnSettings.setBounds(10, 10, 50, 50);
 			
 
-		//set stuff invisible
-			btnSettings.setBorderPainted(false);
-			btnSettings.setBorder(null);
-			btnSettings.setFocusable(false);
-			btnSettings.setMargin(new Insets(0, 0, 0, 0));
-			btnSettings.setContentAreaFilled(false);
-				
-			tfP1.setBorder(null);
-			tfP1.setMargin(new Insets(0, 0, 0, 0));
-			tfP1.setOpaque(false);
-			
 		//mainPanel
 			mainPanel.setBounds(311, 30, 360, 400);
 			mainPanel.setOpaque(false);
@@ -101,7 +96,13 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			lblUsername.setFont(r20);
 			lblTitle.setBounds(0, 0, 1000, 90);
 			lblTitle.setFont(r60);
-			tfP1.setBounds(100, 200, 150, 60);
+
+		//set settings invisible
+			btnSettings.setBorderPainted(false);
+			btnSettings.setBorder(null);
+			btnSettings.setFocusable(false);
+			btnSettings.setMargin(new Insets(0, 0, 0, 0));
+			btnSettings.setContentAreaFilled(false);
 			
 			
 			//add components
@@ -112,15 +113,35 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			contentPanel.add(btnStart);
 			contentPanel.add(mainPanel);
 			
-			mainPanel.add(lblTitle);
-			mainPanel.add(tfP1);
-			mainPanel.add(lblUsername);
+		//singleplayer
+			boolean singleplayer = true;
 			
-//			if()
-//				contentPanel.add(singel)
-//			elsa
-//				contentPanel.add(multi);
-		
+			if(singleplayer == true) {	
+				lblTitle.setText("Singleplayer");
+			mainPanel.add(lblTitle);
+				lblUsername.setText("Enter your name below");
+			mainPanel.add(tf);
+			mainPanel.add(lblUsername);
+			//set stuff invisible
+			tf.setBounds(100, 200, 150, 60);
+			tf.setBorder(null);
+			tf.setMargin(new Insets(0, 0, 0, 0));
+			tf.setOpaque(false);
+			}
+			
+			
+		//multiplayer	
+			else{
+				mainPanel.add(lblTitleP1);
+				mainPanel.add(lblTitleP2);
+				mainPanel.add(tfP1);
+				mainPanel.add(tfP2);
+				mainPanel.add(lblUsernameP1);
+				mainPanel.add(lblUsernameP2);
+			}
+			
+			
+			
 			//actionListener
 			btnSettings.addActionListener(this);
 		
