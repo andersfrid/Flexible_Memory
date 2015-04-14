@@ -24,7 +24,7 @@ public class ControllerGUI extends Applet{
 				new Runnable(){
 					public void run(){
 						frame.getContentPane().removeAll();
-						frame.add(new ChooseGameGUI());
+						frame.add(new ChooseGameGUI(true));
 						frame.getContentPane().revalidate();
 						frame.getContentPane().repaint();
 					
@@ -33,6 +33,17 @@ public class ControllerGUI extends Applet{
 
 	}
 	public void chooseMulti(){
+		SwingUtilities.invokeLater(
+				new Runnable(){
+					public void run(){
+						frame.getContentPane().removeAll();
+						frame.add(new ChooseGameGUI(false));
+						frame.getContentPane().revalidate();
+						frame.getContentPane().repaint();
+					
+					}
+				});
+
 	}
 	
 	public void startGame(){

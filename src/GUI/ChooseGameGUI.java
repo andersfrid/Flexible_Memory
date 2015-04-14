@@ -60,8 +60,11 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private Font r20 = new Font("Rockwell", Font.PLAIN, 20);
 	private Border blackline, raisedetched, loweredetched,
     raisedbevel, loweredbevel, empty;
+	private Boolean singlePlayer;
 	
-	public ChooseGameGUI() {
+	public ChooseGameGUI(Boolean singlePlayer) {
+		
+		this.singlePlayer = singlePlayer;
 		
 //		JPanel bgpanel = new BgPanel(); 
 //		bgpanel.setLayout(null);
@@ -114,12 +117,12 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			contentPanel.add(mainPanel);
 			
 		//singleplayer
-			boolean singleplayer = true;
+//			boolean singleplayer = true;
 			
-			if(singleplayer == true) {	
-				lblTitle.setText("Singleplayer");
+			if(singlePlayer == true) {	
+			lblTitle.setText("Singleplayer");
 			mainPanel.add(lblTitle);
-				lblUsername.setText("Enter your name below");
+			lblUsername.setText("Enter your name below");
 			mainPanel.add(tf);
 			mainPanel.add(lblUsername);
 			//set stuff invisible
@@ -168,7 +171,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	
 		
 	public static void main(String[] args) {
-		new ChooseGameGUI();
+		new ChooseGameGUI(false);
 	}
 
 	public void actionPerformed (ActionEvent e){
