@@ -11,9 +11,12 @@ import java.util.Random;
  *
  */
 public class RoundController {
+	//temp
+	private String background = "/maps/background/background_0";
+	
 	private int[][] currentGameBoard;
 	private Random rand = new Random();
-
+	
 	public RoundController() {
 	}
 
@@ -27,31 +30,62 @@ public class RoundController {
 	 * @return En spelplan som ska ritas
 	 */
 	public void createNewGameBoard(int level, int mode) {
-		int col, row;
+		
+	}
 
+	/**
+	 * Räknar ut hur spelplanen kommer se ut, skapar planen samt returnerar den
+	 * som en array[][]
+	 * 
+	 * @param level
+	 * @return array[][] som representerar spelplanen
+	 */
+	public Card[][] calcGameBoardSize(int level) {
+		int col, row;
 		switch (level) {
 		case 0:
 			col = 4;
-			row = 4;
+			row = 5;
 			break;
 		case 1:
 			col = 4;
-			row = 6;
+			row = 7;
 			break;
 		case 2:
-			col = 6;
-			row = 6;
+			col = 5;
+			row = 8;
 			break;
-
 		default:
 			col = 4;
-			row = 4;
+			row = 5;
 			break;
 		}
 
-		// currentGameBoard = new Card[col][row];
-		currentGameBoard = new int[col][row];
-
+		Card[][] gameBoard = new Card[col][row];
+		return gameBoard;
+	}
+	
+	/**
+	 * Får filvägen till den spelläge som har valts.
+	 * @param mode
+	 * @return filvägen till bilderna utan till de spelläget som ska köras.
+	 */
+	public String getModePath(int mode){
+		String path = "";
+		switch(mode){
+			case 0: //Standardläge
+				path = "/maps/standard/standard_";
+				break;
+			case 1: //flaggor
+				path = "/maps/flag/flag_";
+				break;
+			default :
+				path = "/maps/standard/standard_";
+				break;
+				
+			//Fler spellägen ska läggas in här!
+		}
+		return path;
 	}
 
 	/**
@@ -61,5 +95,12 @@ public class RoundController {
 	 */
 	public int[][] getGameBoard() {
 		return this.currentGameBoard;
+	}
+
+	/**
+	 * Ritar spelplanen i frame
+	 */
+	public void paintGameBoard() {
+
 	}
 }
