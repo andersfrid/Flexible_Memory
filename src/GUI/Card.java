@@ -11,14 +11,13 @@ import javax.swing.ImageIcon;
  *
  */
 public class Card {
-	private Icon cardBack;
+	private Icon cardBack = new ImageIcon("maps/background/bak_0.jpg");
 	private Icon cardFace;
 	private int compareNbr;
 	private boolean isCompared = false;
 
 	
-	public Card(String fileCardBack, String fileCardFace, int compareNbr){
-		cardBack = new ImageIcon(fileCardBack);
+	public Card(String fileCardFace, int compareNbr){
 		cardFace = new ImageIcon(fileCardFace);
 		this.compareNbr = compareNbr;
 	}

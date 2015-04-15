@@ -1,5 +1,6 @@
 package GUI;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,10 +15,13 @@ public class RoundController {
 	//temp
 	private String background = "/maps/background/background_0";
 	
-	private int[][] currentGameBoard;
+	private Card[][] currentGameBoard;
 	private Random rand = new Random();
 	
+	private int col, row;
+	
 	public RoundController() {
+		createNewGameBoard(0, 0);
 	}
 
 	/**
@@ -30,9 +34,62 @@ public class RoundController {
 	 * @return En spelplan som ska ritas
 	 */
 	public void createNewGameBoard(int level, int mode) {
+		currentGameBoard = calcGameBoardSize(level);
+		
+		String imagePath = getModePath(mode);	
+		String folderPath = imagePath.substring(1,imagePath.lastIndexOf('/')+1);
+		
+		System.out.println(imagePath);
+		System.out.println(folderPath);
+		
+		int nbrOfCards = (new File(folderPath).listFiles().length)/2;
+		System.out.println(nbrOfCards);
+		
+		System.out.println(rand.nextInt(nbrOfCards));
+		
+		int[] alreadyPlaced = new int[20]; 
+		
+		System.out.println(currentGameBoard.length);
+		
+//		while(!isFilled(currentGameBoard)){
+//			int pairNbr = rand.nextInt(nbrOfCards);
+//			if(!alreadyPlaced(alreadyPlaced, pairNbr)){
+//				
+//				if(currentGameBoard[rand.nextInt(currentGameBoard.length-1)][] != null){
+//					
+//				}
+//				
+//			}
+//		}
+		
 		
 	}
+	
+	public boolean alreadyPlaced(int[] array, int nbr){
+		for(int i = 0; i < array.length; i++){
+			if(array[i] == nbr){
+				return true;
+			}
+		}
+		return false;
+	}
 
+	/**
+	 * 
+	 * @param array
+	 * @return
+	 */
+	public boolean isFilled(Card[][] array){
+		for(int i = 0; i < array.length; i++){
+			for(int j = 0; j < array[i].length; j++){
+				if(array[i][j] == null){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
 	/**
 	 * Räknar ut hur spelplanen kommer se ut, skapar planen samt returnerar den
 	 * som en array[][]
@@ -41,7 +98,6 @@ public class RoundController {
 	 * @return array[][] som representerar spelplanen
 	 */
 	public Card[][] calcGameBoardSize(int level) {
-		int col, row;
 		switch (level) {
 		case 0:
 			col = 4;
@@ -88,12 +144,13 @@ public class RoundController {
 		return path;
 	}
 
+	
 	/**
 	 * Returnerar spelplanen
 	 * 
 	 * @return
 	 */
-	public int[][] getGameBoard() {
+	public Card[][] getGameBoard() {
 		return this.currentGameBoard;
 	}
 
@@ -102,5 +159,10 @@ public class RoundController {
 	 */
 	public void paintGameBoard() {
 
+	}
+	
+	
+	public static void main(String[] args) {
+		new RoundController();
 	}
 }
