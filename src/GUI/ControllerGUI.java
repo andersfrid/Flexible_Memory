@@ -20,25 +20,25 @@ public class ControllerGUI extends Applet{
 		
 	}
 	
-//	public void chooseSingle(){
+	public void chooseSingle(){
 //		SwingUtilities.invokeLater(
 //				new Runnable(){
 //					public void run(){
-//						frame.getContentPane().removeAll();
-//						frame.add(new ChooseGameGUI(true, null));
-//						frame.getContentPane().revalidate();
-//						frame.getContentPane().repaint();
-//					
+						frame.getContentPane().removeAll();
+						frame.add(new ChooseGameGUI(this,true));
+						frame.getContentPane().revalidate();
+						frame.getContentPane().repaint();
+					
 //					}
 //				});
 //
-//	}
+	}
 	public void chooseMulti(){
 //		SwingUtilities.invokeLater(
 //				new Runnable(){
 //					public void run(){
 						frame.getContentPane().removeAll();
-						frame.add(new ChooseGameGUI(this));
+						frame.add(new ChooseGameGUI(this,false));
 						frame.getContentPane().revalidate();
 						frame.getContentPane().repaint();
 //					

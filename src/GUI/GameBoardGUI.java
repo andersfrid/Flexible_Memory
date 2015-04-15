@@ -78,7 +78,7 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		//Gamepanel
 		gameArea = new JPanel();
 		gameArea.setLayout(new GridLayout(5,8,4,4));
-		gameArea.setPreferredSize(new Dimension(100,100));
+		gameArea.setPreferredSize(new Dimension(120,95));
 		gameArea.setOpaque(false);
 
 		ImageIcon cards = new ImageIcon("Images/card_95x120.jpg");

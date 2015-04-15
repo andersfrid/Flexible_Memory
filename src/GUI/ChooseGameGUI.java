@@ -62,7 +62,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private boolean singlePlayer;
 	private ControllerGUI controller;
 	
-	public ChooseGameGUI(ControllerGUI controller) {
+	public ChooseGameGUI(ControllerGUI controller, boolean singlePlayer) {
 		
 		this.singlePlayer = singlePlayer;
 		this.controller = controller;
@@ -148,7 +148,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 				lblUsernameP2.setBounds(225, 150, 150, 60);
 			mainPanel.add(tfP1);
 			mainPanel.add(tfP2);
-			
+			}
 			//set textfield invisible and bounds	
 				tfP1.setBounds(0, 200, 150, 60);
 				tfP1.setBorder(null);
@@ -163,7 +163,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 				
 				mainPanel.add(lblUsernameP1);
 				mainPanel.add(lblUsernameP2);
-			}
+			
 			
 			
 			
