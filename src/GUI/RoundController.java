@@ -14,14 +14,14 @@ import java.util.Random;
 public class RoundController {
 	// temp
 	private String background = "/maps/background/background_0";
-
+	
 	private Card[][] currentGameBoard;
 	private Random rand = new Random();
 
 	private int col, row;
 
-	public RoundController() {
-		createNewGameBoard(0, 0);
+	public RoundController(int level, int mode) {
+		createNewGameBoard(level, mode);
 	}
 
 	/**
