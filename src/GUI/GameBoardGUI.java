@@ -76,9 +76,14 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		scorePlayerTwo.setBounds(800, 100, 150, 50);
 
 		// button
-		ImageIcon iconKogg = new ImageIcon("Images/cog2.jpg");
+		ImageIcon iconKogg = new ImageIcon("Images/cog2.png");
 		button = new JButton(iconKogg);
-		button.setBounds(10, 10, 50, 50);
+		button.setBounds(0, 0, 50, 50);
+		button.setBorderPainted(false);
+		button.setBorder(null);
+		button.setFocusable(false);
+		button.setMargin(new Insets(0, 0, 0, 0));
+		button.setContentAreaFilled(false);
 
 		// Gamepanel
 		gameArea = new JPanel();
@@ -88,13 +93,13 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 
 		mainPanel.add(gameArea, BorderLayout.CENTER);
 
+		northPanel.add(button);
 		northPanel.add(playerOneName);
 		northPanel.add(logo);
 		northPanel.add(playerTwoName);
 		northPanel.add(scorePlayerOne);
 		northPanel.add(level);
 		northPanel.add(scorePlayerTwo);
-		northPanel.add(button);
 
 		add(mainPanel);
 
