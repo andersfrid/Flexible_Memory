@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
@@ -29,7 +30,7 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 	private JPanel mainPanel, northPanel, gameArea;
 	private JFrame frame;
 	private JButton button;
-	private JButton[] buttons = new JButton[40];
+	private JButton[] buttons;
 	private int i;
 	
 	public GameBoardGUI(){
@@ -40,7 +41,6 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		
 		northPanel = new JPanel();
 		northPanel.setPreferredSize(new Dimension(1000,200));
-		northPanel.setLayout(null);
 		northPanel.setOpaque(false);
 		
 		mainPanel.add(northPanel, BorderLayout.NORTH);
@@ -71,23 +71,16 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		scorePlayerTwo.setBounds(800, 100, 150, 50);
 		
 		//button
-//		ImageIcon iconKogg = new ImageIcon("Images/kogg.jpg");
-//		button = new JButton(iconKogg);
-//		button.setBounds(50, 75, 50, 50);
+		ImageIcon iconKogg = new ImageIcon("Images/cog2.jpg");
+		button = new JButton(iconKogg);
+		button.setBounds(10, 10, 50, 50);
 		
 		//Gamepanel
 		gameArea = new JPanel();
-		gameArea.setLayout(new GridLayout(5,8,4,4));
-		gameArea.setPreferredSize(new Dimension(120,95));
+		gameArea.setLayout(new BorderLayout());
+		gameArea.setLayout(new GridLayout(4,6,4,4));
 		gameArea.setOpaque(false);
-
-		ImageIcon cards = new ImageIcon("Images/card_95x120.jpg");
-		for(i =0; i<buttons.length; i++){
-			buttons[i] = new JButton(cards);
-			buttons[i].setSize(95, 120);
-			gameArea.add(buttons[i]);
-			
-		}
+	
 		mainPanel.add(gameArea, BorderLayout.CENTER);
 		
 		northPanel.add(playerOneName);
@@ -96,7 +89,7 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 		northPanel.add(scorePlayerOne);
 		northPanel.add(level);
 		northPanel.add(scorePlayerTwo);
-//		northPanel.add(button);
+		northPanel.add(button);
 		
 		
 		add(mainPanel);
@@ -110,6 +103,51 @@ public class GameBoardGUI extends JPanel implements ActionListener{
 
 	}
 	
+	public void gameMode(int level){
+		ImageIcon cards = new ImageIcon("Images/card_95x120.jpg");
+		switch(level){
+		
+		case 0: 
+			buttons = new JButton[24];
+			for(i =0; i<buttons.length; i++){
+				buttons[i] = new JButton(cards);
+				buttons[i].setSize(120, 95);
+				buttons[i].setBorderPainted(false);
+				buttons[i].setBorder(null);
+				buttons[i].setFocusable(false);
+				buttons[i].setMargin(new Insets(0,0,0,0));
+				buttons[i].setContentAreaFilled(false);
+				gameArea.add(buttons[i]);
+			}
+		break;
+		case 1:
+			buttons = new JButton[28];
+			for(i =0; i<buttons.length; i++){
+				buttons[i] = new JButton(cards);
+				buttons[i].setSize(120, 95);
+				buttons[i].setBorderPainted(false);
+				buttons[i].setBorder(null);
+				buttons[i].setFocusable(false);
+				buttons[i].setMargin(new Insets(0,0,0,0));
+				buttons[i].setContentAreaFilled(false);
+				gameArea.add(buttons[i]);
+			}
+			break;
+		case 3:
+			buttons = new JButton[28];
+			for(i =0; i<buttons.length; i++){
+				buttons[i] = new JButton(cards);
+				buttons[i].setSize(120, 95);
+				buttons[i].setBorderPainted(false);
+				buttons[i].setBorder(null);
+				buttons[i].setFocusable(false);
+				buttons[i].setMargin(new Insets(0,0,0,0));
+				buttons[i].setContentAreaFilled(false);
+				gameArea.add(buttons[i]);
+			}
+			break;
+		}
+}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button){
 			

@@ -3,6 +3,7 @@ package GUI;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.Dimension;
+import java.awt.LayoutManager;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -14,7 +15,8 @@ public class ControllerGUI extends Applet{
 	private StartGUI start = new StartGUI(this);
 	private AudioClip audioClip;
 	private JFrame frame;
-	
+	private int level, mode;
+	private RoundController rc;
 	
 	public ControllerGUI() {
 		
@@ -31,7 +33,7 @@ public class ControllerGUI extends Applet{
 					
 //					}
 //				});
-//
+
 	}
 	public void chooseMulti(){
 //		SwingUtilities.invokeLater(
@@ -48,18 +50,29 @@ public class ControllerGUI extends Applet{
 	}
 	
 	public void startGame(){
-		SwingUtilities.invokeLater(
-				new Runnable(){
-					public void run(){
+		rc = new RoundController(level, mode);
+		
+//		SwingUtilities.invokeLater(
+//				new Runnable(){
+//					public void run(){
 						frame.getContentPane().removeAll();
 						frame.add(new GameBoardGUI());
 						frame.getContentPane().revalidate();
 						frame.getContentPane().repaint();
-					
-					}
-				});
+//					
+//					}
+//				});
 	}
+	public void settings(){
+		frame.add(new SettingsPanel());
 
+	}
+	public void setLevel(int level){
+		this.level = level;
+	}
+	public void setMode(int mode){
+		this.mode = mode;
+	}
 	public void init(){
 		try {
 			audioClip = Applet.newAudioClip( new URL( "file:\\Users\\Anders\\Pictures\\gong.au"));
@@ -72,7 +85,7 @@ public class ControllerGUI extends Applet{
 
 	public void startFrame() {
 		frame = new JFrame();
-		frame.setPreferredSize(new Dimension(1000,700));
+//		frame.setPreferredSize(new Dimension(1000,700));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.add(new StartGUI(this));

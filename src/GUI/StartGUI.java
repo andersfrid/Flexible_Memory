@@ -34,7 +34,7 @@ import com.sun.prism.paint.Color;
  *
  */
 public class StartGUI extends JPanel implements ActionListener{
-	private JButton jbtSingle, jbtMulti, jbtClose, jbtMusic, jbtFx;
+	private JButton jbtSingle, jbtMulti, jbtClose, jbtMusic, jbtFx, jbtSettings;
 	private JLabel lblLogo;
 	private JPanel pnlCenter = new JPanel();
 //	private StartBGMusic sm = new StartBGMusic();
@@ -71,6 +71,7 @@ public class StartGUI extends JPanel implements ActionListener{
 		ImageIcon iconFx = new ImageIcon("Images/b_sfx_on_50x50.png");
 		jbtFx = new JButton(iconFx);
 		
+		
 		lblLogo.setBounds(0, 0, 1000, 300);
 		
 		jbtSingle.setBounds(180, 400, 310, 100);
@@ -81,6 +82,8 @@ public class StartGUI extends JPanel implements ActionListener{
 		
 		jbtClose.setBounds(180, 520, 640, 100);
 		jbtClose.setBorderPainted(false);
+		
+
 		
 		jbtMusic.setBounds(10, 600, 50, 50);
 		jbtMusic.setBorderPainted(false);
@@ -94,7 +97,7 @@ public class StartGUI extends JPanel implements ActionListener{
 		jbtFx.setBorder(null);
 		jbtFx.setFocusable(false);
 		jbtFx.setMargin(new Insets(0,0,0,0));
-		jbtFx.setContentAreaFilled(false	);
+		jbtFx.setContentAreaFilled(false);
 		
 		bgPanel.add(pnlCenter);
 		pnlCenter.add(lblLogo);
@@ -103,12 +106,14 @@ public class StartGUI extends JPanel implements ActionListener{
 		pnlCenter.add(jbtClose);
 		pnlCenter.add(jbtMusic);
 		pnlCenter.add(jbtFx);
+
 		
 		jbtSingle.addActionListener(this);
 		jbtMulti.addActionListener(this);
 		jbtClose.addActionListener(this);
 		jbtMusic.addActionListener(this);
 		jbtFx.addActionListener(this);
+	
 		
 //		sm.init();
 		

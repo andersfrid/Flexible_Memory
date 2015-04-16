@@ -61,6 +61,8 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
     raisedbevel, loweredbevel, empty;
 	private boolean singlePlayer;
 	private ControllerGUI controller;
+	private GameBoardGUI gbGUI = new GameBoardGUI();
+	private int level;
 	
 	public ChooseGameGUI(ControllerGUI controller, boolean singlePlayer) {
 		
@@ -204,24 +206,23 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		if (e.getSource() == btnSettings) {
 			System.out.println("Inställningar");
 		}
-		
-		if (e.getSource() == btnEasy) {
+		if (e.getSource()==btnEasy) {
 			System.out.println("Lätt");
-			
+			controller.setLevel(0);
 		}
-		if (e.getSource() == btnMedium) {
+		if (e.getSource()== btnMedium) {
 			System.out.println("Medium");
-			
+			controller.setLevel(1);
 		}
-		if (e.getSource() == btnHard) {
+		if (e.getSource()==btnHard) {
 			System.out.println("Svårt");
-			
+			controller.setLevel(2);
 		}
 		if (e.getSource() == btnStart) {
 			System.out.println("Startar spelet.... INTE");
 			controller.startGame();
+			
 		}
-		
 		
 	}
 }
