@@ -61,8 +61,6 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
     raisedbevel, loweredbevel, empty;
 	private boolean singlePlayer;
 	private ControllerGUI controller;
-	private GameBoardGUI gbGUI = new GameBoardGUI();
-	private int level;
 	
 	public ChooseGameGUI(ControllerGUI controller, boolean singlePlayer) {
 		

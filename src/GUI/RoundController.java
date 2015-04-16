@@ -17,10 +17,12 @@ public class RoundController {
 	
 	private Card[][] currentGameBoard;
 	private Random rand = new Random();
+	private ControllerGUI cGUI;
 
 	private int col, row;
 
-	public RoundController(int level, int mode) {
+	public RoundController(int level, int mode, ControllerGUI cGUI) {
+		this.cGUI = cGUI;
 		createNewGameBoard(level, mode);
 	}
 
@@ -67,7 +69,7 @@ public class RoundController {
 
 						if (currentGameBoard[randCol][randRow] == null) {
 							String pathToImage = imagePath;
-							pathToImage += "" + pairNbr + "_" + i;
+							pathToImage += "" + pairNbr + "_" + i+".jpg";
 
 							alreadyPlaced[count] = pairNbr; // count läggs till
 															// efter loopen
@@ -91,6 +93,9 @@ public class RoundController {
 					System.out.println("");
 			}
 		}
+		
+		paintGameBoard();
+		
 	}
 
 	public boolean alreadyPlaced(int[] array, int nbr) {
@@ -129,7 +134,7 @@ public class RoundController {
 		switch (level) {
 		case 0:
 			col = 4;
-			row = 5;
+			row = 6;
 			break;
 		case 1:
 			col = 4;
@@ -141,7 +146,7 @@ public class RoundController {
 			break;
 		default:
 			col = 4;
-			row = 5;
+			row = 6;
 			break;
 		}
 
@@ -186,10 +191,7 @@ public class RoundController {
 	 * Ritar spelplanen i frame
 	 */
 	public void paintGameBoard() {
-
+		cGUI.printGameBoard(currentGameBoard);
 	}
 
-	public static void main(String[] args) {
-		new RoundController();
-	}
 }
