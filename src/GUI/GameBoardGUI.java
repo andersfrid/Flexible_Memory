@@ -90,7 +90,6 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		// Gamepanel
 		gameArea = new JPanel();
 		gameArea.setLayout(new BorderLayout());
-		gameArea.setLayout(new GridLayout(4, 6, 4, 4));
 		gameArea.setOpaque(false);
 
 		mainPanel.add(gameArea, BorderLayout.CENTER);
@@ -113,18 +112,21 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 
 		case 0:
 			buttons = new JButton[4][6];
+			gameArea.setLayout(new GridLayout(4, 6, 4, 4));
 			break;
 		case 1:
 			buttons = new JButton[4][7];
+			gameArea.setLayout(new GridLayout(4, 7, 4, 4));
 			break;
 		case 2:
 			buttons = new JButton[5][8];
+			gameArea.setLayout(new GridLayout(5, 8, 4, 4));
 			break;
 		}
 		
 		for (int i = 0; i < gameBoard.length; i++) {
 			for (int j = 0; j < gameBoard[i].length; j++) {
-				buttons[i][j] = new JButton(gameBoard[i][j].getCardBack());
+				buttons[i][j] = new JButton(gameBoard[i][j].getCardFront());
 				System.out.println(gameBoard[i][j].getCardFront());
 				buttons[i][j].setSize(120, 95);
 				buttons[i][j].setBorderPainted(false);

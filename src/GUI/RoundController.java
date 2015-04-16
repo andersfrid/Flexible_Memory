@@ -59,7 +59,7 @@ public class RoundController {
 
 			int pairNbr = rand.nextInt(nbrOfCards);
 
-			//if (!alreadyPlaced(alreadyPlaced, pairNbr)) {
+			if (!alreadyPlaced(alreadyPlaced, pairNbr)) {
 				for (int i = 0; i <= 1; i++) {
 					boolean ok = false;
 
@@ -80,18 +80,8 @@ public class RoundController {
 					} while (!ok);
 				}
 				count++;
-//			}
-
-		}
-		System.out.println("toString");
-
-		System.out.println(currentGameBoard.toString());
-		for(int i=0; i<currentGameBoard.length; i++){
-			for(int j=0; j<currentGameBoard[i].length; j++){
-				System.out.print(currentGameBoard[i][j].getCardFront().toString()+", ");
-				if(j == currentGameBoard[i].length-1)
-					System.out.println("");
 			}
+
 		}
 		
 		paintGameBoard();
