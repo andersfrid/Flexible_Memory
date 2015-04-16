@@ -82,8 +82,7 @@ public class ControllerGUI extends Applet {
 
 	public void init() {
 		try {
-			audioClip = Applet.newAudioClip(new URL(
-					"file:\\Users\\Anders\\Pictures\\gong.au"));
+			audioClip = Applet.newAudioClip(new URL("?????"));
 		} catch (MalformedURLException e) {
 
 			e.printStackTrace();
@@ -93,7 +92,6 @@ public class ControllerGUI extends Applet {
 
 	public void startFrame() {
 		frame = new JFrame();
-		// frame.setPreferredSize(new Dimension(1000,700));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.add(new StartGUI(this));
