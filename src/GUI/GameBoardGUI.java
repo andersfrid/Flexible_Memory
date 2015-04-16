@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.omg.CORBA.Current;
+
 /**
  * 
  * @author David
@@ -102,16 +104,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		northPanel.add(scorePlayerTwo);
 
 		add(mainPanel);
-
 		gameMode();
-
-		// frame = new JFrame();
-		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// frame.setResizable(false);
-		// frame.add(mainPanel);
-		// frame.pack();
-		// frame.setVisible(true);
-
 	}
 
 	public void gameMode() {
@@ -131,7 +124,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		
 		for (int i = 0; i < gameBoard.length; i++) {
 			for (int j = 0; j < gameBoard[i].length; j++) {
-				buttons[i][j] = new JButton(gameBoard[i][j].getCardFront());
+				buttons[i][j] = new JButton(gameBoard[i][j].getCardBack());
 				System.out.println(gameBoard[i][j].getCardFront());
 				buttons[i][j].setSize(120, 95);
 				buttons[i][j].setBorderPainted(false);
@@ -139,17 +132,21 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 				buttons[i][j].setFocusable(false);
 				buttons[i][j].setMargin(new Insets(0, 0, 0, 0));
 				buttons[i][j].setContentAreaFilled(false);
+				buttons[i][j].addActionListener(this);
 				gameArea.add(buttons[i][j]);
-
 			}
 		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == button) {
-
+		for(int i = 0; i < buttons.length; i++){
+			for(int j = 0; j < buttons[i].length; j++){
+				if(e.getSource() == buttons[i][j]){
+					System.out.println("COL:"+i+", ROW:"+j);
+					buttons[i][j].setIcon(gameBoard[i][j].getCardFront());
+				}
+			}
 		}
-
 	}
 
 	private class BackgroundPanel extends JPanel {
@@ -160,14 +157,4 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 			g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
 		}
 	}
-
-	// public static void main(String[]args){
-	// SwingUtilities.invokeLater(
-	// new Runnable(){
-	// public void run(){
-	// new GameBoardGUI();
-	//
-	// }
-	// });
-	// }
 }
