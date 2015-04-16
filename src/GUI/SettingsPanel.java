@@ -1,8 +1,11 @@
 package GUI;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,24 +14,24 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class SettingsPanel extends JPanel{
+public class SettingsPanel extends JPanel implements ActionListener{
 	private JPanel panel;
-	private JLabel label, logo;
+	private JLabel logo;
 	private JButton musicButton, soundButton, restartButton, mainMenu, exit;
 	private JFrame frame;
+	private ControllerGUI controller;
 	
-	public SettingsPanel(){
+	public SettingsPanel(ControllerGUI controller){
+		this.controller = controller;
+		
 		panel = new JPanel();
 		panel.setLayout(null);
 		panel.setPreferredSize(new Dimension(400,400));
 		panel.setBackground(Color.LIGHT_GRAY);
 		
-//		label = new JLabel("Inställningar");
-//		label.setBounds(100, 50, 300, 50);
 		logo = new JLabel("FLEXIBLE MEMORY" + "\n" + "Inställningar");
 		logo.setBounds(150, 10, 200, 50);
-		
-		
+			
 		restartButton = new JButton("STARTA OM");
 		restartButton.setBounds(40, 160, 150, 75);
 		mainMenu = new JButton("HUVUD MENYN");
@@ -67,13 +70,48 @@ public class SettingsPanel extends JPanel{
 		frame.pack();
 		frame.setVisible(true);
 		
+		restartButton.addActionListener(this);
+		mainMenu.addActionListener(this);
+		exit.addActionListener(this);
+		soundButton.addActionListener(this);
+		
+	}
+	public void volumePic(){
+		boolean playSound = controller.getBoolean();
+		
+		if(playSound == true){
+			
+			ImageIcon iconSound = new ImageIcon("Images/b_sfx_on_50x50.png");
+			soundButton.setIcon(iconSound);
+		}
+		else{
+		
+			ImageIcon iconSound = new ImageIcon("Images/b_sfx_off_50x50.png");
+			soundButton.setIcon(iconSound);
+		}
 	}
 	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == restartButton){
+			controller.soundEffects();
+		}
+		if (e.getSource() == mainMenu){
+			controller.soundEffects();
+		}
+		if(e.getSource() == exit){
+			System.exit(0);
+		}
+		if(e.getSource() == soundButton){
+			controller.stopSound();
+			volumePic();
+		}
+		
+	}
 	public static void main(String[]args){
 		SwingUtilities.invokeLater(
 				new Runnable(){
 					public void run(){
-						new SettingsPanel();
+						new SettingsPanel(new ControllerGUI());
 					}
 				});
 	}

@@ -4,9 +4,11 @@ import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -17,11 +19,12 @@ public class ControllerGUI extends Applet {
 	private JFrame frame;
 	private int level, mode=0; //Bara ett spelläge än
 	private RoundController rc;
+	private	boolean playSound = true;
 
 	public ControllerGUI() {
 
 	}
-
+	
 	public void chooseSingle() {
 		// SwingUtilities.invokeLater(
 		// new Runnable(){
@@ -55,7 +58,7 @@ public class ControllerGUI extends Applet {
 	}
 
 	public void settings() {
-		frame.add(new SettingsPanel());
+		frame.add(new SettingsPanel(new ControllerGUI()));
 
 	}
 
@@ -79,17 +82,39 @@ public class ControllerGUI extends Applet {
 		// }
 		// });
 	}
-
-	public void init() {
-		try {
-			audioClip = Applet.newAudioClip(new URL("?????"));
-		} catch (MalformedURLException e) {
-
-			e.printStackTrace();
+	public void soundEffects(){
+		AudioClip clip = null;
+		if(playSound == true){		
+	   	 try {
+	   		 URL url = new File("Music/gong.au").toURI().toURL();
+	   		 clip = Applet.newAudioClip(url);
+	   		 clip.play();
+	   		 
+	   		 
+	   	 }catch(MalformedURLException e){
+	   		 System.out.println(e);
+	   	 } 
 		}
-		audioClip.loop();
 	}
-
+	
+	public void stopSound(){
+		if(playSound == true){
+			playSound = false;
+			
+		}
+		else{
+			playSound = true;
+			
+		}
+	}
+	
+	public void setBoolean(boolean playSound){
+		this.playSound = playSound;	
+	}
+	public boolean getBoolean(){
+		return playSound;
+		
+	}
 	public void startFrame() {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
