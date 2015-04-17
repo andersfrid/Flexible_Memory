@@ -19,7 +19,7 @@ public class ControllerGUI extends Applet {
 	private JFrame frame;
 	private int level, mode=0; //Bara ett spelläge än
 	private RoundController rc;
-	private	boolean playSound = true;
+	
 
 	public ControllerGUI() {
 
@@ -82,39 +82,7 @@ public class ControllerGUI extends Applet {
 		// }
 		// });
 	}
-	public void soundEffects(){
-		AudioClip clip = null;
-		if(playSound == true){		
-	   	 try {
-	   		 URL url = new File("Music/gong.au").toURI().toURL();
-	   		 clip = Applet.newAudioClip(url);
-	   		 clip.play();
-	   		 
-	   		 
-	   	 }catch(MalformedURLException e){
-	   		 System.out.println(e);
-	   	 } 
-		}
-	}
 	
-	public void stopSound(){
-		if(playSound == true){
-			playSound = false;
-			
-		}
-		else{
-			playSound = true;
-			
-		}
-	}
-	
-	public void setBoolean(boolean playSound){
-		this.playSound = playSound;	
-	}
-	public boolean getBoolean(){
-		return playSound;
-		
-	}
 	public void startFrame() {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
