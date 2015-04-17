@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,14 +20,13 @@ public class WinnerPanel extends JPanel {
 	
 	public WinnerPanel(){
 		
-		panel = new JPanel();
-		panel.setBackground(Color.LIGHT_GRAY);
+		panel = new BgPanel();
 		panel.setPreferredSize(new Dimension(700,700));
 		panel.setLayout(null);
 		
 		label = new JLabel("WINNER WINNER CHICKEN DINNER:");
 		label.setBounds(200, 300, 550, 100);
-		ImageIcon iconLogo = new ImageIcon("Images/logo_smal_550x75.png");
+		ImageIcon iconLogo = new ImageIcon("Images/logo_small_550x75.png");
 		logo = new JLabel(iconLogo);
 		logo.setBounds(75, 50, 550, 75);
 		
@@ -48,7 +49,13 @@ public class WinnerPanel extends JPanel {
 		frame.setVisible(true);
 		
 	}
-	
+	private class BgPanel extends JPanel {
+	    Image bg = new ImageIcon("Images/mario_1.jpg").getImage();
+	    @Override
+	    public void paintComponent(Graphics g) {
+	        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+	    }
+	}
 	public static void main(String[]args){
 		SwingUtilities.invokeLater(
 				new Runnable(){
