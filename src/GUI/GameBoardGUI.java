@@ -37,7 +37,6 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	private Card[][] gameBoard;
 	private RoundController rc;
 	private int levelNbr;
-	private int i;
 
 	public GameBoardGUI(int levelNbr, Card[][] gameBoard, RoundController rc) {
 		this.levelNbr = levelNbr;
@@ -145,10 +144,12 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	public void removeCards(int compareNbr) {
 		for (int i = 0; i < gameBoard.length; i++) {
 			for (int j = 0; j < gameBoard[i].length; j++) {
-				if(gameBoard[i][j].getCompareNbr() == compareNbr){
-					gameBoard[i][j] = null;
-					buttons[i][j].setEnabled(false);
-					buttons[i][j].setIcon(null);
+				if (gameBoard[i][j] != null) {
+					if (gameBoard[i][j].getCompareNbr() == compareNbr) {
+						gameBoard[i][j] = null;
+						buttons[i][j].setEnabled(false);
+						buttons[i][j].setIcon(null);
+					}
 				}
 			}
 		}
@@ -166,30 +167,31 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		
 		for (int i = 0; i < buttons.length; i++) {
 			for (int j = 0; j < buttons[i].length; j++) {
 				if (e.getSource() == buttons[i][j]) {
 					System.out.println("COL:" + i + ", ROW:" + j);
-					
-					buttons[i][j].setIcon(gameBoard[i][j].getCardFront());
-				
-					int backValue = rc.makeRound(gameBoard[i][j]);
 
-					if(backValue == -1){
+					System.out.println("NY RUNDA!");
+					buttons[i][j].setIcon(gameBoard[i][j].getCardFront());
+					
+					int backValue = rc.makeRound(gameBoard[i][j]);
+					System.out.println("BACKVALUE-------------->" + backValue);
+
+					if (backValue == -1) {
 						System.out.println("DU HAR EN TILL RUNDA");
-					}
-					else if(backValue == -2){
+					} else if (backValue == -2) {
 						clearGameBoard();
-					}
-					else{
+					} else {
 						removeCards(backValue);
 					}
-					
 				}
 			}
 		}
 	}
 
+	
 	private class BackgroundPanel extends JPanel {
 		private Image backGround = new ImageIcon("Images/mario_1.jpg")
 				.getImage();
