@@ -6,41 +6,95 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class SoundController {
-	private	boolean playSound = true;
-	
-	public void soundEffects(){
-		AudioClip clip = null;
-		if(playSound == true){		
-	   	 try {
-	   		 URL url = new File("Music/gong.au").toURI().toURL();
-	   		 clip = Applet.newAudioClip(url);
-	   		 clip.play();
-	   		 
-	   		 
-	   	 }catch(MalformedURLException e){
-	   		 System.out.println(e);
-	   	 } 
-		}
+import javax.swing.SwingUtilities;
+
+public class SoundController extends Thread {
+	private boolean playSound = true;
+	private boolean playMusic = true;
+	private AudioClip music = null;
+
+	public SoundController() {
+
 	}
-	
-	public void stopSound(){
-		if(playSound == true){
+
+	private void soundEffects() {
+		SwingUtilities.invokeLater(new Runnable() {
+			AudioClip music = null;
+
+			public void run() {
+				if (playSound == true) {
+					try {
+						URL url = new File("Music/gong.au").toURI().toURL();
+						music = Applet.newAudioClip(url);
+						music.play();
+
+					} catch (MalformedURLException e) {
+						System.out.println(e);
+					}
+				}
+			}
+		});
+	}
+
+	public void stopSound() {
+		if (playSound == true) {
 			playSound = false;
-			
-		}
-		else{
+
+		} else {
 			playSound = true;
-			
+
 		}
 	}
-	
-	public void setBoolean(boolean playSound){
-		this.playSound = playSound;	
+
+	public void run() {
+
+		if (playMusic == true) {
+			try {
+				URL url = new File("Music/Artemis.wav").toURI().toURL();
+				music = Applet.newAudioClip(url);
+				music.play();
+
+			} catch (MalformedURLException e) {
+				System.out.println(e);
+			}
+		}
+
 	}
-	public boolean getBoolean(){
+
+	public void stopMusic() {
+		if (playMusic == true) {
+			playMusic = false;
+			music.stop();
+			this.interrupt();
+		} else
+			playMusic = true;
+			startMusic();
+	}
+
+	public void setSound(boolean playSound) {
+		this.playSound = playSound;
+
+	}
+
+	public boolean getSound() {
 		return playSound;
-		
+
+	}
+
+	public void setMusic(boolean playMusic) {
+		this.playMusic = playMusic;
+	}
+
+	public boolean getMusic() {
+		return playMusic;
+	}
+
+	public void startEffects() {
+		soundEffects();
+	}
+
+	public void startMusic() {
+		run();
 	}
 
 }
