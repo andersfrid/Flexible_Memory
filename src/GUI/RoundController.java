@@ -14,11 +14,16 @@ import java.util.Random;
 public class RoundController {
 	// temp
 	private String background = "/maps/background/background_0";
-	
+
 	private Card[][] currentGameBoard;
 	private Random rand = new Random();
 	private ControllerGUI cGUI;
 
+	// temp
+	private Card turn1 = null;
+	private Card turn2 = null;
+
+	private Player player1, player2;
 	private int col, row;
 
 	public RoundController(int level, int mode, ControllerGUI cGUI) {
@@ -69,12 +74,13 @@ public class RoundController {
 
 						if (currentGameBoard[randCol][randRow] == null) {
 							String pathToImage = imagePath;
-							pathToImage += "" + pairNbr + "_" + i+".jpg";
+							pathToImage += "" + pairNbr + "_" + i + ".jpg";
 
 							alreadyPlaced[count] = pairNbr; // count läggs till
 															// efter loopen
 
-							currentGameBoard[randCol][randRow] = new Card(pathToImage, pairNbr);
+							currentGameBoard[randCol][randRow] = new Card(
+									pathToImage, pairNbr);
 							ok = true;
 						}
 					} while (!ok);
@@ -83,9 +89,9 @@ public class RoundController {
 			}
 
 		}
-		
+
 		paintGameBoard();
-		
+
 	}
 
 	public boolean alreadyPlaced(int[] array, int nbr) {
@@ -181,7 +187,54 @@ public class RoundController {
 	 * Ritar spelplanen i frame
 	 */
 	public void paintGameBoard() {
-		cGUI.printGameBoard(currentGameBoard);
+		cGUI.printGameBoard(currentGameBoard, this);
+	}
+
+	public boolean isPair(Card card1, Card card2) {
+		if (card1.getCompareNbr() == card2.getCompareNbr()) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @param card
+	 * @return -1 Första rundan
+	 * 			-2 inte samma compare 
+	 * 			alla andra, det är ett par tabort detta. 
+	 */
+	public int makeRound(Card card) {
+		int backValue = -1;
+		
+		if (turn1 == null) {
+			turn1 = card;
+		} else if (turn2 == null) {
+			turn2 = card;
+		}
+
+		if (turn1 != null && turn2 != null) {
+			if (isPair(turn1, turn2)) {
+				backValue = turn1.getCompareNbr();
+			}
+			else{
+				backValue = -2;
+			}
+			
+			turn1 = null;
+			turn2 = null;
+		}
+		
+		return backValue;
+	}
+
+	public void setPlayers(String name) {
+		player1 = new Player(name);
+	}
+
+	public void setPlayers(String name1, String name2) {
+		player1 = new Player(name1);
+		player2 = new Player(name2);
 	}
 
 }

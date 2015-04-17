@@ -35,12 +35,15 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	private JButton button;
 	private JButton[][] buttons;
 	private Card[][] gameBoard;
+	private RoundController rc;
 	private int levelNbr;
 	private int i;
 
-	public GameBoardGUI(int levelNbr, Card[][] gameBoard) {
+	public GameBoardGUI(int levelNbr, Card[][] gameBoard, RoundController rc) {
 		this.levelNbr = levelNbr;
 		this.gameBoard = gameBoard;
+		this.rc = rc;
+
 		// panels
 		mainPanel = new BackgroundPanel();
 		mainPanel.setLayout(new BorderLayout());
@@ -109,7 +112,6 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	public void gameMode() {
 
 		switch (levelNbr) {
-
 		case 0:
 			buttons = new JButton[4][6];
 			gameArea.setLayout(new GridLayout(4, 6, 4, 4));
@@ -123,10 +125,10 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 			gameArea.setLayout(new GridLayout(5, 8, 4, 4));
 			break;
 		}
-		
+
 		for (int i = 0; i < gameBoard.length; i++) {
 			for (int j = 0; j < gameBoard[i].length; j++) {
-				buttons[i][j] = new JButton(gameBoard[i][j].getCardFront());
+				buttons[i][j] = new JButton(gameBoard[i][j].getCardBack());
 				System.out.println(gameBoard[i][j].getCardFront());
 				buttons[i][j].setSize(120, 95);
 				buttons[i][j].setBorderPainted(false);
@@ -140,12 +142,49 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		}
 	}
 
+	public void removeCards(int compareNbr) {
+		for (int i = 0; i < gameBoard.length; i++) {
+			for (int j = 0; j < gameBoard[i].length; j++) {
+				if(gameBoard[i][j].getCompareNbr() == compareNbr){
+					gameBoard[i][j] = null;
+					buttons[i][j].setEnabled(false);
+					buttons[i][j].setIcon(null);
+				}
+			}
+		}
+		clearGameBoard();
+	}
+
+	public void clearGameBoard() {
+		for (int i = 0; i < gameBoard.length; i++) {
+			for (int j = 0; j < gameBoard[i].length; j++) {
+				if (gameBoard[i][j] != null) {
+					buttons[i][j].setIcon(gameBoard[i][j].getCardBack());
+				}
+			}
+		}
+	}
+
 	public void actionPerformed(ActionEvent e) {
-		for(int i = 0; i < buttons.length; i++){
-			for(int j = 0; j < buttons[i].length; j++){
-				if(e.getSource() == buttons[i][j]){
-					System.out.println("COL:"+i+", ROW:"+j);
+		for (int i = 0; i < buttons.length; i++) {
+			for (int j = 0; j < buttons[i].length; j++) {
+				if (e.getSource() == buttons[i][j]) {
+					System.out.println("COL:" + i + ", ROW:" + j);
+					
 					buttons[i][j].setIcon(gameBoard[i][j].getCardFront());
+				
+					int backValue = rc.makeRound(gameBoard[i][j]);
+
+					if(backValue == -1){
+						System.out.println("DU HAR EN TILL RUNDA");
+					}
+					else if(backValue == -2){
+						clearGameBoard();
+					}
+					else{
+						removeCards(backValue);
+					}
+					
 				}
 			}
 		}

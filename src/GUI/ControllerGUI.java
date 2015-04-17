@@ -22,6 +22,7 @@ public class ControllerGUI extends Applet {
 	
 
 	public ControllerGUI() {
+		
 
 	}
 	
@@ -54,6 +55,7 @@ public class ControllerGUI extends Applet {
 	}
 
 	public void startGame() {
+		//Här
 		rc = new RoundController(level, mode, this);
 	}
 
@@ -70,12 +72,12 @@ public class ControllerGUI extends Applet {
 		this.mode = mode;
 	}
 	
-	public void printGameBoard(Card[][] gameBoard){
+	public void printGameBoard(Card[][] gameBoard, RoundController rc){
 		// SwingUtilities.invokeLater(
 		// new Runnable(){
 		// public void run(){
 		frame.getContentPane().removeAll();
-		frame.add(new GameBoardGUI(level, gameBoard));
+		frame.add(new GameBoardGUI(level, gameBoard,rc));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
 		//

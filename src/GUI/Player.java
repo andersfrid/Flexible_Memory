@@ -11,4 +11,11 @@ public class Player {
 	public int getRoundCount(){
 		return roundCount;
 	}
+	
+	public void addRound(){
+		roundCount++;
+	}
+	public void clearRounds(){
+		roundCount=0;
+	}
 }
