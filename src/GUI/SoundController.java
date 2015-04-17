@@ -50,7 +50,7 @@ public class SoundController extends Thread {
 
 		if (playMusic == true) {
 			try {
-				URL url = new File("Music/Artemis.wav").toURI().toURL();
+				URL url = new File("Music/alcoholic.au").toURI().toURL();
 				music = Applet.newAudioClip(url);
 				music.play();
 
