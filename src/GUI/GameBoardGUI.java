@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import org.omg.CORBA.Current;
 
@@ -26,7 +27,7 @@ import org.omg.CORBA.Current;
  * 
  * @author David
  *
- */
+ */ 
 public class GameBoardGUI extends JPanel implements ActionListener {
 	private JLabel playerOneName, playerTwoName, scorePlayerOne,
 			scorePlayerTwo, level, logo;
@@ -167,7 +168,6 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
 		for (int i = 0; i < buttons.length; i++) {
 			for (int j = 0; j < buttons[i].length; j++) {
 				if (e.getSource() == buttons[i][j]) {
@@ -178,19 +178,21 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 					
 					int backValue = rc.makeRound(gameBoard[i][j]);
 					System.out.println("BACKVALUE-------------->" + backValue);
-
+					
 					if (backValue == -1) {
 						System.out.println("DU HAR EN TILL RUNDA");
 					} else if (backValue == -2) {
 						clearGameBoard();
-					} else {
+					} else if(backValue == -3){
+						System.out.println("Du får inte välja samma kort.");
+					}
+					else {
 						removeCards(backValue);
 					}
 				}
 			}
 		}
 	}
-
 	
 	private class BackgroundPanel extends JPanel {
 		private Image backGround = new ImageIcon("Images/mario_1.jpg")

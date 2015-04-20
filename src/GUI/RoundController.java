@@ -200,13 +200,12 @@ public class RoundController {
 	/**
 	 * 
 	 * @param card
-	 * @return -1 Första rundan
-	 * 			-2 inte samma compare 
-	 * 			alla andra, det är ett par tabort detta. 
+	 * @return -1 Första rundan -2 inte samma compare. -3 tryckt på samma kort.
+	 *         alla andra, det är ett par tabort detta.
 	 */
 	public int makeRound(Card card) {
 		int backValue = -1;
-		
+
 		if (turn1 == null) {
 			turn1 = card;
 		} else if (turn2 == null) {
@@ -214,17 +213,21 @@ public class RoundController {
 		}
 
 		if (turn1 != null && turn2 != null) {
-			if (isPair(turn1, turn2)) {
-				backValue = turn1.getCompareNbr();
+			if (!turn1.equals(turn2)) {
+				if (isPair(turn1, turn2)) {
+					backValue = turn1.getCompareNbr();
+				} else {
+					backValue = -2;
+				}
+
+				turn1 = null;
+				turn2 = null;
 			}
 			else{
-				backValue = -2;
+				turn2 = null;
+				backValue = -3;
 			}
-			
-			turn1 = null;
-			turn2 = null;
 		}
-		
 		return backValue;
 	}
 
