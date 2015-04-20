@@ -30,7 +30,7 @@ import entity.Card;
  * 
  * @author David
  *
- */ 
+ */
 public class GameBoardGUI extends JPanel implements ActionListener {
 	private JLabel playerOneName, playerTwoName, scorePlayerOne,
 			scorePlayerTwo, level, logo;
@@ -146,57 +146,82 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	}
 
 	public void removeCards(int compareNbr) {
-		for (int i = 0; i < gameBoard.length; i++) {
-			for (int j = 0; j < gameBoard[i].length; j++) {
-				if (gameBoard[i][j] != null) {
-					if (gameBoard[i][j].getCompareNbr() == compareNbr) {
-						gameBoard[i][j] = null;
-						buttons[i][j].setEnabled(false);
-						buttons[i][j].setIcon(null);
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				for (int i = 0; i < gameBoard.length; i++) {
+					for (int j = 0; j < gameBoard[i].length; j++) {
+						if (gameBoard[i][j] != null) {
+							if (gameBoard[i][j].getCompareNbr() == compareNbr) {
+								gameBoard[i][j] = null;
+								buttons[i][j].setEnabled(false);
+								buttons[i][j].setIcon(null);
+							}
+						}
 					}
 				}
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
-		}
-		clearGameBoard();
+		});
 	}
 
 	public void clearGameBoard() {
-		for (int i = 0; i < gameBoard.length; i++) {
-			for (int j = 0; j < gameBoard[i].length; j++) {
-				if (gameBoard[i][j] != null) {
-					buttons[i][j].setIcon(gameBoard[i][j].getCardBack());
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				for (int i = 0; i < gameBoard.length; i++) {
+					for (int j = 0; j < gameBoard[i].length; j++) {
+						if (gameBoard[i][j] != null) {
+							buttons[i][j].setIcon(gameBoard[i][j].getCardBack());
+							
+						}
+					}
+				}
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
-		}
+			
+		});
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		for (int i = 0; i < buttons.length; i++) {
-			for (int j = 0; j < buttons[i].length; j++) {
-				if (e.getSource() == buttons[i][j]) {
-					System.out.println("COL:" + i + ", ROW:" + j);
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				for (int i = 0; i < buttons.length; i++) {
+					for (int j = 0; j < buttons[i].length; j++) {
+						if (e.getSource() == buttons[i][j]) {
+							System.out.println("COL:" + i + ", ROW:" + j);
 
-					System.out.println("NY RUNDA!");
-					buttons[i][j].setIcon(gameBoard[i][j].getCardFront());
-					
-					int backValue = rc.makeRound(gameBoard[i][j]);
-					System.out.println("BACKVALUE-------------->" + backValue);
-					
-					if (backValue == -1) {
-						System.out.println("DU HAR EN TILL RUNDA");
-					} else if (backValue == -2) {
-						clearGameBoard();
-					} else if(backValue == -3){
-						System.out.println("Du får inte välja samma kort.");
-					}
-					else {
-						removeCards(backValue);
+							System.out.println("NY RUNDA!");
+							buttons[i][j].setIcon(gameBoard[i][j].getCardFront());
+							
+							int backValue = rc.makeRound(gameBoard[i][j]);
+							System.out.println("BACKVALUE-------------->" + backValue);
+
+							if (backValue == -1) {
+								System.out.println("DU HAR EN TILL RUNDA");
+							} else if (backValue == -2) {
+								clearGameBoard();
+							} else if (backValue == -3) {
+								System.out.println("Du får inte välja samma kort.");
+							} else {
+								removeCards(backValue);
+							}
+						}
 					}
 				}
 			}
-		}
+		});
+		
+
 	}
-	
+
 	private class BackgroundPanel extends JPanel {
 		private Image backGround = new ImageIcon("Images/mario_1.jpg")
 				.getImage();
