@@ -171,6 +171,12 @@ public class RoundController {
 		case 2: //capitals
 			path = "maps/capital/flag_";
 			break;
+		case 3:
+			path = "maps/mult/mult_";
+			break;
+		case 4:
+			path = "maps/plus/plus_";
+			break;
 		default:
 			path = "maps/standard/standard_";
 			break;

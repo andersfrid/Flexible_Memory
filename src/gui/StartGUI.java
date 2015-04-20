@@ -119,7 +119,7 @@ public class StartGUI extends JPanel implements ActionListener{
 		jbtFx.addActionListener(this);
 	
 		
-		s.startMusic();
+//		s.startMusic();
 		
 		add(bgPanel);
 		
