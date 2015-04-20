@@ -53,20 +53,21 @@ public class RoundController {
 		System.out.println(imagePath);
 		System.out.println(folderPath);
 
-		int nbrOfCards = (new File(folderPath).listFiles().length) / 2;
+		int nbrOfCards = ((new File(folderPath).listFiles().length) / 2);
 		System.out.println(nbrOfCards);
 
-		System.out.println(rand.nextInt(nbrOfCards));
 
 		int[] alreadyPlaced = new int[20];
+		for(int i=0; i<alreadyPlaced.length; i++){
+			alreadyPlaced[i] = -1;
+		}
+		
 		int count = 0;
 
-		System.out.println(currentGameBoard.length);
-
 		while (!isFilled(currentGameBoard)) {
-
+			
 			int pairNbr = rand.nextInt(nbrOfCards);
-
+			
 			if (!alreadyPlaced(alreadyPlaced, pairNbr)) {
 				for (int i = 0; i <= 1; i++) {
 					boolean ok = false;
@@ -76,12 +77,12 @@ public class RoundController {
 						int randRow = rand.nextInt(this.row);
 
 						if (currentGameBoard[randCol][randRow] == null) {
+							
 							String pathToImage = imagePath;
 							pathToImage += "" + pairNbr + "_" + i + ".jpg";
 
-							alreadyPlaced[count] = pairNbr; // count läggs till
-															// efter loopen
-
+							alreadyPlaced[count] = pairNbr; // count läggs till efter loopen
+							
 							currentGameBoard[randCol][randRow] = new Card(
 									pathToImage, pairNbr);
 							ok = true;

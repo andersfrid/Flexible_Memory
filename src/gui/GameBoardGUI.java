@@ -131,8 +131,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 
 		for (int i = 0; i < gameBoard.length; i++) {
 			for (int j = 0; j < gameBoard[i].length; j++) {
-				buttons[i][j] = new JButton(gameBoard[i][j].getCardFront());
-				System.out.println(gameBoard[i][j].getCardFront());
+				buttons[i][j] = new JButton(gameBoard[i][j].getCardBack());
 				buttons[i][j].setSize(120, 95);
 				buttons[i][j].setBorderPainted(false);
 				buttons[i][j].setBorder(null);
