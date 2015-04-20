@@ -1,9 +1,11 @@
-package GUI;
+package gui;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+
+import controller.ControllerGUI;
 
 public class StartGame {
 	private ControllerGUI controller = new ControllerGUI();

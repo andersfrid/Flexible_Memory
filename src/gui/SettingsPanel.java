@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,6 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import controller.ControllerGUI;
+import controller.SoundController;
 
 public class SettingsPanel extends JPanel implements ActionListener {
 	private JPanel panel;

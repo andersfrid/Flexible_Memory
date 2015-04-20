@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
@@ -27,6 +27,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.sun.prism.paint.Color;
+
+import controller.ControllerGUI;
 
 /**
  * Start menu GUI

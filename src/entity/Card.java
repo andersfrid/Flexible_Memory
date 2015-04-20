@@ -1,4 +1,4 @@
-package GUI;
+package entity;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;

@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,6 +22,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import org.omg.CORBA.Current;
+
+import controller.RoundController;
+import entity.Card;
 
 /**
  * 

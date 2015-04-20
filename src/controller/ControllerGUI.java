@@ -1,4 +1,4 @@
-package GUI;
+package controller;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
@@ -11,6 +11,12 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+
+import entity.Card;
+import gui.ChooseGameGUI;
+import gui.GameBoardGUI;
+import gui.SettingsPanel;
+import gui.StartGUI;
 
 public class ControllerGUI extends Applet {
 

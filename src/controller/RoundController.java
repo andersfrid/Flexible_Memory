@@ -1,8 +1,11 @@
-package GUI;
+package controller;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
+
+import entity.Card;
+import entity.Player;
 
 /**
  * Klassen ska sköta logiken som sker under rundan Exempelvis ska den skapa
