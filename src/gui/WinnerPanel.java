@@ -14,7 +14,7 @@ import javax.swing.SwingUtilities;
 
 public class WinnerPanel extends JPanel {
 	private JPanel panel;
-	private JLabel label, logo;
+	private JLabel label, logo, winner;
 	private JButton startOver, home;
 	private JFrame frame;
 	
@@ -24,19 +24,25 @@ public class WinnerPanel extends JPanel {
 		panel.setPreferredSize(new Dimension(700,700));
 		panel.setLayout(null);
 		
-		label = new JLabel("WINNER WINNER CHICKEN DINNER:");
-		label.setBounds(200, 300, 550, 100);
+//		label = new JLabel("WINNER WINNER CHICKEN DINNER:");
+//		label.setBounds(200, 300, 550, 100);
 		ImageIcon iconLogo = new ImageIcon("Images/logo_small_550x75.png");
 		logo = new JLabel(iconLogo);
 		logo.setBounds(75, 50, 550, 75);
 		
-		startOver = new JButton("RESTART GAME");
-		startOver.setBounds(25, 500, 310, 100);
+		ImageIcon winnerLogo = new ImageIcon("Images/winner1.png");
+		winner = new JLabel(winnerLogo);
+		winner.setBounds(150,100,400,360);
 		
-		home = new JButton("HOME");
-		home.setBounds(365, 500, 310, 100);
+		ImageIcon startLogo = new ImageIcon("Images/restartgame.jpg");
+		startOver = new JButton(startLogo);
+		startOver.setBounds(25, 560, 310, 100);
 		
-		panel.add(label);
+		ImageIcon homeLogo = new ImageIcon("Images/home.jpg");
+		home = new JButton(homeLogo);
+		home.setBounds(365, 560, 310, 100);
+		
+		panel.add(winner);
 		panel.add(logo);
 		panel.add(startOver);
 		panel.add(home);
