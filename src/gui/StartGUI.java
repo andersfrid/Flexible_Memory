@@ -29,6 +29,7 @@ import javax.swing.SwingUtilities;
 import com.sun.prism.paint.Color;
 
 import controller.ControllerGUI;
+import controller.SoundController;
 
 /**
  * Start menu GUI
@@ -41,6 +42,7 @@ public class StartGUI extends JPanel implements ActionListener{
 	private JPanel pnlCenter = new JPanel();
 //	private StartBGMusic sm = new StartBGMusic();
 	private ControllerGUI controller;
+	private SoundController s;
 	
 
 	
@@ -117,11 +119,39 @@ public class StartGUI extends JPanel implements ActionListener{
 		jbtFx.addActionListener(this);
 	
 		
-//		sm.init();
+		s.startMusic();
 		
 		add(bgPanel);
 		
 	}
+	public void volumePic() {
+		boolean playSound = s.getSound();
+
+		if (playSound == true) {
+
+			ImageIcon iconSound = new ImageIcon("Images/b_sfx_on_50x50.png");
+			jbtFx.setIcon(iconSound);
+		} else {
+
+			ImageIcon iconSound = new ImageIcon("Images/b_sfx_off_50x50.png");
+			jbtFx.setIcon(iconSound);
+		}
+	}
+
+	public void musicPic() {
+		boolean playMusic = s.getMusic();
+
+		if (playMusic == true) {
+
+			ImageIcon iconMusic = new ImageIcon("Images/b_volume_on_50x50.png");
+			jbtMusic.setIcon(iconMusic);
+		} else {
+
+			ImageIcon iconMusic = new ImageIcon("Images/b_volume_off_50x50.png");
+			jbtMusic.setIcon(iconMusic);
+		}
+	}
+
 	
 	public void actionPerformed(ActionEvent e) {
 		
@@ -135,7 +165,8 @@ public class StartGUI extends JPanel implements ActionListener{
 			System.exit(0);
 		}
 		if(e.getSource() == jbtMusic){
-			controller.init();
+			s.stopMusic();
+			
 		}
 		if(e.getSource() == jbtFx){
 			

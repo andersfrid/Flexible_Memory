@@ -168,6 +168,9 @@ public class RoundController {
 		case 1: // flaggor
 			path = "maps/flag/flag_";
 			break;
+		case 2: //capitals
+			path = "maps/capital/flag_";
+			break;
 		default:
 			path = "maps/standard/standard_";
 			break;

@@ -23,7 +23,7 @@ public class ControllerGUI extends Applet {
 	private StartGUI start = new StartGUI(this);
 	private AudioClip audioClip;
 	private JFrame frame;
-	private int level, mode=0; //Bara ett spelläge än
+	private int level, mode=2; //Bara ett spelläge än
 	private RoundController rc;
 	
 
