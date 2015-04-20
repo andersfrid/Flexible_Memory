@@ -20,11 +20,12 @@ import gui.StartGUI;
 
 public class ControllerGUI extends Applet {
 
-	private StartGUI start = new StartGUI(this);
 	private AudioClip audioClip;
 	private JFrame frame;
 	private int level, mode=0; //Bara ett spelläge än
 	private RoundController rc;
+	private SoundController s;
+	private StartGUI start;
 	
 
 	public ControllerGUI() {
@@ -95,7 +96,7 @@ public class ControllerGUI extends Applet {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		frame.add(new StartGUI(this));
+		frame.add(new StartGUI(this,new SoundController()));
 		frame.setVisible(true);
 		frame.pack();
 

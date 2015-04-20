@@ -42,12 +42,13 @@ public class StartGUI extends JPanel implements ActionListener{
 	private JPanel pnlCenter = new JPanel();
 //	private StartBGMusic sm = new StartBGMusic();
 	private ControllerGUI controller;
-	private SoundController s;
+	private SoundController s = new SoundController();
 	
 
 	
-	public StartGUI(ControllerGUI controller){
+	public StartGUI(ControllerGUI controller, SoundController s){
 		this.controller = controller;
+		this.s = s;
 		
 		JPanel bgPanel = new BgPanel(); 
 		bgPanel.setPreferredSize(new Dimension(1000,700));
@@ -119,9 +120,10 @@ public class StartGUI extends JPanel implements ActionListener{
 		jbtFx.addActionListener(this);
 	
 		
-//		s.startMusic();
 		
 		add(bgPanel);
+		
+		s.startMusic();
 		
 	}
 	public void volumePic() {
@@ -157,19 +159,23 @@ public class StartGUI extends JPanel implements ActionListener{
 		
 		if(e.getSource() == jbtSingle){
 			controller.chooseSingle();
+			s.startEffects();
 		}
 		if(e.getSource() == jbtMulti){
 			controller.chooseMulti();
+			s.startEffects();
 		}
 		if(e.getSource() == jbtClose){
+			s.startEffects();
 			System.exit(0);
 		}
 		if(e.getSource() == jbtMusic){
 			s.stopMusic();
-			
+			musicPic();
 		}
 		if(e.getSource() == jbtFx){
-			
+			s.stopSound();
+			volumePic();
 		}
 		
 	}
