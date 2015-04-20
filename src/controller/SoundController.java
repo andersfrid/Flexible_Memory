@@ -26,6 +26,7 @@ public class SoundController extends Thread {
 					try {
 						URL url = new File("Music/gong.au").toURI().toURL();
 						music = Applet.newAudioClip(url);
+						
 						music.play();
 
 					} catch (MalformedURLException e) {
@@ -52,7 +53,8 @@ public class SoundController extends Thread {
 			try {
 				URL url = new File("Music/alcoholic.au").toURI().toURL();
 				music = Applet.newAudioClip(url);
-				music.play();
+				music.loop();
+//				music.play();
 
 			} catch (MalformedURLException e) {
 				System.out.println(e);
