@@ -187,6 +187,9 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnMedium.addActionListener(this);
 		btnHard.addActionListener(this);
 		btnStart.addActionListener(this);
+		btnFlag.addActionListener(this);
+		btnStandard.addActionListener(this);
+		btnPlus.addActionListener(this);
 
 		add(contentPanel);
 	}
@@ -203,6 +206,19 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 
 
 	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == btnStandard){
+			controller.setMode(0);
+		}
+		
+		if(e.getSource() == btnFlag){
+			System.out.println("FLAGGOR!!");
+			controller.setMode(1);
+		}
+	
+		if(e.getSource() == btnPlus){
+			controller.setMode(4);
+		}
+		
 		if (e.getSource() == btnSettings) {
 			System.out.println("Inställningar");
 		}
