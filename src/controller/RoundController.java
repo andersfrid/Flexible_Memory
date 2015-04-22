@@ -52,23 +52,32 @@ public class RoundController {
 
 		System.out.println(imagePath);
 		System.out.println(folderPath);
-		
-		
-		int nbrOfCards = ((new File(folderPath).listFiles().length) / 2);
+
+		//Räknar ut hur många bilder det är i mappen
+		File f = new File(folderPath);
+		int images = 0;
+		for (File file : f.listFiles()) {
+			if ((file.isFile() && (file.getName().endsWith(".txt") || file
+					.getName().endsWith(".jpg")))) {
+				images++;
+			}
+		}
+		System.out.println("Number of images: " + images);
+
+		int nbrOfCards = images/2;
 		System.out.println(nbrOfCards);
 
-
 		int[] alreadyPlaced = new int[20];
-		for(int i=0; i<alreadyPlaced.length; i++){
+		for (int i = 0; i < alreadyPlaced.length; i++) {
 			alreadyPlaced[i] = -1;
 		}
-		
+
 		int count = 0;
 
 		while (!isFilled(currentGameBoard)) {
-			
+
 			int pairNbr = rand.nextInt(nbrOfCards);
-			
+
 			if (!alreadyPlaced(alreadyPlaced, pairNbr)) {
 				for (int i = 0; i <= 1; i++) {
 					boolean ok = false;
@@ -78,15 +87,17 @@ public class RoundController {
 						int randRow = rand.nextInt(this.row);
 
 						if (currentGameBoard[randCol][randRow] == null) {
-							
+
 							String pathToImage = imagePath;
 							pathToImage += "" + pairNbr + "_" + i + ".jpg";
 
-							alreadyPlaced[count] = pairNbr; // count läggs till efter loopen
-							
+							alreadyPlaced[count] = pairNbr; // count läggs till
+															// efter loopen
+
 							currentGameBoard[randCol][randRow] = new Card(
 									pathToImage, pairNbr);
-							System.out.println("Här lägs det in: "+pathToImage);
+							System.out.println("Här lägs det in: "
+									+ pathToImage);
 							ok = true;
 						}
 					} while (!ok);
@@ -171,7 +182,7 @@ public class RoundController {
 		case 1: // flaggor
 			path = "maps/flag/flag_";
 			break;
-		case 2: //capitals
+		case 2: // capitals
 			path = "maps/capital/flag_";
 			break;
 		case 3:
@@ -237,8 +248,7 @@ public class RoundController {
 
 				turn1 = null;
 				turn2 = null;
-			}
-			else{
+			} else {
 				turn2 = null;
 				backValue = -3;
 			}
