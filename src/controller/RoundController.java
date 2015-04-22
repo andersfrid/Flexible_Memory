@@ -52,7 +52,8 @@ public class RoundController {
 
 		System.out.println(imagePath);
 		System.out.println(folderPath);
-
+		
+		
 		int nbrOfCards = ((new File(folderPath).listFiles().length) / 2);
 		System.out.println(nbrOfCards);
 
@@ -85,6 +86,7 @@ public class RoundController {
 							
 							currentGameBoard[randCol][randRow] = new Card(
 									pathToImage, pairNbr);
+							System.out.println("Här lägs det in: "+pathToImage);
 							ok = true;
 						}
 					} while (!ok);
