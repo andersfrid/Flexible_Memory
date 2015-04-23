@@ -355,7 +355,13 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			}
 		if (e.getSource() == btnStart) {
 			System.out.println("Startar spelet.... INTE");
-			controller.startGame();
+			
+			if(singlePlayer){
+				controller.startGame(tf.getText(),null);
+			}
+			else{
+				controller.startGame(tfP1.getText(), tfP2.getText());
+			}
 
 		}
 
