@@ -10,6 +10,8 @@ import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -30,11 +32,13 @@ import controller.ControllerGUI;
  * @auth JGS
  */
 
+
+
 public class ChooseGameGUI extends JPanel implements ActionListener {
 
 	private JFrame frame = new JFrame("Flexible Memory");
 	private JPanel mainPanel, contentPanel, bg;
-	private JButton btnEasy, btnMedium, btnHard, btnSettings, btnStart, btnStandard, btnFlag, btnPlus;
+	private JButton btnEasy, btnMedium, btnHard, btnSettings, btnStart, btnStandard, btnFlag, btnPlus, btntfRemove, btntfP1Remove, btntfP2Remove;
 	private JLabel lblTitleP1 = new JLabel();
 	private JLabel lblTitleP2 = new JLabel();
 	private JLabel lblUsernameP1 = new JLabel();
@@ -45,14 +49,15 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private JLabel lblEnter = new JLabel();
 	private JLabel lblTheme = new JLabel();
 	private JLabel lblDifficulty = new JLabel();
-	private JTextField tf = new JTextField();
+	private JTextField tf = new JTextField("Enter your name");
 	private JTextField tfP1 = new JTextField("Enter Player 1's name");
 	private JTextField tfP2 = new JTextField("Enter Player 2's name");
 	private Font r60 = new Font("Rockwell", Font.PLAIN, 60);
 	private Font p50 = new Font("Papyrus", Font.BOLD, 50);
 	private Font r20 = new Font("Rockwell", Font.PLAIN, 20);
-	private Font bof18 = new Font("Baskerville Old Face", Font.BOLD, 18);
-
+	private Font afb20 = new Font("Agency FB", Font.PLAIN, 20);
+	private Color color;
+	
 	private Border blackline, raisedetched, loweredetched, raisedbevel,
 			loweredbevel, empty;
 	private boolean singlePlayer;
@@ -79,10 +84,13 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		lblTheme = new JLabel(iconlblTheme);
 		ImageIcon iconbtnStandard = new ImageIcon("Images/Standard.jpg");
 		btnStandard = new JButton(iconbtnStandard);
+		btnStandard.setToolTipText("A theme with random pictures (standard)");
 		ImageIcon iconbtnFlag = new ImageIcon("Images/Flag.jpg");
 		btnFlag = new JButton(iconbtnFlag);
+		btnFlag.setToolTipText("A theme with different flags");
 		ImageIcon iconbtnPlus = new ImageIcon("Images/Plus.jpg");
 		btnPlus = new JButton(iconbtnPlus);
+		btnPlus.setToolTipText("A theme with math (addition)");
 		ImageIcon iconlblDifficulty = new ImageIcon("Images/Difficulty.png");
 		lblDifficulty = new JLabel(iconlblDifficulty);
 		ImageIcon iconbtnEasy = new ImageIcon("Images/easy2.png");
@@ -134,7 +142,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		if (singlePlayer == true) {
 
 			
-			
+		
 			ImageIcon iconlblTitle = new ImageIcon("Images/Title.png");
 			lblTitle = new JLabel(iconlblTitle);
 			lblTitle.setBounds(0, 0, 380, 90);
@@ -151,11 +159,31 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			mainPanel.add(lbltfBackground);
 
 			// set stuff invisible
-			tf.setBounds(110, 130, 140, 50);
-			tf.setFont(bof18);
+			btntfRemove = new JButton();
+			btntfRemove.setBounds(105, 138, 150, 28);
+			btntfRemove.setBorder(null);
+			btntfRemove.setMargin(new Insets(0, 0, 0,0));
+			btntfRemove.setOpaque(false);
+			
+			
+			tf.setBounds(110, 127, 140, 50);
+			tf.setFont(afb20);
 			tf.setBorder(null);
 			tf.setMargin(new Insets(0, 0, 0, 0));
 			tf.setOpaque(false);
+		
+			tf.setForeground(color.DARK_GRAY);
+			tf.addFocusListener(new FocusListener(){
+		        public void focusGained(FocusEvent e){
+		            tf.setText("");
+		            tf.setForeground(color.BLACK);
+		        }
+
+				public void focusLost(FocusEvent arg0) {
+				}
+		    });
+		
+		
 		}
 		
 		// multiplayer
@@ -186,15 +214,44 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			mainPanel.add(lbltfBackground);
 			mainPanel.add(lbltfBackground2);
 			
+			tfP1.setForeground(color.DARK_GRAY);
+			tfP1.addFocusListener(new FocusListener(){
+		    
+				public void focusGained(FocusEvent e){
+		            tfP1.setText("");
+		            tfP1.setForeground(color.BLACK);
+			        
+		        }
+
+				public void focusLost(FocusEvent notUsed) {
+				}
+		    });
+			
+			tfP2.setForeground(color.DARK_GRAY);
+			tfP2.addFocusListener(new FocusListener(){
+		        public void focusGained(FocusEvent e){
+		            tfP2.setText("");
+		            tfP2.setForeground(color.BLACK);
+			        
+		        }
+		        
+		        public void focusLost(FocusEvent notUsed2) {
+				}
+		    });
+		
+		
+					
 		}
 		
 		// set textfield invisible and bounds
-		tfP1.setBounds(5, 110, 150, 60);
+		tfP1.setFont(afb20);
+		tfP1.setBounds(5, 107, 150, 60);
 		tfP1.setBorder(null);
 		tfP1.setMargin(new Insets(0, 0, 0, 0));
 		tfP1.setOpaque(false);
 
-		tfP2.setBounds(225, 110, 150, 60);
+		tfP2.setFont(afb20);
+		tfP2.setBounds(225, 107, 150, 60);
 		tfP2.setBorder(null);
 		tfP2.setMargin(new Insets(0, 0, 0, 0));
 		tfP2.setOpaque(false);
@@ -302,5 +359,19 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 
 		}
 
+		if (e.getSource() == btntfRemove) {
+			tf.setText("");
+		}
+		
+//		if (e.getSource() == btntf1remove) {
+//			tfP1.setText("");
+//		}
+//
+//		if (e.getSource() == btntf2remove) {
+//			tfP2.setText("");
+//}
+	
+		
+		
 	}
 }
