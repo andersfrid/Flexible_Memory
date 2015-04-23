@@ -23,6 +23,7 @@ import javax.swing.Timer;
 
 import org.omg.CORBA.Current;
 
+import controller.ControllerGUI;
 import controller.RoundController;
 import entity.Card;
 
@@ -41,6 +42,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	private Card[][] gameBoard;
 	private RoundController rc;
 	private int levelNbr;
+	private ControllerGUI controller;
 
 	public GameBoardGUI(int levelNbr, Card[][] gameBoard, RoundController rc) {
 		this.levelNbr = levelNbr;
@@ -217,7 +219,9 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 				}
 			}
 		});
-		
+						if(e.getSource() == button){
+							controller.settings();
+						}
 
 	}
 

@@ -80,7 +80,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		soundButton.addActionListener(this);
 		musicButton.addActionListener(this);
 		
-		s.startMusic();
+
 
 	}
 
