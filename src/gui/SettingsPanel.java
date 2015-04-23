@@ -22,11 +22,9 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	private JButton musicButton, soundButton, restartButton, mainMenu, exit;
 	private JFrame frame;
 	private ControllerGUI controller;
-	private SoundController s;
 
-	public SettingsPanel(ControllerGUI controller, SoundController s) {
+	public SettingsPanel(ControllerGUI controller) {
 		this.controller = controller;
-		this.s = s;
 
 		panel = new JPanel();
 		panel.setLayout(null);
@@ -85,7 +83,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	}
 
 	public void volumePic() {
-		boolean playSound = s.getSound();
+		boolean playSound = controller.getSound();
 
 		if (playSound == true) {
 
@@ -99,7 +97,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	}
 
 	public void musicPic() {
-		boolean playMusic = s.getMusic();
+		boolean playMusic = controller.getMusic();
 
 		if (playMusic == true) {
 
@@ -114,20 +112,20 @@ public class SettingsPanel extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == restartButton) {
-			s.startEffects();
+			controller.getSound();
 		}
 		if (e.getSource() == mainMenu) {
-			s.startEffects();
+			controller.getSound();
 		}
 		if (e.getSource() == exit) {
 			System.exit(0);
 		}
 		if (e.getSource() == soundButton) {
-			s.stopSound();
+			controller.stopSound();
 			volumePic();
 		}
 		if (e.getSource() == musicButton) {
-			s.stopMusic();
+			controller.stopMusic();
 			musicPic();
 		}
 

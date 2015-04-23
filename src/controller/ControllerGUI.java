@@ -24,12 +24,11 @@ public class ControllerGUI extends Applet {
 	private JFrame frame;
 	private int level, mode=0; //Bara ett spelläge än
 	private RoundController rc;
-	private SoundController s;
+	private SoundController s = new SoundController();
 	private StartGUI start;
 	
 
 	public ControllerGUI() {
-		
 
 	}
 	
@@ -67,7 +66,7 @@ public class ControllerGUI extends Applet {
 	}
 
 	public void settings() {
-		frame.add(new SettingsPanel(this, s));
+		frame.add(new SettingsPanel(this));
 
 	}
 
@@ -78,6 +77,25 @@ public class ControllerGUI extends Applet {
 	public void setMode(int mode) {
 		this.mode = mode;
 	}
+	public boolean getMusic(){
+		return s.getMusic();
+	}
+	public boolean getSound(){
+		return s.getSound();
+	}
+	public void startSound(){
+		s.startEffects();
+	}
+	public void stopSound(){
+		s.stopSound();
+	}
+	public void startMusic(){
+		s.startMusic();
+	}
+	public void stopMusic(){
+		s.stopMusic();
+	}
+	
 	
 	public void printGameBoard(Card[][] gameBoard, RoundController rc){
 		// SwingUtilities.invokeLater(
@@ -96,7 +114,7 @@ public class ControllerGUI extends Applet {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		frame.add(new StartGUI(this,new SoundController()));
+		frame.add(new StartGUI(this));
 		frame.setVisible(true);
 		frame.pack();
 

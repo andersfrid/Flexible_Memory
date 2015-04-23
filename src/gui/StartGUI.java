@@ -42,13 +42,11 @@ public class StartGUI extends JPanel implements ActionListener{
 	private JPanel pnlCenter = new JPanel();
 //	private StartBGMusic sm = new StartBGMusic();
 	private ControllerGUI controller;
-	private SoundController s = new SoundController();
 	
 
 	
-	public StartGUI(ControllerGUI controller, SoundController s){
+	public StartGUI(ControllerGUI controller){
 		this.controller = controller;
-		this.s = s;
 		
 		JPanel bgPanel = new BgPanel(); 
 		bgPanel.setPreferredSize(new Dimension(1000,700));
@@ -123,11 +121,11 @@ public class StartGUI extends JPanel implements ActionListener{
 		
 		add(bgPanel);
 		
-		s.startMusic();
+		controller.startMusic();
 		
 	}
 	public void volumePic() {
-		boolean playSound = s.getSound();
+		boolean playSound = controller.getSound();
 
 		if (playSound == true) {
 
@@ -141,7 +139,7 @@ public class StartGUI extends JPanel implements ActionListener{
 	}
 
 	public void musicPic() {
-		boolean playMusic = s.getMusic();
+		boolean playMusic = controller.getMusic();
 
 		if (playMusic == true) {
 
@@ -159,22 +157,21 @@ public class StartGUI extends JPanel implements ActionListener{
 		
 		if(e.getSource() == jbtSingle){
 			controller.chooseSingle();
-			s.startEffects();
+			controller.startSound();
 		}
 		if(e.getSource() == jbtMulti){
 			controller.chooseMulti();
-			s.startEffects();
+			controller.startSound();
 		}
 		if(e.getSource() == jbtClose){
-			s.startEffects();
 			System.exit(0);
 		}
 		if(e.getSource() == jbtMusic){
-			s.stopMusic();
+			controller.stopMusic();
 			musicPic();
 		}
 		if(e.getSource() == jbtFx){
-			s.stopSound();
+			controller.stopSound();
 			volumePic();
 		}
 		
