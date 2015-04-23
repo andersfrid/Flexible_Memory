@@ -61,7 +61,7 @@ public class StartGUI extends JPanel implements ActionListener{
 		ImageIcon iconLogo = new ImageIcon("Images/logo_big_800x275.png");
 		lblLogo = new JLabel(iconLogo);
 		
-		ImageIcon iconSingle = new ImageIcon("Images/b_singelplayer310x100.png");
+		ImageIcon iconSingle = new ImageIcon("Images/b_singleplayer310x100.png");
 		jbtSingle = new JButton(iconSingle);
 		
 		ImageIcon iconMulti = new ImageIcon("Images/b_multiplayer_310x100.png");
