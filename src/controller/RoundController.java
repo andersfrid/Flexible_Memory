@@ -28,6 +28,8 @@ public class RoundController {
 
 	private Player player1, player2;
 	private int col, row;
+	
+	private boolean roundEnable = true;
 
 	public RoundController(int level, int mode, ControllerGUI cGUI) {
 		this.cGUI = cGUI;
@@ -75,7 +77,8 @@ public class RoundController {
 		int count = 0;
 
 		while (!isFilled(currentGameBoard)) {
-
+			
+			
 			int pairNbr = rand.nextInt(nbrOfCards);
 
 			if (!alreadyPlaced(alreadyPlaced, pairNbr)) {

@@ -147,8 +147,8 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	}
 
 	public void removeCards(int compareNbr) {
-		SwingUtilities.invokeLater(new Runnable(){
-			public void run(){
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
 				for (int i = 0; i < gameBoard.length; i++) {
 					for (int j = 0; j < gameBoard[i].length; j++) {
 						if (gameBoard[i][j] != null) {
@@ -170,13 +170,13 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	}
 
 	public void clearGameBoard() {
-		SwingUtilities.invokeLater(new Runnable(){
-			public void run(){
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
 				for (int i = 0; i < gameBoard.length; i++) {
 					for (int j = 0; j < gameBoard[i].length; j++) {
 						if (gameBoard[i][j] != null) {
 							buttons[i][j].setIcon(gameBoard[i][j].getCardBack());
-							
+
 						}
 					}
 				}
@@ -186,31 +186,35 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 					e.printStackTrace();
 				}
 			}
-			
+
 		});
-		
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		SwingUtilities.invokeLater(new Runnable(){
-			public void run(){
+
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
 				for (int i = 0; i < buttons.length; i++) {
 					for (int j = 0; j < buttons[i].length; j++) {
 						if (e.getSource() == buttons[i][j]) {
 							System.out.println("COL:" + i + ", ROW:" + j);
 
 							System.out.println("NY RUNDA!");
-							buttons[i][j].setIcon(gameBoard[i][j].getCardFront());
-							
+							buttons[i][j].setIcon(gameBoard[i][j]
+									.getCardFront());
+
 							int backValue = rc.makeRound(gameBoard[i][j]);
-							System.out.println("BACKVALUE-------------->" + backValue);
+							System.out.println("BACKVALUE-------------->"
+									+ backValue);
 
 							if (backValue == -1) {
 								System.out.println("DU HAR EN TILL RUNDA");
 							} else if (backValue == -2) {
 								clearGameBoard();
 							} else if (backValue == -3) {
-								System.out.println("Du får inte välja samma kort.");
+								System.out
+										.println("Du får inte välja samma kort.");
 							} else {
 								removeCards(backValue);
 							}
@@ -219,9 +223,10 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 				}
 			}
 		});
-						if(e.getSource() == button){
-							controller.settings();
-						}
+
+		if (e.getSource() == button) {
+			controller.settings();
+		}
 
 	}
 
