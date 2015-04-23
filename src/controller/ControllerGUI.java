@@ -27,11 +27,14 @@ public class ControllerGUI extends Applet {
 	private RoundController rc;
 	private SoundController s = new SoundController();
 	private StartGUI start;
+	private boolean singleplayer;
+	private String p1,p2;
 	
 	/**
 	 * Byter panel till singelplayer när användaren väljer singelplayer.
 	 */
 	public void chooseSingle() {
+		singleplayer = true;
 		frame.getContentPane().removeAll();
 		frame.add(new ChooseGameGUI(this, true));
 		frame.getContentPane().revalidate();
@@ -43,6 +46,7 @@ public class ControllerGUI extends Applet {
 	 * Byter panel till multiplayer delen, när användaren väljer multiplayer.
 	 */
 	public void chooseMulti() {
+		singleplayer = false;
 		frame.getContentPane().removeAll();
 		frame.add(new ChooseGameGUI(this, false));
 		frame.getContentPane().revalidate();
@@ -53,9 +57,10 @@ public class ControllerGUI extends Applet {
 	/**
 	 * Startar RoundController, med de värden vi väljer att skicka med.
 	 */
-	public void startGame() {
-		
-		rc = new RoundController(level, mode, this);
+	public void startGame(String p1, String p2) {
+		this.p1 = p1;
+		this.p2 = p2;
+		rc = new RoundController(level, mode, singleplayer,p1,p2,this);
 	}
 
 	/**

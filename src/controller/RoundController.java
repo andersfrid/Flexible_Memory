@@ -28,11 +28,20 @@ public class RoundController {
 
 	private Player player1, player2;
 	private int col, row;
-	
-	private boolean roundEnable = true;
 
-	public RoundController(int level, int mode, ControllerGUI cGUI) {
+	private boolean singleplayer;
+
+	private Player currentPlayer;
+	
+	public RoundController(int level, int mode, boolean singleplayer,
+			String p1, String p2, ControllerGUI cGUI) {
+	
 		this.cGUI = cGUI;
+		this.singleplayer = singleplayer;
+		player1 = new Player(p1);
+		player2 = new Player(p2);
+		currentPlayer = player1;
+		
 		createNewGameBoard(level, mode);
 	}
 
@@ -55,7 +64,7 @@ public class RoundController {
 		System.out.println(imagePath);
 		System.out.println(folderPath);
 
-		//Räknar ut hur många bilder det är i mappen
+		// Räknar ut hur många bilder det är i mappen
 		File f = new File(folderPath);
 		int images = 0;
 		for (File file : f.listFiles()) {
@@ -66,7 +75,7 @@ public class RoundController {
 		}
 		System.out.println("Number of images: " + images);
 
-		int nbrOfCards = images/2;
+		int nbrOfCards = images / 2;
 		System.out.println(nbrOfCards);
 
 		int[] alreadyPlaced = new int[20];
@@ -77,8 +86,7 @@ public class RoundController {
 		int count = 0;
 
 		while (!isFilled(currentGameBoard)) {
-			
-			
+
 			int pairNbr = rand.nextInt(nbrOfCards);
 
 			if (!alreadyPlaced(alreadyPlaced, pairNbr)) {
@@ -99,8 +107,6 @@ public class RoundController {
 
 							currentGameBoard[randCol][randRow] = new Card(
 									pathToImage, pairNbr);
-							System.out.println("Här lägs det in: "
-									+ pathToImage);
 							ok = true;
 						}
 					} while (!ok);
@@ -241,31 +247,43 @@ public class RoundController {
 			turn2 = card;
 		}
 
+		System.out.println(currentPlayer.getName()+" : "+currentPlayer.getRoundCount()+" : "+currentPlayer.getPairs());
 		if (turn1 != null && turn2 != null) {
 			if (!turn1.equals(turn2)) {
+				currentPlayer.addRound();
 				if (isPair(turn1, turn2)) {
 					backValue = turn1.getCompareNbr();
+					currentPlayer.addPair();
+					//Lägger till ett par hos spelaren
 				} else {
 					backValue = -2;
+					swapPlayer();	
 				}
 
 				turn1 = null;
 				turn2 = null;
+				
 			} else {
 				turn2 = null;
-				backValue = -3;
+				backValue = -3; //Spelaren klickar på samma kort som redan är uppe.
 			}
 		}
+		
 		return backValue;
 	}
-
-	public void setPlayers(String name) {
-		player1 = new Player(name);
+	
+	public void swapPlayer(){
+		if(!singleplayer){
+			System.out.println("Försöker swapa");
+			
+			if(currentPlayer.equals(player1)){
+				currentPlayer = player2;
+			}
+			else if(currentPlayer.equals(player2)){
+				currentPlayer = player1;
+			}
+		}
 	}
-
-	public void setPlayers(String name1, String name2) {
-		player1 = new Player(name1);
-		player2 = new Player(name2);
-	}
+	
 
 }
