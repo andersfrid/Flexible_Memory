@@ -202,7 +202,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 					for (int j = 0; j < buttons[i].length; j++) {
 						if (e.getSource() == buttons[i][j]) {
 							System.out.println("COL:" + i + ", ROW:" + j);
-
+							
 							System.out.println("NY RUNDA!");
 							buttons[i][j].setIcon(gameBoard[i][j]
 									.getCardFront());
@@ -210,7 +210,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 							int backValue = rc.makeRound(gameBoard[i][j]);
 							System.out.println("BACKVALUE-------------->"
 									+ backValue);
-
+							
 							if (backValue == -1) {
 								System.out.println("DU HAR EN TILL RUNDA");
 							} else if (backValue == -2) {
@@ -226,11 +226,6 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 				}
 			}
 		});
-
-		if (e.getSource() == button) {
-			controller.settings();
-		}
-
 	}
 
 	private class BackgroundPanel extends JPanel {

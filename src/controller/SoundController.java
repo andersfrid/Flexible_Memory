@@ -9,7 +9,9 @@ import java.net.URL;
 import javax.swing.SwingUtilities;
 
 /**
- * En klass som startar musik och stänger av musik. Skickar även värde om musik/ effektljud är igång eller inte.
+ * En klass som startar musik och stänger av musik. Skickar även värde om musik/
+ * effektljud är igång eller inte.
+ * 
  * @author David
  *
  */
@@ -23,15 +25,15 @@ public class SoundController extends Thread {
 	 */
 	private void soundEffects() {
 		SwingUtilities.invokeLater(new Runnable() {
-			AudioClip music = null;
+			AudioClip soundEffects = null;
 
 			public void run() {
 				if (playSound == true) {
 					try {
-						URL url = new File("Music/gong.au").toURI().toURL();
-						music = Applet.newAudioClip(url);
-						
-						music.play();
+						URL url = new File("Music/whoosh.wav").toURI().toURL();
+						soundEffects = Applet.newAudioClip(url);
+
+						soundEffects.play();
 
 					} catch (MalformedURLException e) {
 						System.out.println(e);
@@ -40,8 +42,84 @@ public class SoundController extends Thread {
 			}
 		});
 	}
+
 	/**
-	 * Metod som kollar om ljudeffekterna är på eller avstängda. 
+	 * Tråd som spelar upp bakgrundmusiken.
+	 */
+	public void run() {
+		if (playMusic == true) {
+			try {
+				URL url = new File("Music/alcoholic.au").toURI().toURL();
+				music = Applet.newAudioClip(url);
+				music.loop();
+				// music.play();
+
+			} catch (MalformedURLException e) {
+				System.out.println(e);
+			}
+		}
+	}
+
+	/**
+	 * En metod som spelar upp ett ljud när någon att vunnit.
+	 */
+	private void winnerSound() {
+		if (playMusic == true) {
+			AudioClip winnerSound = null;
+			try {
+				URL url = new File("Music/WinnerSoundFull.wav").toURI().toURL();
+				winnerSound = Applet.newAudioClip(url);
+				winnerSound.play();
+
+			} catch (MalformedURLException e) {
+				System.out.println(e);
+			}
+		}
+	}
+
+	private void cardTurn() {
+		if (playSound == true) {
+			AudioClip sound = null;
+			try {
+				URL url = new File("Music/whoosh.wav").toURI().toURL();
+				sound = Applet.newAudioClip(url);
+				sound.play();
+
+			} catch (MalformedURLException e) {
+				System.out.println(e);
+			}
+		}
+	}
+
+	private void wrongPair() {
+		if (playSound == true) {
+			AudioClip wrongPair = null;
+			try {
+				URL url = new File("Music/WinnerSoundFull.wav").toURI().toURL();
+				wrongPair = Applet.newAudioClip(url);
+				wrongPair.play();
+
+			} catch (MalformedURLException e) {
+				System.out.println(e);
+			}
+		}
+	}
+
+	private void pair() {
+		if (playSound == true) {
+			try {
+				URL url = new File("Music/WinnerSoundFull.wav").toURI().toURL();
+				music = Applet.newAudioClip(url);
+				music.play();
+
+			} catch (MalformedURLException e) {
+				System.out.println(e);
+			}
+		}
+	}
+
+	/**
+	 * Metod som kollar om ljudeffekterna är på eller avstängda.
 	 */
 	public void stopSound() {
 		if (playSound == true) {
@@ -49,27 +127,7 @@ public class SoundController extends Thread {
 
 		} else {
 			playSound = true;
-
 		}
-	}
-
-	/**
-	 * Tråd som spelar upp bakgrundmusiken.
-	 */
-	public void run() {
-
-		if (playMusic == true) {
-			try {
-				URL url = new File("Music/alcoholic.au").toURI().toURL();
-				music = Applet.newAudioClip(url);
-				music.loop();
-//				music.play();
-
-			} catch (MalformedURLException e) {
-				System.out.println(e);
-			}
-		}
-
 	}
 
 	/**
@@ -82,7 +140,7 @@ public class SoundController extends Thread {
 			this.interrupt();
 		} else
 			playMusic = true;
-			startMusic();
+		startMusic();
 	}
 
 	public void setSound(boolean playSound) {
@@ -109,6 +167,14 @@ public class SoundController extends Thread {
 
 	public void startMusic() {
 		run();
+	}
+
+	public void startWinnerSound() {
+		winnerSound();
+	}
+
+	public void turnCard() {
+		cardTurn();
 	}
 
 }
