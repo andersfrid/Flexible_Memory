@@ -101,6 +101,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		gameArea.setOpaque(false);
 
 		mainPanel.add(gameArea, BorderLayout.CENTER);
+		
 
 		northPanel.add(button);
 		northPanel.add(playerOneName);
@@ -109,7 +110,9 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		northPanel.add(scorePlayerOne);
 		northPanel.add(level);
 		northPanel.add(scorePlayerTwo);
-
+		
+		button.addActionListener(this);
+		
 		add(mainPanel);
 		gameMode();
 	}

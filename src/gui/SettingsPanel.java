@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,20 +28,26 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	public SettingsPanel(ControllerGUI controller) {
 		this.controller = controller;
 
-		panel = new JPanel();
+		panel = new BgPanel();
 		panel.setLayout(null);
 		panel.setPreferredSize(new Dimension(400, 400));
 		panel.setBackground(Color.LIGHT_GRAY);
 
-		logo = new JLabel("FLEXIBLE MEMORY" + "\n" + "Inställningar");
-		logo.setBounds(150, 10, 200, 50);
+		ImageIcon iconLogo = new ImageIcon("Images/logo_smaller_320x75.png");
+		logo = new JLabel(iconLogo);
+		logo.setBounds(40, 40, 320, 50);
 
-		restartButton = new JButton("STARTA OM");
-		restartButton.setBounds(40, 160, 150, 75);
-		mainMenu = new JButton("HUVUD MENYN");
-		mainMenu.setBounds(210, 160, 150, 75);
-		exit = new JButton("AVSLUTA");
-		exit.setBounds(50, 250, 300, 75);
+		ImageIcon iconStart = new ImageIcon("Images/restartgame_small.jpg");
+		restartButton = new JButton(iconStart);
+		restartButton.setBounds(40, 170, 150, 50);
+		
+		ImageIcon iconHome = new ImageIcon("Images/home_small.jpg");
+		mainMenu = new JButton(iconHome);
+		mainMenu.setBounds(210, 170, 150, 50);
+		
+		ImageIcon iconAvsluta = new ImageIcon("Images/b_exit_small_300x50.png");
+		exit = new JButton(iconAvsluta);
+		exit.setBounds(50, 250, 300, 50);
 
 		ImageIcon iconMusic = new ImageIcon("Images/b_volume_on_50x50.png");
 		musicButton = new JButton(iconMusic);
@@ -129,6 +137,18 @@ public class SettingsPanel extends JPanel implements ActionListener {
 			musicPic();
 		}
 
+	}
+	
+	private class BgPanel extends JPanel {
+	    Image bg = new ImageIcon("Images/mario_1.jpg").getImage();
+	    @Override
+	    public void paintComponent(Graphics g) {
+	        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+	    }
+	}
+	
+	public static void main(String[]args){
+		new SettingsPanel(new ControllerGUI());
 	}
 
 }
