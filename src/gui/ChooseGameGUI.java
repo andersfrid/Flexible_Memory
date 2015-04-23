@@ -108,8 +108,6 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		// mainPanel
 		mainPanel.setBounds(311, 30, 460, 400);
 		mainPanel.setOpaque(false);
-		lblTitle.setBounds(0, 0, 1000, 90);
-		lblTitle.setFont(r60);
 
 		// set settings invisible
 		btnSettings.setBorderPainted(false);
@@ -162,6 +160,8 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		
 		// multiplayer
 		else {
+			lblTitle.setBounds(20, 0, 1000, 90);
+
 			ImageIcon iconMP = new ImageIcon("Images/multiplayer.png");
 
 			lblTitle.setIcon(iconMP);
@@ -215,7 +215,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 
 	private class BgPanel extends JPanel {
 		private java.awt.Image bg = new ImageIcon(
-				"Images/retro3.jpg").getImage();
+				"Images/retro4.jpg").getImage();
 
 		@Override
 		public void paintComponent(Graphics g) {
@@ -226,33 +226,76 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnStandard){
-			controller.setMode(0);
+	controller.setMode(0);
+	
+	ImageIcon iconbtnStandardSelected = new ImageIcon("Images/StandardSelected.jpg");
+	btnStandard.setIcon(iconbtnStandardSelected);
+	ImageIcon iconbtnFlag = new ImageIcon("Images/Flag.jpg");
+	btnFlag.setIcon(iconbtnFlag);
+	ImageIcon iconbtnPlus = new ImageIcon("Images/Plus.jpg");
+	btnPlus.setIcon(iconbtnPlus);
+	
+		
 		}
 		
 		if(e.getSource() == btnFlag){
 			System.out.println("FLAGGOR!!");
 			controller.setMode(1);
+	
+			ImageIcon iconbtnFlagSelected = new ImageIcon("Images/FlagSelected.jpg");
+			btnFlag.setIcon(iconbtnFlagSelected);
+			ImageIcon iconbtnStandard = new ImageIcon("Images/Standard.jpg");
+			btnStandard.setIcon(iconbtnStandard);
+			ImageIcon iconbtnPlus = new ImageIcon("Images/Plus.jpg");
+			btnPlus.setIcon(iconbtnPlus);
+			
 		}
 	
 		if(e.getSource() == btnPlus){
 			controller.setMode(4);
+			ImageIcon iconbtnPlusSelected = new ImageIcon("Images/PlusSelected.jpg");
+			btnPlus.setIcon(iconbtnPlusSelected);
+			ImageIcon iconbtnFlag = new ImageIcon("Images/Flag.jpg");
+			btnFlag.setIcon(iconbtnFlag);
+			ImageIcon iconbtnStandard = new ImageIcon("Images/Standard.jpg");
+			btnStandard.setIcon(iconbtnStandard);
+			
 		}
 		
 		if (e.getSource() == btnSettings) {
 			System.out.println("Inställningar");
 		}
 		if (e.getSource() == btnEasy) {
-			System.out.println("Lätt");
+			ImageIcon iconbtnEasySelected = new ImageIcon("Images/EasySelected.png");
+			
+	
 			controller.setLevel(0);
+			btnEasy.setIcon(iconbtnEasySelected);
+			ImageIcon iconbtnMedium = new ImageIcon("Images/medium.png");
+			btnMedium.setIcon(iconbtnMedium);
+			ImageIcon iconbtnHard = new ImageIcon("Images/hard.png");
+			btnHard.setIcon(iconbtnHard);
 		}
 		if (e.getSource() == btnMedium) {
-			System.out.println("Medium");
+			ImageIcon iconbtnMediumSelected = new ImageIcon("Images/MediumSelected.png");
+			
 			controller.setLevel(1);
-		}
+			btnMedium.setIcon(iconbtnMediumSelected);
+			ImageIcon iconbtnEasy = new ImageIcon("Images/easy2.png");
+			btnEasy.setIcon(iconbtnEasy);
+			ImageIcon iconbtnHard = new ImageIcon("Images/hard.png");
+			btnHard.setIcon(iconbtnHard);
+			}
 		if (e.getSource() == btnHard) {
-			System.out.println("Svårt");
+			ImageIcon iconbtnHardSelected = new ImageIcon("Images/HardSelected.png");
+			
 			controller.setLevel(2);
-		}
+			btnHard.setIcon(iconbtnHardSelected);
+			ImageIcon iconbtnEasy = new ImageIcon("Images/easy2.png");
+			btnEasy.setIcon(iconbtnEasy);
+			ImageIcon iconbtnMedium = new ImageIcon("Images/medium.png");
+			btnMedium.setIcon(iconbtnMedium);
+			}
 		if (e.getSource() == btnStart) {
 			System.out.println("Startar spelet.... INTE");
 			controller.startGame();

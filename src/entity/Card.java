@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
  *
  */
 public class Card {
-	private Icon cardBack = new ImageIcon("maps/background/bak_1.jpg");
+	private Icon cardBack = new ImageIcon("maps/background/Cardback3.jpg");
 	private Icon cardFace;
 	private int compareNbr;
 	private boolean isCompared = false;
