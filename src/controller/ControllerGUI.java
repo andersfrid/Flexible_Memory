@@ -2,15 +2,10 @@ package controller;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
-import java.awt.Dimension;
-import java.awt.LayoutManager;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-import javax.swing.ImageIcon;
+
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+
 
 import entity.Card;
 import gui.ChooseGameGUI;
@@ -18,6 +13,12 @@ import gui.GameBoardGUI;
 import gui.SettingsPanel;
 import gui.StartGUI;
 
+/**
+ * En panel och sound kontroller som hanterar hur vi byter mellan våra paneler. 
+ * Även hur vi hanterar vår musik ifrån SoundController.
+ * @author David Anders Andreas Joakim
+ *
+ */
 public class ControllerGUI extends Applet {
 
 	private AudioClip audioClip;
@@ -27,49 +28,52 @@ public class ControllerGUI extends Applet {
 	private SoundController s = new SoundController();
 	private StartGUI start;
 	
-
-	public ControllerGUI() {
-
-	}
-	
+	/**
+	 * Byter panel till singelplayer när användaren väljer singelplayer.
+	 */
 	public void chooseSingle() {
-		// SwingUtilities.invokeLater(
-		// new Runnable(){
-		// public void run(){
 		frame.getContentPane().removeAll();
 		frame.add(new ChooseGameGUI(this, true));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
 
-		// }
-		// });
-
 	}
 
+	/**
+	 * Byter panel till multiplayer delen, när användaren väljer multiplayer.
+	 */
 	public void chooseMulti() {
-		// SwingUtilities.invokeLater(
-		// new Runnable(){
-		// public void run(){
 		frame.getContentPane().removeAll();
 		frame.add(new ChooseGameGUI(this, false));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
-		//
-		// }
-		// });
-
+	
 	}
 
+	/**
+	 * Startar RoundController, med de värden vi väljer att skicka med.
+	 */
 	public void startGame() {
-		//Här
+		
 		rc = new RoundController(level, mode, this);
 	}
 
+	/**
+	 * Startar en ny frame med en settingsruta där användaren kan ändra lite inställningar.
+	 */
 	public void settings() {
-		frame.add(new SettingsPanel(this));
+		frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.add(new SettingsPanel(this));		
+		frame.setVisible(true);
+		frame.pack();
 
 	}
 
+	/**
+	 * En del setters och getters. Som ändrar musik och nivåer i spelet.
+	 */
 	public void setLevel(int level) {
 		this.level = level;
 	}
@@ -96,20 +100,22 @@ public class ControllerGUI extends Applet {
 		s.stopMusic();
 	}
 	
-	
+	/**
+	 * Ritar ut våran spelplans panel med de valen som användaren har valt i tematmenyen.
+	 * @param gameBoard
+	 * @param rc
+	 */
 	public void printGameBoard(Card[][] gameBoard, RoundController rc){
-		// SwingUtilities.invokeLater(
-		// new Runnable(){
-		// public void run(){
 		frame.getContentPane().removeAll();
 		frame.add(new GameBoardGUI(level, gameBoard,rc));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
-		//
-		// }
-		// });
+		
 	}
 	
+	/**
+	 * Startar en första frame och lägger vår start panel i den.
+	 */
 	public void startFrame() {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

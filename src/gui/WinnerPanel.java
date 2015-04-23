@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -12,20 +11,26 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+/**
+ * En panel som visar vem som har vunnit efter varje spel. Finns två knappar, restart och home.
+ * @author David
+ *
+ */
 public class WinnerPanel extends JPanel {
 	private JPanel panel;
-	private JLabel label, logo, winner;
+	private JLabel logo, winner;
 	private JButton startOver, home;
 	private JFrame frame;
 	
+	/**
+	 * Konstruktor där panelen instansieras.
+	 */
 	public WinnerPanel(){
 		
 		panel = new BgPanel();
 		panel.setPreferredSize(new Dimension(700,700));
 		panel.setLayout(null);
 		
-//		label = new JLabel("WINNER WINNER CHICKEN DINNER:");
-//		label.setBounds(200, 300, 550, 100);
 		ImageIcon iconLogo = new ImageIcon("Images/logo_small_550x75.png");
 		logo = new JLabel(iconLogo);
 		logo.setBounds(75, 50, 550, 75);
@@ -55,6 +60,11 @@ public class WinnerPanel extends JPanel {
 		frame.setVisible(true);
 		
 	}
+	/**
+	 * Innre klass som ritar upp bakgrunden på panelen.
+	 * @author David
+	 *
+	 */
 	private class BgPanel extends JPanel {
 	    Image bg = new ImageIcon("Images/mario_1.jpg").getImage();
 	    @Override

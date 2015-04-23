@@ -1,12 +1,15 @@
 package gui;
 
-import java.awt.Dimension;
 
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import controller.ControllerGUI;
 
+/**
+ * En klass som startar vårat spel
+ * @author	Anders, David
+ *
+ */
 public class StartGame {
 	private ControllerGUI controller = new ControllerGUI();
 	

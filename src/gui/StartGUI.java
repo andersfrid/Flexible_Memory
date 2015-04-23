@@ -1,38 +1,26 @@
 package gui;
 
-import java.applet.Applet;
-import java.applet.AudioClip;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
-import com.sun.prism.paint.Color;
 
 import controller.ControllerGUI;
-import controller.SoundController;
+
 
 /**
- * Start menu GUI
+ * Start menu GUI där spelet startas. Man kan välja singelplayer eller multiplayer och starta spelet.
  * @author Anders Frid
  *
  */
@@ -43,7 +31,11 @@ public class StartGUI extends JPanel implements ActionListener{
 //	private StartBGMusic sm = new StartBGMusic();
 	private ControllerGUI controller;
 	
-
+	/**
+	 * Konstruktor som ritar upp panelen och dess komponenter. 
+	 * Har en referens till en kontroller som styr musik och vilka GUI som skall ritas upp.
+	 * @param controller 
+	 */
 	
 	public StartGUI(ControllerGUI controller){
 		this.controller = controller;
@@ -86,8 +78,6 @@ public class StartGUI extends JPanel implements ActionListener{
 		jbtClose.setBounds(180, 520, 640, 100);
 		jbtClose.setBorderPainted(false);
 		
-
-		
 		jbtMusic.setBounds(10, 600, 50, 50);
 		jbtMusic.setBorderPainted(false);
 		jbtMusic.setBorder(null);
@@ -117,13 +107,14 @@ public class StartGUI extends JPanel implements ActionListener{
 		jbtMusic.addActionListener(this);
 		jbtFx.addActionListener(this);
 	
-		
-		
 		add(bgPanel);
 		
 		controller.startMusic();
 		
 	}
+	/**
+	 * Ändrar bilden på effektknappen beroende på om användaren mutat eller vill ha effekt ljud.
+	 */
 	public void volumePic() {
 		boolean playSound = controller.getSound();
 
@@ -138,6 +129,9 @@ public class StartGUI extends JPanel implements ActionListener{
 		}
 	}
 
+	/**
+	 * Ändrar bilden på musikknappen beroende på om det är mutat eller spelas musik.
+	 */
 	public void musicPic() {
 		boolean playMusic = controller.getMusic();
 
@@ -152,7 +146,9 @@ public class StartGUI extends JPanel implements ActionListener{
 		}
 	}
 
-	
+	/**
+	 * En aktionlistener som kontrollerar vad våra knappar gör.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == jbtSingle){
@@ -176,21 +172,11 @@ public class StartGUI extends JPanel implements ActionListener{
 		}
 		
 	}
-	
-//	private class StartBGMusic extends Applet { //Plays the background music
-//		AudioClip audioClip;	
-//		
-//		public void init(){
-//			try {
-//				audioClip = Applet.newAudioClip( new URL( "file:\\Users\\Anders\\Pictures\\gong.au"));
-//			} catch (MalformedURLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			audioClip.loop();
-//		}
-//    }
-	
+	/**
+	 * En inre klass som ritar upp bakgrunden på panelen.
+	 * @author Anders Fridh
+	 *
+	 */
 	private class BgPanel extends JPanel {
 	    Image bg = new ImageIcon("Images/mario_1.jpg").getImage();
 	    @Override

@@ -8,15 +8,19 @@ import java.net.URL;
 
 import javax.swing.SwingUtilities;
 
+/**
+ * En klass som startar musik och stänger av musik. Skickar även värde om musik/ effektljud är igång eller inte.
+ * @author David
+ *
+ */
 public class SoundController extends Thread {
 	private boolean playSound = true;
 	private boolean playMusic = true;
 	private AudioClip music = null;
 
-	public SoundController() {
-
-	}
-
+	/**
+	 * En metod som skapar ett soundeffect ljud.
+	 */
 	private void soundEffects() {
 		SwingUtilities.invokeLater(new Runnable() {
 			AudioClip music = null;
@@ -36,7 +40,9 @@ public class SoundController extends Thread {
 			}
 		});
 	}
-
+	/**
+	 * Metod som kollar om ljudeffekterna är på eller avstängda. 
+	 */
 	public void stopSound() {
 		if (playSound == true) {
 			playSound = false;
@@ -47,6 +53,9 @@ public class SoundController extends Thread {
 		}
 	}
 
+	/**
+	 * Tråd som spelar upp bakgrundmusiken.
+	 */
 	public void run() {
 
 		if (playMusic == true) {
@@ -63,6 +72,9 @@ public class SoundController extends Thread {
 
 	}
 
+	/**
+	 * Kollar om musiken skall stoppas eller sättas igång.
+	 */
 	public void stopMusic() {
 		if (playMusic == true) {
 			playMusic = false;
