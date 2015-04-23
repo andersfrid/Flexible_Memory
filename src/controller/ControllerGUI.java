@@ -67,7 +67,7 @@ public class ControllerGUI extends Applet {
 	}
 
 	public void settings() {
-		frame.add(new SettingsPanel(new ControllerGUI()));
+		frame.add(new SettingsPanel(new ControllerGUI(), s));
 
 	}
 

@@ -133,11 +133,4 @@ public class SettingsPanel extends JPanel implements ActionListener {
 
 	}
 
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				new SettingsPanel(new ControllerGUI(), new SoundController());
-			}
-		});
-	}
 }
