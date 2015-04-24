@@ -109,7 +109,7 @@ public class StartGUI extends JPanel implements ActionListener{
 	
 		add(bgPanel);
 		
-		controller.startMusic();
+		//controller.startMusic();
 		
 	}
 	/**
@@ -153,11 +153,11 @@ public class StartGUI extends JPanel implements ActionListener{
 		
 		if(e.getSource() == jbtSingle){
 			controller.chooseSingle();
-			controller.startSound();
+			controller.startSound(-1);
 		}
 		if(e.getSource() == jbtMulti){
 			controller.chooseMulti();
-			controller.startSound();
+			controller.startSound(-1);
 		}
 		if(e.getSource() == jbtClose){
 			System.exit(0);

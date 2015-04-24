@@ -161,7 +161,12 @@ public class SoundController extends Thread {
 		return playMusic;
 	}
 
-	public void startEffects() {
+	public void startEffects(int soundNbr) {
+		if(soundNbr == 1)//Swish
+		{
+			cardTurn();
+		}
+		
 		soundEffects();
 	}
 

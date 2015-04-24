@@ -42,9 +42,10 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	private Card[][] gameBoard;
 	private RoundController rc;
 	private int levelNbr;
-	private ControllerGUI controller;
+	private ControllerGUI cg;
 
-	public GameBoardGUI(int levelNbr, Card[][] gameBoard, RoundController rc) {
+	public GameBoardGUI(int levelNbr, Card[][] gameBoard,ControllerGUI cg, RoundController rc) {
+		this.cg = cg;
 		this.levelNbr = levelNbr;
 		this.gameBoard = gameBoard;
 		this.rc = rc;
@@ -101,7 +102,6 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		gameArea.setOpaque(false);
 
 		mainPanel.add(gameArea, BorderLayout.CENTER);
-		
 
 		northPanel.add(button);
 		northPanel.add(playerOneName);
@@ -110,9 +110,9 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		northPanel.add(scorePlayerOne);
 		northPanel.add(level);
 		northPanel.add(scorePlayerTwo);
-		
+
 		button.addActionListener(this);
-		
+
 		add(mainPanel);
 		gameMode();
 	}
@@ -195,37 +195,33 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		for (int i = 0; i < buttons.length; i++) {
+			for (int j = 0; j < buttons[i].length; j++) {
+				if (e.getSource() == buttons[i][j]) {
+					System.out.println("COL:" + i + ", ROW:" + j);
 
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				for (int i = 0; i < buttons.length; i++) {
-					for (int j = 0; j < buttons[i].length; j++) {
-						if (e.getSource() == buttons[i][j]) {
-							System.out.println("COL:" + i + ", ROW:" + j);
-							
-							System.out.println("NY RUNDA!");
-							buttons[i][j].setIcon(gameBoard[i][j]
-									.getCardFront());
+					System.out.println("NY RUNDA!");
+					buttons[i][j].setIcon(gameBoard[i][j].getCardFront());
 
-							int backValue = rc.makeRound(gameBoard[i][j]);
-							System.out.println("BACKVALUE-------------->"
-									+ backValue);
-							
-							if (backValue == -1) {
-								System.out.println("DU HAR EN TILL RUNDA");
-							} else if (backValue == -2) {
-								clearGameBoard();
-							} else if (backValue == -3) {
-								System.out
-										.println("Du får inte välja samma kort.");
-							} else {
-								removeCards(backValue);
-							}
-						}
+					int backValue = rc.makeRound(gameBoard[i][j]);
+					System.out.println("BACKVALUE-------------->" + backValue);
+
+					if (backValue == -1) {
+						cg.startSound(1);
+						System.out.println("DU HAR EN TILL RUNDA");
+					} else if (backValue == -2) {
+						cg.startSound(1);
+						clearGameBoard();
+					} else if (backValue == -3) {
+						cg.startSound(2);
+						System.out.println("Du får inte välja samma kort.");
+					} else {
+						removeCards(backValue);
 					}
 				}
 			}
-		});
+		}
+
 	}
 
 	private class BackgroundPanel extends JPanel {

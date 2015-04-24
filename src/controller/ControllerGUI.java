@@ -92,9 +92,11 @@ public class ControllerGUI extends Applet {
 	public boolean getSound(){
 		return s.getSound();
 	}
-	public void startSound(){
-		s.startEffects();
+	
+	public void startSound(int soundNbr){
+		s.startEffects(soundNbr);
 	}
+	
 	public void stopSound(){
 		s.stopSound();
 	}
@@ -112,7 +114,7 @@ public class ControllerGUI extends Applet {
 	 */
 	public void printGameBoard(Card[][] gameBoard, RoundController rc){
 		frame.getContentPane().removeAll();
-		frame.add(new GameBoardGUI(level, gameBoard,rc));
+		frame.add(new GameBoardGUI(level, gameBoard,this,rc));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
 		
