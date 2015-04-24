@@ -49,10 +49,9 @@ public class SoundController extends Thread {
 	public void run() {
 		if (playMusic == true) {
 			try {
-				URL url = new File("Music/alcoholic.waw").toURI().toURL();
+				URL url = new File("Music/alcoholic.wav").toURI().toURL();
 				music = Applet.newAudioClip(url);
 				music.loop();
-				// music.play();
 
 			} catch (MalformedURLException e) {
 				System.out.println(e);

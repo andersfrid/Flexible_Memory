@@ -109,7 +109,7 @@ public class StartGUI extends JPanel implements ActionListener{
 	
 		add(bgPanel);
 		
-		//controller.startMusic();
+		controller.startMusic();
 		
 	}
 	/**
