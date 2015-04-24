@@ -105,8 +105,8 @@ public class ControllerGUI extends Applet {
 	public void stopSound(){
 		s.stopSound();
 	}
-	public void startMusic(){
-		s.startMusic();
+	public void startMusic(int musicNbr){
+		s.startMusic(musicNbr);
 	}
 	public void stopMusic(){
 		s.stopMusic();
@@ -149,7 +149,7 @@ public class ControllerGUI extends Applet {
 		frame.add(new StartGUI(this));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
-		removeSettings();
+		
 	}
 
 	public void removeSettings(){

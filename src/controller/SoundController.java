@@ -8,6 +8,8 @@ import java.net.URL;
 
 import javax.swing.SwingUtilities;
 
+
+
 /**
  * En klass som startar musik och stänger av musik. Skickar även värde om musik/
  * effektljud är igång eller inte.
@@ -19,29 +21,6 @@ public class SoundController extends Thread {
 	private boolean playSound = true;
 	private boolean playMusic = true;
 	private AudioClip music = null;
-
-	/**
-	 * En metod som skapar ett soundeffect ljud.
-	 */
-	private void soundEffects() {
-		SwingUtilities.invokeLater(new Runnable() {
-			AudioClip soundEffects = null;
-
-			public void run() {
-				if (playSound == true) {
-					try {
-						URL url = new File("Music/whoosh.wav").toURI().toURL();
-						soundEffects = Applet.newAudioClip(url);
-
-						soundEffects.play();
-
-					} catch (MalformedURLException e) {
-						System.out.println(e);
-					}
-				}
-			}
-		});
-	}
 
 	/**
 	 * Tråd som spelar upp bakgrundmusiken.
@@ -63,17 +42,21 @@ public class SoundController extends Thread {
 	 * En metod som spelar upp ett ljud när någon att vunnit.
 	 */
 	private void winnerSound() {
-		if (playMusic == true) {
-			AudioClip winnerSound = null;
-			try {
-				URL url = new File("Music/WinnerSoundFull.wav").toURI().toURL();
-				winnerSound = Applet.newAudioClip(url);
-				winnerSound.play();
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				if (playMusic == true) {
+					AudioClip winnerSound = null;
+					try {
+						URL url = new File("Music/WinnerSoundFull.wav").toURI().toURL();
+						winnerSound = Applet.newAudioClip(url);
+						winnerSound.play();
 
-			} catch (MalformedURLException e) {
-				System.out.println(e);
+					} catch (MalformedURLException e) {
+						System.out.println(e);
+					}
+				}
 			}
-		}
+		});	
 	}
 
 	private void cardTurn() {
@@ -94,7 +77,7 @@ public class SoundController extends Thread {
 		if (playSound == true) {
 			AudioClip wrongPair = null;
 			try {
-				URL url = new File("Music/WinnerSoundFull.wav").toURI().toURL();
+				URL url = new File("Music/error.wav").toURI().toURL();
 				wrongPair = Applet.newAudioClip(url);
 				wrongPair.play();
 
@@ -106,10 +89,39 @@ public class SoundController extends Thread {
 
 	private void pair() {
 		if (playSound == true) {
+			AudioClip pair = null;
 			try {
-				URL url = new File("Music/WinnerSoundFull.wav").toURI().toURL();
-				music = Applet.newAudioClip(url);
-				music.play();
+				URL url = new File("Music/win.wav").toURI().toURL();
+				pair = Applet.newAudioClip(url);
+				pair.play();
+
+			} catch (MalformedURLException e) {
+				System.out.println(e);
+			}
+		}
+	}
+	
+	private void error(){
+		if (playSound == true) {
+			AudioClip error = null;
+			try {
+				URL url = new File("Music/aj.wav").toURI().toURL();
+				error = Applet.newAudioClip(url);
+				error.play();
+
+			} catch (MalformedURLException e) {
+				System.out.println(e);
+			}
+		}
+	}
+	
+	private void buttonSound(){
+		if (playSound == true) {
+			AudioClip button = null;
+			try {
+				URL url = new File("Music/click.wav").toURI().toURL();
+				button = Applet.newAudioClip(url);
+				button.play();
 
 			} catch (MalformedURLException e) {
 				System.out.println(e);
@@ -139,7 +151,7 @@ public class SoundController extends Thread {
 			this.interrupt();
 		} else
 			playMusic = true;
-		startMusic();
+		startMusic(1);
 	}
 
 	public void setSound(boolean playSound) {
@@ -161,23 +173,31 @@ public class SoundController extends Thread {
 	}
 
 	public void startEffects(int soundNbr) {
-		if(soundNbr == 1){ // swish
-			cardTurn();
+		if(soundNbr == 1){ 
+			cardTurn(); // swish when card turns = number 1
 		}
 		if(soundNbr == 2){
-			
+			wrongPair(); //
 		}
 		if(soundNbr == 3){
-			
+			pair(); //
 		}
 		if(soundNbr == 4){
-			
+			error(); //
+		}
+		if(soundNbr == 5){
+			buttonSound();
 		}
 		
 	}
 
-	public void startMusic() {
-		run();
+	public void startMusic(int musicNbr) {
+		if(musicNbr == 1){
+			run();			
+		}
+		if(musicNbr ==2){
+			winnerSound();
+		}
 	}
 
 }

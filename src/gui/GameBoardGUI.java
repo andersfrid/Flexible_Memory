@@ -211,11 +211,14 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 						System.out.println("DU HAR EN TILL RUNDA");
 					} else if (backValue == -2) {
 						cg.startSound(1);
+						cg.startSound(2);
 						clearGameBoard();
 					} else if (backValue == -3) {
-						cg.startSound(2);
+						cg.startSound(4);
 						System.out.println("Du får inte välja samma kort.");
 					} else {
+						cg.startSound(1);
+						cg.startSound(3);
 						removeCards(backValue);
 					}
 				}
