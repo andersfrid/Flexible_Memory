@@ -29,7 +29,7 @@ public class WinnerPanel extends JPanel implements ActionListener{
 	private JFrame frame;
 	private JLabel player = new JLabel();
 	private Font afb20 = new Font("Agency FB", Font.PLAIN, 72);
-	private ControllerGUI controller;
+	private ControllerGUI controller = new ControllerGUI();
 	/**
 	 * Konstruktor där panelen instansieras.
 	 */
@@ -68,13 +68,8 @@ public class WinnerPanel extends JPanel implements ActionListener{
 		startOver.addActionListener(this);
 		home.addActionListener(this);
 		
-		
-		frame = new JFrame("Winner");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(panel);
-		frame.setResizable(false);
-		frame.pack();
-		frame.setVisible(true);
+		add(panel);
+
 		
 	}
 	
@@ -98,14 +93,6 @@ public class WinnerPanel extends JPanel implements ActionListener{
 	    public void paintComponent(Graphics g) {
 	        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 	    }
-	}
-	public static void main(String[]args){
-		SwingUtilities.invokeLater(
-				new Runnable(){
-					public void run(){
-						new WinnerPanel();
-					}
-				});
 	}
 
 }

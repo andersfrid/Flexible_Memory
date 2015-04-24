@@ -73,12 +73,12 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		panel.add(musicButton);
 		panel.add(soundButton);
 
-		frame = new JFrame("Inställningar");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.add(panel);
-		frame.pack();
-		frame.setVisible(true);
+//		frame = new JFrame("Inställningar");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.setResizable(false);
+//		frame.add(panel);
+//		frame.pack();
+//		frame.setVisible(true);
 
 		restartButton.addActionListener(this);
 		mainMenu.addActionListener(this);
@@ -86,8 +86,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		soundButton.addActionListener(this);
 		musicButton.addActionListener(this);
 		
-
-
+		add(panel);
 	}
 
 	public void volumePic() {
@@ -125,11 +124,10 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == mainMenu) {
 			controller.getSound();
-			controller.startFrame();
 			controller.home();
 		}
 		if (e.getSource() == exit) {
-			System.exit(0);
+			controller.removeSettings();
 		}
 		if (e.getSource() == soundButton) {
 			controller.stopSound();
@@ -150,8 +148,8 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	    }
 	}
 	
-	public static void main(String[]args){
-		new SettingsPanel(new ControllerGUI());
-	}
+//	public static void main(String[]args){
+//		new SettingsPanel(new ControllerGUI());
+//	}
 
 }

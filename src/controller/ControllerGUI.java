@@ -4,7 +4,9 @@ import java.applet.Applet;
 import java.applet.AudioClip;
 
 
+
 import javax.swing.JFrame;
+
 
 
 import entity.Card;
@@ -12,6 +14,7 @@ import gui.ChooseGameGUI;
 import gui.GameBoardGUI;
 import gui.SettingsPanel;
 import gui.StartGUI;
+import gui.WinnerPanel;
 
 /**
  * En panel och sound kontroller som hanterar hur vi byter mellan våra paneler. 
@@ -23,6 +26,8 @@ public class ControllerGUI extends Applet {
 
 	private AudioClip audioClip;
 	private JFrame frame;
+	private JFrame frameSett;
+	private JFrame frameWin;
 	private int level, mode=0; //Bara ett spelläge än
 	private RoundController rc;
 	private SoundController s = new SoundController();
@@ -67,12 +72,12 @@ public class ControllerGUI extends Applet {
 	 * Startar en ny frame med en settingsruta där användaren kan ändra lite inställningar.
 	 */
 	public void settings() {
-		frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.add(new SettingsPanel(this));		
-		frame.setVisible(true);
-		frame.pack();
+		frameSett = new JFrame("Settings");
+		frameSett.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameSett.setResizable(false);
+		frameSett.add(new SettingsPanel(this));		
+		frameSett.setVisible(true);
+		frameSett.pack();
 
 	}
 
@@ -139,10 +144,34 @@ public class ControllerGUI extends Applet {
 		startGame(p1, p2);
 	}
 	public void home(){
+		removeSettings();
 		frame.getContentPane().removeAll();
+		frame.add(new StartGUI(this));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
-		startFrame();
+		removeSettings();
+	}
+
+	public void removeSettings(){
+		frameSett.remove(this);
+		frameSett.getContentPane().removeAll();
+//		frameSett.setVisible(false);
+		frameSett.dispose();
+	}
+	public void removeWinner(){
+		frameWin.remove(this);
+		frameWin.getContentPane().removeAll();
+//		frameSett.setVisible(false);
+		frameWin.dispose();
+	}
+	public void winner(){
+		
+		frameWin= new JFrame("Winner");
+		frameWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameWin.add(new WinnerPanel());
+		frameWin.setResizable(false);
+		frameWin.pack();
+		frameWin.setVisible(true);
 	}
 
 }
