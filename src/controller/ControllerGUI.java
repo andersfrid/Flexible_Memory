@@ -132,5 +132,17 @@ public class ControllerGUI extends Applet {
 		frame.pack();
 
 	}
+	public void restart(){
+		frame.getContentPane().removeAll();
+		frame.getContentPane().revalidate();
+		frame.getContentPane().repaint();
+		startGame(p1, p2);
+	}
+	public void home(){
+		frame.getContentPane().removeAll();
+		frame.getContentPane().revalidate();
+		frame.getContentPane().repaint();
+		startFrame();
+	}
 
 }

@@ -121,9 +121,12 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == restartButton) {
 			controller.getSound();
+			controller.restart();
 		}
 		if (e.getSource() == mainMenu) {
 			controller.getSound();
+			controller.startFrame();
+			controller.home();
 		}
 		if (e.getSource() == exit) {
 			System.exit(0);

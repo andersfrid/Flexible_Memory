@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,18 +15,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import controller.ControllerGUI;
+
 /**
  * En panel som visar vem som har vunnit efter varje spel. Finns två knappar, restart och home.
  * @author David
  *
  */
-public class WinnerPanel extends JPanel {
+public class WinnerPanel extends JPanel implements ActionListener{
 	private JPanel panel;
 	private JLabel logo, winner;
 	private JButton startOver, home;
 	private JFrame frame;
 	private JLabel player = new JLabel();
 	private Font afb20 = new Font("Agency FB", Font.PLAIN, 72);
+	private ControllerGUI controller;
 	/**
 	 * Konstruktor där panelen instansieras.
 	 */
@@ -60,6 +65,10 @@ public class WinnerPanel extends JPanel {
 		panel.add(home);
 		panel.add(player);
 		
+		startOver.addActionListener(this);
+		home.addActionListener(this);
+		
+		
 		frame = new JFrame("Winner");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(panel);
@@ -67,6 +76,16 @@ public class WinnerPanel extends JPanel {
 		frame.pack();
 		frame.setVisible(true);
 		
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == startOver){
+			controller.restart();
+			
+		}
+		if(e.getSource() == home){
+			controller.home();
+		}
 	}
 	/**
 	 * Innre klass som ritar upp bakgrunden på panelen.
