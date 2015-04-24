@@ -44,7 +44,8 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	private int levelNbr;
 	private ControllerGUI cg;
 
-	public GameBoardGUI(int levelNbr, Card[][] gameBoard,ControllerGUI cg, RoundController rc) {
+	public GameBoardGUI(int levelNbr, Card[][] gameBoard, ControllerGUI cg,
+			RoundController rc) {
 		this.cg = cg;
 		this.levelNbr = levelNbr;
 		this.gameBoard = gameBoard;
@@ -149,6 +150,17 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		}
 	}
 
+	public boolean cardsLeft() {
+		for (int i = 0; i < gameBoard.length; i++) {
+			for (int j = 0; j < gameBoard[i].length; j++) {
+				if(gameBoard[i][j] != null){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public void removeCards(int compareNbr) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -179,7 +191,6 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 					for (int j = 0; j < gameBoard[i].length; j++) {
 						if (gameBoard[i][j] != null) {
 							buttons[i][j].setIcon(gameBoard[i][j].getCardBack());
-
 						}
 					}
 				}
@@ -220,11 +231,14 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 						cg.startSound(1);
 						cg.startSound(3);
 						removeCards(backValue);
+						if(!cardsLeft()){
+							System.out.println("Vi har en vinnare!");
+						}
 					}
 				}
 			}
 		}
-		if(e.getSource() == button){
+		if (e.getSource() == button) {
 			cg.settings();
 		}
 	}
