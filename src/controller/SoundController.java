@@ -49,7 +49,7 @@ public class SoundController extends Thread {
 	public void run() {
 		if (playMusic == true) {
 			try {
-				URL url = new File("Music/alcoholic.au").toURI().toURL();
+				URL url = new File("Music/alcoholic.waw").toURI().toURL();
 				music = Applet.newAudioClip(url);
 				music.loop();
 				// music.play();
@@ -162,24 +162,23 @@ public class SoundController extends Thread {
 	}
 
 	public void startEffects(int soundNbr) {
-		if(soundNbr == 1)//Swish
-		{
+		if(soundNbr == 1){ // swish
 			cardTurn();
 		}
+		if(soundNbr == 2){
+			
+		}
+		if(soundNbr == 3){
+			
+		}
+		if(soundNbr == 4){
+			
+		}
 		
-		soundEffects();
 	}
 
 	public void startMusic() {
 		run();
-	}
-
-	public void startWinnerSound() {
-		winnerSound();
-	}
-
-	public void turnCard() {
-		cardTurn();
 	}
 
 }
