@@ -1,6 +1,8 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -21,7 +23,8 @@ public class WinnerPanel extends JPanel {
 	private JLabel logo, winner;
 	private JButton startOver, home;
 	private JFrame frame;
-	
+	private JLabel player = new JLabel();
+	private Font afb20 = new Font("Agency FB", Font.PLAIN, 72);
 	/**
 	 * Konstruktor där panelen instansieras.
 	 */
@@ -30,6 +33,10 @@ public class WinnerPanel extends JPanel {
 		panel = new BgPanel();
 		panel.setPreferredSize(new Dimension(700,700));
 		panel.setLayout(null);
+		
+		player.setBounds(275, 425, 300, 100);
+		player.setFont(afb20);
+		player.setForeground(Color.BLACK);
 		
 		ImageIcon iconLogo = new ImageIcon("Images/logo_small_550x75.png");
 		logo = new JLabel(iconLogo);
@@ -51,6 +58,7 @@ public class WinnerPanel extends JPanel {
 		panel.add(logo);
 		panel.add(startOver);
 		panel.add(home);
+		panel.add(player);
 		
 		frame = new JFrame("Winner");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
