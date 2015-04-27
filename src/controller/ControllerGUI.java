@@ -73,7 +73,7 @@ public class ControllerGUI extends Applet {
 	 */
 	public void settings() {
 		frameSett = new JFrame("Settings");
-		frameSett.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameSett.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frameSett.setResizable(false);
 		frameSett.add(new SettingsPanel(this));		
 		frameSett.setVisible(true);
