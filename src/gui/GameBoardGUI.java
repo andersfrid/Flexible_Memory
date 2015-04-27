@@ -150,15 +150,16 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		}
 	}
 
-	public boolean cardsLeft() {
+	public int cardsLeft() {
+		int count = 0;
 		for (int i = 0; i < gameBoard.length; i++) {
 			for (int j = 0; j < gameBoard[i].length; j++) {
-				if(gameBoard[i][j] != null){
-					return true;
+				if (gameBoard[i][j] != null) {
+					count++;
 				}
 			}
 		}
-		return false;
+		return count;
 	}
 
 	public void removeCards(int compareNbr) {
@@ -175,8 +176,14 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 						}
 					}
 				}
+
 				try {
 					Thread.sleep(1000);
+					System.err.println("Kort kvar: " + cardsLeft());
+					if (cardsLeft() <= 0) {
+						System.out.println("Vi har en vinnare!");
+						rc.winner();
+					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -190,7 +197,8 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 				for (int i = 0; i < gameBoard.length; i++) {
 					for (int j = 0; j < gameBoard[i].length; j++) {
 						if (gameBoard[i][j] != null) {
-							buttons[i][j].setIcon(gameBoard[i][j].getCardBack());
+							buttons[i][j].setIcon(gameBoard[i][j]
+									.getCardFront());
 						}
 					}
 				}
@@ -231,9 +239,6 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 						cg.startSound(1);
 						cg.startSound(3);
 						removeCards(backValue);
-						if(!cardsLeft()){
-							System.out.println("Vi har en vinnare!");
-						}
 					}
 				}
 			}

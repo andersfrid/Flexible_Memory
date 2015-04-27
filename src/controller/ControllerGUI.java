@@ -5,11 +5,14 @@ import java.applet.AudioClip;
 
 
 
+
 import javax.swing.JFrame;
 
 
 
+
 import entity.Card;
+import entity.Player;
 import gui.ChooseGameGUI;
 import gui.GameBoardGUI;
 import gui.SettingsPanel;
@@ -163,11 +166,11 @@ public class ControllerGUI extends Applet {
 //		frameSett.setVisible(false);
 		frameWin.dispose();
 	}
-	public void winner(){
-		
+	public void winner(Player player1,Player player2, int winnerNbr){
 		frameWin= new JFrame("Winner");
 		frameWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frameWin.add(new WinnerPanel());
+	
+		frameWin.add(new WinnerPanel(player1, player2, winnerNbr));
 		frameWin.setResizable(false);
 		frameWin.pack();
 		frameWin.setVisible(true);

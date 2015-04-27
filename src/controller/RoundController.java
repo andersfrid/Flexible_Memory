@@ -232,6 +232,31 @@ public class RoundController {
 		return false;
 	}
 
+	public void winner(){
+		if(singleplayer){
+			System.out.println(player1.getName()+" klarade memoryt på "+player1.getRoundCount()+ " antal rundor");
+			cGUI.winner(player1, null, 1);
+		}else{
+			if(player1.getPairs() == player2.getPairs()){ //Lika
+				System.out.println("Lika!");
+				System.out.println(player1.getName()+" och "+player2.getName()+" fick: "+player1.getPairs()+" par.");
+				cGUI.winner(player1, player2, 0);
+			}
+			else{
+				if(player1.getPairs() > player2.getPairs()){ //Spelare 1 vann
+					System.out.println(player1.getName()+" Vann!!");
+					cGUI.winner(player1, player2, 1);
+				}
+				else{	//Spelare 2 vann
+					System.out.println(player2.getName()+" Vann!!");
+					cGUI.winner(player1, player2, 2);
+				}				
+				System.out.println(player1.getName()+" fick "+player1.getPairs()+" par");
+				System.out.println(player2.getName()+" fick "+player2.getPairs()+" par");
+			}
+		}
+	}
+	
 	/**
 	 * 
 	 * @param card

@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import controller.ControllerGUI;
+import entity.Player;
 
 /**
  * En panel som visar vem som har vunnit efter varje spel. Finns två knappar, restart och home.
@@ -27,21 +28,32 @@ public class WinnerPanel extends JPanel implements ActionListener{
 	private JLabel logo, winner;
 	private JButton startOver, home;
 	private JFrame frame;
-	private JLabel player = new JLabel();
+	private JLabel playerWinner = new JLabel();
+	private JLabel playerLoser = new JLabel();
 	private Font afb20 = new Font("Agency FB", Font.PLAIN, 72);
 	private ControllerGUI controller = new ControllerGUI();
 	/**
 	 * Konstruktor där panelen instansieras.
 	 */
-	public WinnerPanel(){
+	public WinnerPanel(Player player1, Player player2, int winnerNbr){
+		
+		if(winnerNbr == 1){
+			playerWinner.setText(player1.getName() + " Par: "+player1.getPairs());
+		}
+		else if(winnerNbr == 2){
+			playerWinner.setText(player2.getName() + " Par: "+player2.getPairs());
+		}
+		else{
+			playerWinner.setText("Det blev lika: "+player1.getPairs());
+		}
 		
 		panel = new BgPanel();
 		panel.setPreferredSize(new Dimension(700,700));
 		panel.setLayout(null);
 		
-		player.setBounds(275, 425, 300, 100);
-		player.setFont(afb20);
-		player.setForeground(Color.BLACK);
+		playerWinner.setBounds(275, 425, 300, 100);
+		playerWinner.setFont(afb20);
+		playerWinner.setForeground(Color.BLACK);
 		
 		ImageIcon iconLogo = new ImageIcon("Images/logo_small_550x75.png");
 		logo = new JLabel(iconLogo);
@@ -63,7 +75,7 @@ public class WinnerPanel extends JPanel implements ActionListener{
 		panel.add(logo);
 		panel.add(startOver);
 		panel.add(home);
-		panel.add(player);
+		panel.add(playerWinner);
 		
 		startOver.addActionListener(this);
 		home.addActionListener(this);
