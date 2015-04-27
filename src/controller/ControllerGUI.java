@@ -153,10 +153,9 @@ public class ControllerGUI extends Applet {
 	}
 
 	public void removeSettings(){
-		frameSett.remove(this);
-		frameSett.getContentPane().removeAll();
-//		frameSett.setVisible(false);
+		
 		frameSett.dispose();
+		frameSett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	public void removeWinner(){
 		frameWin.remove(this);

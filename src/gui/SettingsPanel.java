@@ -116,7 +116,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 			musicButton.setIcon(iconMusic);
 		}
 	}
-
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == restartButton) {
 			controller.getSound();
