@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -13,17 +14,22 @@ import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import org.omg.CORBA.Current;
 
+import com.sun.xml.internal.bind.api.impl.NameConverter;
+
 import controller.ControllerGUI;
+import controller.NameConvert;
 import controller.RoundController;
 import entity.Card;
 
@@ -34,8 +40,8 @@ import entity.Card;
  */
 public class GameBoardGUI extends JPanel implements ActionListener {
 	private JLabel playerOneName, playerTwoName, scorePlayerOne,
-			scorePlayerTwo, level, logo;
-	private JPanel mainPanel, northPanel, gameArea;
+			scorePlayerTwo, level, logo, player1Pairs, player1Rounds;
+	private JPanel mainPanel, northPanel, gameArea, pnlPlayerOne, pnlPlayerTwo, pnlMode;
 	private JFrame frame;
 	private JButton button;
 	private JButton[][] buttons;
@@ -43,6 +49,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	private RoundController rc;
 	private int levelNbr;
 	private ControllerGUI cg;
+	private NameConvert converter = new NameConvert();
 
 	public GameBoardGUI(int levelNbr, Card[][] gameBoard, ControllerGUI cg,
 			RoundController rc) {
@@ -57,46 +64,119 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		mainPanel.setPreferredSize(new Dimension(1000, 700));
 
 		northPanel = new JPanel();
+		northPanel.setLayout(null);
 		northPanel.setPreferredSize(new Dimension(1000, 200));
 		northPanel.setOpaque(false);
 
 		mainPanel.add(northPanel, BorderLayout.NORTH);
 
+		
+		
+		//PlayerOne
+		pnlPlayerOne = new JPanel();
+		pnlPlayerOne.setLayout(null);
+//		pnlPlayerOne.setBackground(new Color(255,255,255));
+		pnlPlayerOne.setBounds(5,60, 400, 300);
+		
+		//pnlNamePlayerOne
+		JPanel pnlNameOne = new JPanel();
+//		pnlNameOne.setBackground(new Color(212,231,40));
+		pnlNameOne.setBounds(10, 5, 380, 45);
+		
+		pnlNameOne.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
+		
+		//Skall flyttas
+		Icon[] name = converter.generate("Andreas");
+		for(int i = 0; i < name.length; i++){
+			pnlNameOne.add(new JLabel(name[i]));
+		}
+			
+		JPanel pnlPlayer1Pairs = new JPanel();
+		pnlPlayer1Pairs.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
+//		pnlPlayer1Pairs.setBackground(new Color(0,0,0));
+		pnlPlayer1Pairs.setBounds(10, 50, 380, 45);
+		
+		Icon[] pairText = converter.generate("Pairs@");
+		for(int i = 0; i < pairText.length; i++){
+			pnlPlayer1Pairs.add(new JLabel(pairText[i]));
+		}
+		
+		player1Pairs = new JLabel(new ImageIcon("Images/Letters/-.png"));
+		pnlPlayer1Pairs.add(player1Pairs);
+		
+		JPanel pnlPlayer1Rounds = new JPanel();
+//		pnlPlayer1Rounds.setBackground(new Color(100,40,200));
+		pnlPlayer1Rounds.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
+		pnlPlayer1Rounds.setBounds(10, 95, 380, 45);
+		
+		Icon[] roundsText = converter.generate("Rounds@");
+		for(int i = 0; i < roundsText.length; i++){
+			pnlPlayer1Rounds.add(new JLabel(roundsText[i]));
+		}
+
+		player1Rounds = new JLabel(new ImageIcon("Images/Letters/-.png"));
+		pnlPlayer1Rounds.add(player1Rounds);
+		
+		
+		pnlPlayerOne.add(pnlPlayer1Rounds);
+		pnlPlayerOne.add(pnlPlayer1Pairs);
+		pnlPlayerOne.add(pnlNameOne);
+		
+		//PlayerTwo
+		pnlPlayerTwo = new JPanel();
+		pnlPlayerTwo.setBackground(new Color(255,255,255));
+		pnlPlayerTwo.setBounds(595,60, 400, 300);
+		
+		//Modes och Level
+		pnlMode = new JPanel();
+		pnlMode.setBackground(new Color(223,200,213));
+		pnlMode.setBounds(410, 60, 180, 300);
+		
+		northPanel.add(pnlPlayerOne);
+		northPanel.add(pnlPlayerTwo);
+		northPanel.add(pnlMode);
+
+		
 		// labels
-		ImageIcon iconPlayer1 = new ImageIcon("Images/txt_player1_150x50.png");
+		ImageIcon iconPlayer1 = new ImageIcon();
 		playerOneName = new JLabel(iconPlayer1);
+		playerOneName.setBackground(new Color(0,0,0));
 		playerOneName.setBounds(50, 10, 150, 50);
 
 		ImageIcon iconLogo = new ImageIcon("Images/logo_small_550x75.png");
 		logo = new JLabel(iconLogo);
-		logo.setBounds(225, 10, 550, 75);
+		logo.setBounds(225, 0, 550, 75);
 
-		ImageIcon iconPlayer2 = new ImageIcon("Images/txt_player2_150x50.png");
+		ImageIcon iconPlayer2 = new ImageIcon("");
 		playerTwoName = new JLabel(iconPlayer2);
 		playerTwoName.setBounds(800, 10, 150, 50);
 
-		ImageIcon iconScore1 = new ImageIcon("Images/txt_score_150x50.png");
+		ImageIcon iconScore1 = new ImageIcon("");
 		scorePlayerOne = new JLabel(iconScore1);
 		scorePlayerOne.setBounds(50, 100, 150, 50);
 
-		ImageIcon iconLevel = new ImageIcon("Images/txt_medium_200x50.png");
+		ImageIcon iconLevel = new ImageIcon("");
 		level = new JLabel(iconLevel);
 		level.setBounds(400, 100, 200, 50);
 
-		ImageIcon iconScore2 = new ImageIcon("Images/txt_score_150x50.png");
+		ImageIcon iconScore2 = new ImageIcon("");
 		scorePlayerTwo = new JLabel(iconScore2);
 		scorePlayerTwo.setBounds(800, 100, 150, 50);
 
+		
+		
 		// button
 		ImageIcon iconKogg = new ImageIcon("Images/cog2.png");
 		button = new JButton(iconKogg);
-		button.setBounds(0, 0, 50, 50);
+		button.setBounds(5, 5, 50, 50);
+		
 		button.setBorderPainted(false);
 		button.setBorder(null);
 		button.setFocusable(false);
 		button.setMargin(new Insets(0, 0, 0, 0));
 		button.setContentAreaFilled(false);
 
+		
 		// Gamepanel
 		gameArea = new JPanel();
 		gameArea.setLayout(new BorderLayout());
@@ -249,6 +329,8 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	}
 
 	private class BackgroundPanel extends JPanel {
+
+		
 		private Image backGround = new ImageIcon("Images/mario_1.jpg")
 				.getImage();
 
@@ -256,4 +338,5 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 			g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
 		}
 	}
+
 }

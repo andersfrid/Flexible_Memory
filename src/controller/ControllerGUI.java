@@ -125,7 +125,6 @@ public class ControllerGUI extends Applet {
 		frame.add(new GameBoardGUI(level, gameBoard,this,rc));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
-		
 	}
 	
 	/**
