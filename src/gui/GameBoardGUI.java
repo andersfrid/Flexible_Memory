@@ -278,7 +278,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 					for (int j = 0; j < gameBoard[i].length; j++) {
 						if (gameBoard[i][j] != null) {
 							buttons[i][j].setIcon(gameBoard[i][j]
-									.getCardFront());
+									.getCardBack());
 						}
 					}
 				}
