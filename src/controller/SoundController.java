@@ -58,7 +58,9 @@ public class SoundController extends Thread {
 			}
 		});	
 	}
-
+	/**
+	 * Metod för ljudet när man vänder kort.
+	 */
 	private void cardTurn() {
 		if (playSound == true) {
 			AudioClip sound = null;
@@ -73,6 +75,9 @@ public class SoundController extends Thread {
 		}
 	}
 
+	/**
+	 * Metod som spelar upp ljud när man får fel par på sina kort.
+	 */
 	private void wrongPair() {
 		if (playSound == true) {
 			AudioClip wrongPair = null;
@@ -86,7 +91,10 @@ public class SoundController extends Thread {
 			}
 		}
 	}
-
+	
+	/**
+	 * Metod som spelar upp ljud när avändaren lyckas välja rätt par.
+	 */
 	private void pair() {
 		if (playSound == true) {
 			AudioClip pair = null;
@@ -101,6 +109,9 @@ public class SoundController extends Thread {
 		}
 	}
 	
+	/**
+	 * Metod som spelar upp ljud när användaren gör något felaktigt drag.
+	 */
 	private void error(){
 		if (playSound == true) {
 			AudioClip error = null;
@@ -115,6 +126,10 @@ public class SoundController extends Thread {
 		}
 	}
 	
+	/**
+	 * Metod för övriga knappljud, 
+	 * exempel singelplayer, multiplayer, de olika temanen och svårighetsgraderna.
+	 */
 	private void buttonSound(){
 		if (playSound == true) {
 			AudioClip button = null;
@@ -172,31 +187,38 @@ public class SoundController extends Thread {
 		return playMusic;
 	}
 
+	/**
+	 * Metod för att välja vilket ljud som skall spelas
+	 * @param soundNbr skickas in en int som blir valet av vilket ljud som skall spelas.
+	 */
 	public void startEffects(int soundNbr) {
 		if(soundNbr == 1){ 
-			cardTurn(); // swish when card turns = number 1
+			cardTurn(); // swish när kortet vänder = nummer 1
 		}
 		if(soundNbr == 2){
-			wrongPair(); //
+			wrongPair(); //eee spelas vid fel par = nummer 2
 		}
 		if(soundNbr == 3){
-			pair(); //
+			pair(); // pling ljud när det blir rätt par = nummer 3
 		}
 		if(soundNbr == 4){
-			error(); //
+			error(); // aj ljud när man klickar på samma kort två gånger = nummer 4
 		}
 		if(soundNbr == 5){
-			buttonSound();
+			buttonSound(); // klick ljud när man klickar på knapparna i menyerna = nummer 5
 		}
 		
 	}
-
+	/**
+	 * Metod för att välja vilken musik som skall spelas.
+	 * @param musicNbr skickas in en int som blir till val för vilken musik som skall spelas.
+	 */
 	public void startMusic(int musicNbr) {
 		if(musicNbr == 1){
-			run();			
+			run();	// bakgrundsmusiken = nummer 1		
 		}
 		if(musicNbr ==2){
-			winnerSound();
+			winnerSound(); // vinnar musik som spelas när vinnarpanelen visas = nummer 2
 		}
 	}
 
