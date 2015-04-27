@@ -43,12 +43,14 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 
 	private JFrame frame = new JFrame("Flexible Memory");
 	private JPanel mainPanel, contentPanel, bg;
-	private JButton btnEasy, btnMedium, btnHard, btnSettings, btnStart, btnStandard, btnFlag, btnPlus, btntfRemove, btntfP1Remove, btntfP2Remove;
+	private JButton btnEasy, btnMedium, btnHard, btnSettings, btnStart, btnStandard, btnFlag, btnPlus;
 	private JButton btnPipe = new JButton();
+	private JButton btnBush = new JButton();
 	private JLabel lblFlag = new JLabel();
 	private JLabel lblPlus = new JLabel();
 	private JLabel lblStandard = new JLabel();
 	private JLabel lblMario = new JLabel();
+	private JLabel lblYoshi = new JLabel();
 	private JLabel lblTitleP1 = new JLabel();
 	private JLabel lblTitleP2 = new JLabel();
 	private JLabel lblUsernameP1 = new JLabel();
@@ -69,8 +71,9 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private Color color;
 	private boolean singlePlayer;
 	private ControllerGUI controller;
-	private AudioClip music = null;
-
+	private AudioClip pipeSound = null;
+	private AudioClip bushSound = null;
+	
 	public ChooseGameGUI(ControllerGUI controller, boolean singlePlayer) {
 
 		this.singlePlayer = singlePlayer;
@@ -129,6 +132,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnMedium.setBounds(441, 420, 100, 40);
 		btnHard.setBounds(571, 420, 100, 40);
 		btnPipe.setBounds(700, 420, 200, 200);
+		btnBush.setBounds(140, 570, 102, 36);
 		btnStart.setBounds(336, 500, 312, 59);
 
 		// mainPanel
@@ -142,12 +146,19 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnSettings.setMargin(new Insets(0, 0, 0, 0));
 		btnSettings.setContentAreaFilled(false);
 
+		btnBush.setBorderPainted(false);
+		btnBush.setBorder(null);
+		btnBush.setFocusable(false);
+		btnBush.setMargin(new Insets(0, 0, 0, 0));
+		btnBush.setContentAreaFilled(false);
+
 		btnPipe.setBorderPainted(false);
 		btnPipe.setBorder(null);
 		btnPipe.setFocusable(false);
 		btnPipe.setMargin(new Insets(0, 0, 0, 0));
 		btnPipe.setContentAreaFilled(false);
 
+		
 		// add components
 		contentPanel.add(btnSettings);
 		contentPanel.add(lblTheme);
@@ -161,6 +172,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		contentPanel.add(btnEasy);
 		contentPanel.add(btnMedium);
 		contentPanel.add(btnHard);
+		contentPanel.add(btnBush);
 		contentPanel.add(btnPipe);
 		contentPanel.add(btnStart);
 		contentPanel.add(mainPanel);
@@ -281,8 +293,9 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnFlag.addActionListener(this);
 		btnStandard.addActionListener(this);
 		btnPlus.addActionListener(this);
+		btnBush.addActionListener(this);
 		btnPipe.addActionListener(this);
-	
+		
 		
 		add(contentPanel);
 	}
@@ -400,7 +413,10 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			}
 		}
 
-		
+		if (e.getSource() == btnBush) {
+			bush();
+			
+		}
 
 		if (e.getSource() == btnPipe) {
 			pipe();
@@ -413,14 +429,14 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	public void pipe() {
 		
 		SwingUtilities.invokeLater(new Runnable() {
-			AudioClip music = null;
+			AudioClip pipeSound = null;
 
 			public void run() {
 					try {
 						URL url = new File("Music/mario.au").toURI().toURL();
-						music = Applet.newAudioClip(url);
+						pipeSound = Applet.newAudioClip(url);
 						
-						music.play();
+						pipeSound.play();
 
 					} catch (MalformedURLException e) {
 						System.out.println(e);
@@ -438,4 +454,35 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		
 	
 		}
-	}
+
+	public void bush() {
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			AudioClip bushSound = null;
+
+			public void run() {
+					try {
+						URL url = new File("Music/Yoshi.au").toURI().toURL();
+						bushSound = Applet.newAudioClip(url);
+						
+						bushSound.play();
+
+					} catch (MalformedURLException e) {
+						System.out.println(e);
+					}
+				}
+			
+		});
+		ImageIcon iconlblYoshi = new ImageIcon("Images/Yoshi.png");
+		lblYoshi = new JLabel(iconlblYoshi);
+		
+
+		  
+		contentPanel.add(lblYoshi);
+		lblYoshi.setBounds(160, 555, 39, 47);
+		
+	
+		}
+
+
+}
