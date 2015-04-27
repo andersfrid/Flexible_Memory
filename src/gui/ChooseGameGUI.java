@@ -308,6 +308,8 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			btnFlag.setIcon(iconbtnFlag);
 			ImageIcon iconbtnPlus = new ImageIcon("Images/Plus.jpg");
 			btnPlus.setIcon(iconbtnPlus);	
+			
+			controller.startSound(5);
 		}
 		
 		if(e.getSource() == btnFlag){
@@ -321,6 +323,8 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			ImageIcon iconbtnPlus = new ImageIcon("Images/Plus.jpg");
 			btnPlus.setIcon(iconbtnPlus);
 			
+			controller.startSound(5);
+			
 		}
 	
 		if(e.getSource() == btnPlus){
@@ -333,10 +337,13 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			btnFlag.setIcon(iconbtnFlag);
 			ImageIcon iconbtnStandard = new ImageIcon("Images/Standard.jpg");
 			btnStandard.setIcon(iconbtnStandard);
+			
+			controller.startSound(5);
 		}
 		
 		if (e.getSource() == btnSettings) {
-			System.out.println("Inställningar");
+			controller.settings();
+			controller.startSound(5);
 		}
 		
 		if (e.getSource() == btnEasy) {
@@ -349,6 +356,8 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			btnMedium.setIcon(iconbtnMedium);
 			ImageIcon iconbtnHard = new ImageIcon("Images/hard.png");
 			btnHard.setIcon(iconbtnHard);
+			
+			controller.startSound(5);
 		}
 		if (e.getSource() == btnMedium) {
 
@@ -361,6 +370,8 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			ImageIcon iconbtnHard = new ImageIcon("Images/hard.png");
 			btnHard.setIcon(iconbtnHard);
 			System.out.println(tf.getText());
+			
+			controller.startSound(5);
 		}
 		
 		if (e.getSource() == btnHard) {
@@ -373,17 +384,27 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			btnEasy.setIcon(iconbtnEasy);
 			ImageIcon iconbtnMedium = new ImageIcon("Images/medium.png");
 			btnMedium.setIcon(iconbtnMedium);
+			
+			controller.startSound(5);
 		}
 		
 		if (e.getSource() == btnStart) {
-		
-			controller.start();
+			if(singlePlayer){
+				controller.startGame(tf.getText(), null);
+				controller.startSound(5);
+				
+			}
+			else{
+				controller.startGame(tfP1.getText(), tfP2.getText());
+				controller.startSound(5);
+			}
 		}
 
 		
 
 		if (e.getSource() == btnPipe) {
 			pipe();
+			
 		}
 		
 		

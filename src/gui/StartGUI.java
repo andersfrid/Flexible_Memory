@@ -60,11 +60,11 @@ public class StartGUI extends JPanel implements ActionListener{
 		ImageIcon iconClose = new ImageIcon("Images/b_exit_640x100.png");
 		jbtClose = new JButton(iconClose);
 		
-		ImageIcon iconMusic = new ImageIcon("Images/b_volume_on_50x50.png");
-		jbtMusic = new JButton(iconMusic);
+	
+		jbtMusic = new JButton();
 		
-		ImageIcon iconFx = new ImageIcon("Images/b_sfx_on_50x50.png");
-		jbtFx = new JButton(iconFx);
+		
+		jbtFx = new JButton();
 		
 		
 		lblLogo.setBounds(0, 0, 1000, 300);
@@ -106,6 +106,9 @@ public class StartGUI extends JPanel implements ActionListener{
 		jbtClose.addActionListener(this);
 		jbtMusic.addActionListener(this);
 		jbtFx.addActionListener(this);
+		
+		volumePic();
+		musicPic();
 	
 		add(bgPanel);
 		

@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -13,11 +14,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+
 
 import controller.ControllerGUI;
-import controller.SoundController;
 
+/**
+ * Ett GUI som visar en settings panel, där användaren kan stänga av musik och ljud. 
+ * Även starta om spelet och gå till startsidan.
+ * @author David
+ *
+ */
 public class SettingsPanel extends JPanel implements ActionListener {
 	private JPanel panel;
 	private JLabel logo;
@@ -49,16 +55,15 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		exit = new JButton(iconAvsluta);
 		exit.setBounds(50, 250, 300, 50);
 
-		ImageIcon iconMusic = new ImageIcon("Images/b_volume_on_50x50.png");
-		musicButton = new JButton(iconMusic);
+		musicButton = new JButton();
 		musicButton.setBounds(125, 337, 50, 50);
 		musicButton.setBorderPainted(false);
 		musicButton.setBorder(null);
 		musicButton.setFocusable(false);
 		musicButton.setMargin(new Insets(0, 0, 0, 0));
 		musicButton.setContentAreaFilled(false);
-		ImageIcon iconSound = new ImageIcon("Images/b_sfx_on_50x50.png");
-		soundButton = new JButton(iconSound);
+
+		soundButton = new JButton();
 		soundButton.setBounds(225, 337, 50, 50);
 		soundButton.setBorderPainted(false);
 		soundButton.setBorder(null);
@@ -73,12 +78,6 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		panel.add(musicButton);
 		panel.add(soundButton);
 
-//		frame = new JFrame("Inställningar");
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.setResizable(false);
-//		frame.add(panel);
-//		frame.pack();
-//		frame.setVisible(true);
 
 		restartButton.addActionListener(this);
 		mainMenu.addActionListener(this);
@@ -86,9 +85,15 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		soundButton.addActionListener(this);
 		musicButton.addActionListener(this);
 		
+		volumePic();
+		musicPic();
+		
 		add(panel);
 	}
 
+	/**
+	 * Kollar om ljud spelas eller inte, byter även bild till den bild som skall visas.
+	 */
 	public void volumePic() {
 		boolean playSound = controller.getSound();
 
@@ -103,6 +108,9 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * kollar om musik spelar eller inte, byter även bild till den bild som skall visas.
+	 */
 	public void musicPic() {
 		boolean playMusic = controller.getMusic();
 
@@ -116,7 +124,9 @@ public class SettingsPanel extends JPanel implements ActionListener {
 			musicButton.setIcon(iconMusic);
 		}
 	}
-	
+	/**
+	 * Lyssnare som lyssnar på de olika knapparna och ger de funktionallitet.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == restartButton) {
 			controller.getSound();
@@ -140,16 +150,16 @@ public class SettingsPanel extends JPanel implements ActionListener {
 
 	}
 	
+	/**
+	 * Inre klass som målar upp bakgrunden på panelen.
+	 * @author David
+	 *
+	 */
 	private class BgPanel extends JPanel {
 	    Image bg = new ImageIcon("Images/mario_1.jpg").getImage();
-	    @Override
+	  
 	    public void paintComponent(Graphics g) {
 	        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 	    }
 	}
-	
-//	public static void main(String[]args){
-//		new SettingsPanel(new ControllerGUI());
-//	}
-
 }
