@@ -181,7 +181,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 					Thread.sleep(1000);
 					System.err.println("Kort kvar: " + cardsLeft());
 					if (cardsLeft() <= 0) {
-						System.out.println("Vi har en vinnare!");
+						System.out.println(" Vi har en vinnare!");
 						rc.winner();
 					}
 				} catch (InterruptedException e) {

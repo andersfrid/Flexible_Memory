@@ -234,7 +234,7 @@ public class RoundController {
 
 	public void winner(){
 		if(singleplayer){
-			System.out.println(player1.getName()+" klarade memoryt på "+player1.getRoundCount()+ " antal rundor");
+			System.out.println(player1.getName()+"  klarade memoryt på "+player1.getRoundCount()+ " antal rundor");
 			cGUI.winner(player1, null, 1);
 		}else{
 			if(player1.getPairs() == player2.getPairs()){ //Lika

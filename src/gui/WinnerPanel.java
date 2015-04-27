@@ -44,7 +44,7 @@ public class WinnerPanel extends JPanel implements ActionListener{
 			playerWinner.setText(player2.getName() + " Par: "+player2.getPairs());
 		}
 		else{
-			playerWinner.setText("Det blev lika: "+player1.getPairs());
+			playerWinner.setText("Det blev lika:  "+player1.getPairs());
 		}
 		
 		panel = new BgPanel();

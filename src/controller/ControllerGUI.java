@@ -130,7 +130,7 @@ public class ControllerGUI extends Applet {
 	
 	/**
 	 * Startar en första frame och lägger vår start panel i den.
-	 */
+	 */ 
 	public void startFrame() {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
