@@ -35,8 +35,8 @@ public class WinnerPanel extends JPanel implements ActionListener{
 	/**
 	 * Konstruktor där panelen instansieras.
 	 */
-	public WinnerPanel(Player player1, Player player2, int winnerNbr){
-		
+	public WinnerPanel(Player player1, Player player2, int winnerNbr, ControllerGUI controller){
+		this.controller = controller;
 		if(winnerNbr == 1){
 			playerWinner.setText(player1.getName() + " Par: "+player1.getPairs());
 		}
@@ -88,10 +88,11 @@ public class WinnerPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startOver){
 			controller.restart();
+			controller.removeWinner();
 			
 		}
 		if(e.getSource() == home){
-			controller.home();
+			controller.homeWin();
 		}
 	}
 	/**

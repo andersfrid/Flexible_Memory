@@ -154,6 +154,13 @@ public class ControllerGUI extends Applet {
 		frame.getContentPane().repaint();
 		
 	}
+	public void homeWin(){
+		removeWinner();
+		frame.getContentPane().removeAll();
+		frame.add(new StartGUI(this));
+		frame.getContentPane().revalidate();
+		frame.getContentPane().repaint();
+	}
 
 	public void removeSettings(){
 		
@@ -170,7 +177,7 @@ public class ControllerGUI extends Applet {
 		frameWin= new JFrame("Winner");
 		frameWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
-		frameWin.add(new WinnerPanel(player1, player2, winnerNbr));
+		frameWin.add(new WinnerPanel(player1, player2, winnerNbr,this));
 		frameWin.setResizable(false);
 		frameWin.pack();
 		frameWin.setVisible(true);
