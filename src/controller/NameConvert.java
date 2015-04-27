@@ -11,23 +11,29 @@ import entity.Player;
 public class NameConvert {
 	private Player player1, player2;
 	private ControllerGUI controller;
-	
-	public NameConvert(ControllerGUI controller){
-		this.controller = controller;
-		String temp ="";
-		String imagePath ="Images/Letters/";
-	
-		temp = player1.getName();
-		temp = temp.toUpperCase();
-		for(int i =0; i<temp.length(); i++){
+	String imagePath ="Images/Letters/";
+
+	public NameConvert(){
+		
+	}
+
+	public Icon[] generate(String name){
+
+		String word = name;
+		word = word.toUpperCase();
+		Icon[] letters = new Icon[word.length()];
+		for(int i =0; i<word.length(); i++){
 			String pathToImage = imagePath;
-			pathToImage += ""+ temp.charAt(i) + ".png";
-			
-			System.out.println(pathToImage);
+			pathToImage += ""+ word.charAt(i) + ".png";
+			letters[i] = new ImageIcon(pathToImage);
 		}
-		Icon ic = new ImageIcon();
+		return letters ;
 	}
-	public static void main(String[] arsg) {
-		NameConvert t = new NameConvert(new ControllerGUI());
-	}
+//	public static void main(String[] arsg) {
+//		NameConvert t = new NameConvert();
+//		Icon[] letters = t.generate("Anders");
+//		for(int i = 0; i< letters.length; i++){
+//			System.out.println(letters[i]);
+//		}
+//	}
 }
