@@ -1,5 +1,7 @@
 package gui;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,7 +15,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -24,6 +28,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 import controller.ControllerGUI;
@@ -39,6 +44,11 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private JFrame frame = new JFrame("Flexible Memory");
 	private JPanel mainPanel, contentPanel, bg;
 	private JButton btnEasy, btnMedium, btnHard, btnSettings, btnStart, btnStandard, btnFlag, btnPlus, btntfRemove, btntfP1Remove, btntfP2Remove;
+	private JButton btnPipe = new JButton();
+	private JLabel lblFlag = new JLabel();
+	private JLabel lblPlus = new JLabel();
+	private JLabel lblStandard = new JLabel();
+	private JLabel lblMario = new JLabel();
 	private JLabel lblTitleP1 = new JLabel();
 	private JLabel lblTitleP2 = new JLabel();
 	private JLabel lblUsernameP1 = new JLabel();
@@ -49,7 +59,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private JLabel lblEnter = new JLabel();
 	private JLabel lblTheme = new JLabel();
 	private JLabel lblDifficulty = new JLabel();
-	private JTextField tf = new JTextField("Enter your name");
+	private JTextField tf = new JTextField("Enter your name here");
 	private JTextField tfP1 = new JTextField("Enter Player 1's name");
 	private JTextField tfP2 = new JTextField("Enter Player 2's name");
 	private Font r60 = new Font("Rockwell", Font.PLAIN, 60);
@@ -57,11 +67,9 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private Font r20 = new Font("Rockwell", Font.PLAIN, 20);
 	private Font afb20 = new Font("Agency FB", Font.PLAIN, 20);
 	private Color color;
-	
-	private Border blackline, raisedetched, loweredetched, raisedbevel,
-			loweredbevel, empty;
 	private boolean singlePlayer;
 	private ControllerGUI controller;
+	private AudioClip music = null;
 
 	public ChooseGameGUI(ControllerGUI controller, boolean singlePlayer) {
 
@@ -82,13 +90,19 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnSettings = new JButton(iconSettings);
 		ImageIcon iconlblTheme = new ImageIcon("Images/Theme.png");
 		lblTheme = new JLabel(iconlblTheme);
+		ImageIcon iconlblStandard = new ImageIcon("Images/StandardHeader.png");
+		lblStandard = new JLabel(iconlblStandard);
 		ImageIcon iconbtnStandard = new ImageIcon("Images/Standard.jpg");
 		btnStandard = new JButton(iconbtnStandard);
 		btnStandard.setToolTipText("A theme with random pictures (standard)");
+		ImageIcon iconlblFlag = new ImageIcon("Images/FlagsHeader.png");
+		lblFlag = new JLabel(iconlblFlag);
 		ImageIcon iconbtnFlag = new ImageIcon("Images/Flag.jpg");
 		btnFlag = new JButton(iconbtnFlag);
 		btnFlag.setToolTipText("A theme with different flags");
 		ImageIcon iconbtnPlus = new ImageIcon("Images/Plus.jpg");
+		ImageIcon iconlblPlus = new ImageIcon("Images/PlusHeader.png");
+		lblPlus = new JLabel(iconlblPlus);
 		btnPlus = new JButton(iconbtnPlus);
 		btnPlus.setToolTipText("A theme with math (addition)");
 		ImageIcon iconlblDifficulty = new ImageIcon("Images/Difficulty.png");
@@ -101,16 +115,20 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnHard = new JButton(iconbtnHard);
 		ImageIcon iconbtnStart = new ImageIcon("Images/Start.jpg");
 		btnStart = new JButton(iconbtnStart);
-
+	
 		btnSettings.setBounds(10, 10, 50, 50);
-		lblTheme.setBounds(340, 210, 288, 46);
+		lblTheme.setBounds(348, 200, 288, 46);
+		lblStandard.setBounds(313, 245, 98, 33);
 		btnStandard.setBounds(313, 275, 98, 76);
+		lblFlag.setBounds(463, 245, 82, 30);
 		btnFlag.setBounds(442, 275, 98, 76);
+		lblPlus.setBounds(571, 245, 98, 33);
 		btnPlus.setBounds(571, 275, 98, 76);
-		lblDifficulty.setBounds(350, 360, 304, 39);
+		lblDifficulty.setBounds(350, 365, 304, 39);
 		btnEasy.setBounds(311, 420, 100, 40);
 		btnMedium.setBounds(441, 420, 100, 40);
 		btnHard.setBounds(571, 420, 100, 40);
+		btnPipe.setBounds(700, 420, 200, 200);
 		btnStart.setBounds(336, 500, 312, 59);
 
 		// mainPanel
@@ -124,16 +142,26 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnSettings.setMargin(new Insets(0, 0, 0, 0));
 		btnSettings.setContentAreaFilled(false);
 
+		btnPipe.setBorderPainted(false);
+		btnPipe.setBorder(null);
+		btnPipe.setFocusable(false);
+		btnPipe.setMargin(new Insets(0, 0, 0, 0));
+		btnPipe.setContentAreaFilled(false);
+
 		// add components
 		contentPanel.add(btnSettings);
 		contentPanel.add(lblTheme);
+		contentPanel.add(lblStandard);
 		contentPanel.add(btnStandard);
+		contentPanel.add(lblFlag);
 		contentPanel.add(btnFlag);
+		contentPanel.add(lblPlus);
 		contentPanel.add(btnPlus);
 		contentPanel.add(lblDifficulty);
 		contentPanel.add(btnEasy);
 		contentPanel.add(btnMedium);
 		contentPanel.add(btnHard);
+		contentPanel.add(btnPipe);
 		contentPanel.add(btnStart);
 		contentPanel.add(mainPanel);
 
@@ -141,8 +169,6 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 
 		if (singlePlayer == true) {
 
-			
-		
 			ImageIcon iconlblTitle = new ImageIcon("Images/Title.png");
 			lblTitle = new JLabel(iconlblTitle);
 			lblTitle.setBounds(0, 0, 380, 90);
@@ -155,35 +181,27 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		
 			ImageIcon icontfBackground = new ImageIcon("Images/TextFieldBackground3.jpg");
 			lbltfBackground = new JLabel(icontfBackground);
-			lbltfBackground.setBounds(105, 127, 150, 50);
+			lbltfBackground.setBounds(108, 127, 150, 50);
 			mainPanel.add(lbltfBackground);
 
-			// set stuff invisible
-			btntfRemove = new JButton();
-			btntfRemove.setBounds(105, 138, 150, 28);
-			btntfRemove.setBorder(null);
-			btntfRemove.setMargin(new Insets(0, 0, 0,0));
-			btntfRemove.setOpaque(false);
+			// set stuff invisible	
 			
-			
-			tf.setBounds(110, 127, 140, 50);
+			tf.setBounds(113, 127, 140, 50);
 			tf.setFont(afb20);
 			tf.setBorder(null);
 			tf.setMargin(new Insets(0, 0, 0, 0));
 			tf.setOpaque(false);
 		
-			tf.setForeground(color.DARK_GRAY);
+			tf.setForeground(Color.DARK_GRAY);
 			tf.addFocusListener(new FocusListener(){
 		        public void focusGained(FocusEvent e){
 		            tf.setText("");
-		            tf.setForeground(color.BLACK);
+		            tf.setForeground(Color.BLACK);
 		        }
 
 				public void focusLost(FocusEvent arg0) {
 				}
 		    });
-		
-		
 		}
 		
 		// multiplayer
@@ -229,18 +247,15 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			
 			tfP2.setForeground(color.DARK_GRAY);
 			tfP2.addFocusListener(new FocusListener(){
-		        public void focusGained(FocusEvent e){
-		            tfP2.setText("");
-		            tfP2.setForeground(color.BLACK);
-			        
-		        }
 		        
-		        public void focusLost(FocusEvent notUsed2) {
+	public void focusGained(FocusEvent e){
+			tfP2.setText("");
+		    tfP2.setForeground(color.BLACK);     
+		    }    
+		 
+	public void focusLost(FocusEvent notUsed2) {
 				}
-		    });
-		
-		
-					
+		    });					
 		}
 		
 		// set textfield invisible and bounds
@@ -266,7 +281,9 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnFlag.addActionListener(this);
 		btnStandard.addActionListener(this);
 		btnPlus.addActionListener(this);
-
+		btnPipe.addActionListener(this);
+	
+		
 		add(contentPanel);
 	}
 
@@ -274,7 +291,6 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		private java.awt.Image bg = new ImageIcon(
 				"Images/retro4.jpg").getImage();
 
-		@Override
 		public void paintComponent(Graphics g) {
 			g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 		}
@@ -283,20 +299,19 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnStandard){
-	controller.setMode(0);
 	
-	ImageIcon iconbtnStandardSelected = new ImageIcon("Images/StandardSelected.jpg");
-	btnStandard.setIcon(iconbtnStandardSelected);
-	ImageIcon iconbtnFlag = new ImageIcon("Images/Flag.jpg");
-	btnFlag.setIcon(iconbtnFlag);
-	ImageIcon iconbtnPlus = new ImageIcon("Images/Plus.jpg");
-	btnPlus.setIcon(iconbtnPlus);
-	
-		
+			controller.setMode(0);
+
+			ImageIcon iconbtnStandardSelected = new ImageIcon("Images/StandardSelected.jpg");
+			btnStandard.setIcon(iconbtnStandardSelected);
+			ImageIcon iconbtnFlag = new ImageIcon("Images/Flag.jpg");
+			btnFlag.setIcon(iconbtnFlag);
+			ImageIcon iconbtnPlus = new ImageIcon("Images/Plus.jpg");
+			btnPlus.setIcon(iconbtnPlus);	
 		}
 		
 		if(e.getSource() == btnFlag){
-			System.out.println("FLAGGOR!!");
+		
 			controller.setMode(1);
 	
 			ImageIcon iconbtnFlagSelected = new ImageIcon("Images/FlagSelected.jpg");
@@ -309,19 +324,21 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		}
 	
 		if(e.getSource() == btnPlus){
+			
 			controller.setMode(4);
+		
 			ImageIcon iconbtnPlusSelected = new ImageIcon("Images/PlusSelected.jpg");
 			btnPlus.setIcon(iconbtnPlusSelected);
 			ImageIcon iconbtnFlag = new ImageIcon("Images/Flag.jpg");
 			btnFlag.setIcon(iconbtnFlag);
 			ImageIcon iconbtnStandard = new ImageIcon("Images/Standard.jpg");
 			btnStandard.setIcon(iconbtnStandard);
-			
 		}
 		
 		if (e.getSource() == btnSettings) {
 			System.out.println("Inställningar");
 		}
+		
 		if (e.getSource() == btnEasy) {
 			ImageIcon iconbtnEasySelected = new ImageIcon("Images/EasySelected.png");
 			
@@ -334,50 +351,70 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			btnHard.setIcon(iconbtnHard);
 		}
 		if (e.getSource() == btnMedium) {
-			ImageIcon iconbtnMediumSelected = new ImageIcon("Images/MediumSelected.png");
-			
+
 			controller.setLevel(1);
+			
+			ImageIcon iconbtnMediumSelected = new ImageIcon("Images/MediumSelected.png");
 			btnMedium.setIcon(iconbtnMediumSelected);
 			ImageIcon iconbtnEasy = new ImageIcon("Images/easy2.png");
 			btnEasy.setIcon(iconbtnEasy);
 			ImageIcon iconbtnHard = new ImageIcon("Images/hard.png");
 			btnHard.setIcon(iconbtnHard);
-			}
+			System.out.println(tf.getText());
+		}
+		
 		if (e.getSource() == btnHard) {
-			ImageIcon iconbtnHardSelected = new ImageIcon("Images/HardSelected.png");
-			
+
 			controller.setLevel(2);
+		
+			ImageIcon iconbtnHardSelected = new ImageIcon("Images/HardSelected.png");	
 			btnHard.setIcon(iconbtnHardSelected);
 			ImageIcon iconbtnEasy = new ImageIcon("Images/easy2.png");
 			btnEasy.setIcon(iconbtnEasy);
 			ImageIcon iconbtnMedium = new ImageIcon("Images/medium.png");
 			btnMedium.setIcon(iconbtnMedium);
-			}
-		if (e.getSource() == btnStart) {
-			System.out.println("Startar spelet.... INTE");
-			
-			if(singlePlayer){
-				controller.startGame(tf.getText(),null);
-			}
-			else{
-				controller.startGame(tfP1.getText(), tfP2.getText());
-			}
-
-		}
-
-		if (e.getSource() == btntfRemove) {
-			tf.setText("");
 		}
 		
-//		if (e.getSource() == btntf1remove) {
-//			tfP1.setText("");
-//		}
-//
-//		if (e.getSource() == btntf2remove) {
-//			tfP2.setText("");
-//}
-	
+		if (e.getSource() == btnStart) {
+		
+			controller.start();
+		}
+
+		
+
+		if (e.getSource() == btnPipe) {
+			pipe();
+		}
 		
 		
 	}
-}
+
+	public void pipe() {
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			AudioClip music = null;
+
+			public void run() {
+					try {
+						URL url = new File("Music/mario.au").toURI().toURL();
+						music = Applet.newAudioClip(url);
+						
+						music.play();
+
+					} catch (MalformedURLException e) {
+						System.out.println(e);
+					}
+				}
+			
+		});
+		ImageIcon iconlblMario = new ImageIcon("Images/Mario.png");
+		lblMario = new JLabel(iconlblMario);
+		lblMario.setBounds(805, 465, 39, 47);
+		
+
+		  
+		contentPanel.add(lblMario);
+		
+	
+		}
+	}
