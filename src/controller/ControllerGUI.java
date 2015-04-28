@@ -7,6 +7,8 @@ import java.applet.AudioClip;
 
 
 
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 
@@ -51,6 +53,9 @@ public class ControllerGUI extends Applet {
 		frame.add(new ChooseGameGUI(this, true));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
+		ImageIcon img = new ImageIcon("Images/iconFM.png");
+		frame.setIconImage(img.getImage());
+		
 	}
 
 	/**
@@ -62,6 +67,8 @@ public class ControllerGUI extends Applet {
 		frame.add(new ChooseGameGUI(this, false));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
+		ImageIcon img = new ImageIcon("Images/iconFM.png");
+		frame.setIconImage(img.getImage());
 	
 	}
 
@@ -84,6 +91,8 @@ public class ControllerGUI extends Applet {
 		frameSett.add(new SettingsPanel(this,1));		
 		frameSett.setVisible(true);
 		frameSett.pack();
+		ImageIcon img = new ImageIcon("Images/iconFM.png");
+		frameSett.setIconImage(img.getImage());
 	}
 
 	/**
@@ -132,6 +141,8 @@ public class ControllerGUI extends Applet {
 		frame.add(gameBoardGUI);
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
+		ImageIcon img = new ImageIcon("Images/iconFM.png");
+		frame.setIconImage(img.getImage());
 	}
 	
 	public void updateRoundStat(Player player){
@@ -150,12 +161,16 @@ public class ControllerGUI extends Applet {
 		frame.add(new StartGUI(this));
 		frame.setVisible(true);
 		frame.pack();
+		ImageIcon img = new ImageIcon("Images/iconFM.png");
+		frame.setIconImage(img.getImage());
 
 	}
 	public void restart(){
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
+		ImageIcon img = new ImageIcon("Images/iconFM.png");
+		frame.setIconImage(img.getImage());
 		startGame(p1, p2);
 	}
 	public void home(){
@@ -164,6 +179,8 @@ public class ControllerGUI extends Applet {
 		frame.add(new StartGUI(this));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
+		ImageIcon img = new ImageIcon("Images/iconFM.png");
+		frame.setIconImage(img.getImage());
 		
 	}
 	public void homeWin(){
@@ -172,6 +189,8 @@ public class ControllerGUI extends Applet {
 		frame.add(new StartGUI(this));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
+		ImageIcon img = new ImageIcon("Images/iconFM.png");
+		frame.setIconImage(img.getImage());
 	}
 
 	public void removeSettings(){
@@ -199,6 +218,8 @@ public class ControllerGUI extends Applet {
 		frameSett.add(new SettingsPanel(this,0));
 		frameSett.getContentPane().revalidate();
 		frameSett.getContentPane().repaint();
+		ImageIcon img = new ImageIcon("Images/iconFM.png");
+		frame.setIconImage(img.getImage());
 	}
 
 }
