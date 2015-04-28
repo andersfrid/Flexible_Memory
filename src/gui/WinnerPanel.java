@@ -101,7 +101,7 @@ public class WinnerPanel extends JPanel implements ActionListener{
 	 *
 	 */
 	private class BgPanel extends JPanel {
-	    Image bg = new ImageIcon("Images/mario_1.jpg").getImage();
+	    Image bg = new ImageIcon("Images/WinnerBackground.jpg").getImage();
 	    @Override
 	    public void paintComponent(Graphics g) {
 	        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
