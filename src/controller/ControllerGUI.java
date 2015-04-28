@@ -6,10 +6,13 @@ import java.applet.AudioClip;
 
 
 
+
 import javax.swing.JFrame;
 
 
 
+
+import javax.swing.JLabel;
 
 import entity.Card;
 import entity.Player;
@@ -37,6 +40,7 @@ public class ControllerGUI extends Applet {
 	private StartGUI start;
 	private boolean singleplayer;
 	private String p1,p2;
+	private GameBoardGUI gameBoardGUI;
 	
 	/**
 	 * Byter panel till singelplayer när användaren väljer singelplayer.
@@ -47,7 +51,6 @@ public class ControllerGUI extends Applet {
 		frame.add(new ChooseGameGUI(this, true));
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
-
 	}
 
 	/**
@@ -81,7 +84,6 @@ public class ControllerGUI extends Applet {
 		frameSett.add(new SettingsPanel(this));		
 		frameSett.setVisible(true);
 		frameSett.pack();
-
 	}
 
 	/**
@@ -120,11 +122,18 @@ public class ControllerGUI extends Applet {
 	 * @param gameBoard
 	 * @param rc
 	 */
-	public void printGameBoard(Card[][] gameBoard, RoundController rc){
+	public void printGameBoard(Card[][] gameBoard, RoundController rc, String modeName, String player1Name, String player2Name){
+		gameBoardGUI = new GameBoardGUI(level, gameBoard,this,rc, modeName, singleplayer, player1Name, player2Name);
 		frame.getContentPane().removeAll();
-		frame.add(new GameBoardGUI(level, gameBoard,this,rc));
+		frame.add(gameBoardGUI);
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
+	}
+	
+	public void updateRoundStat(Player player){
+		System.err.println(player.getName());
+		gameBoardGUI.updateStats(player.getRoundCount(), player.getPairs(), player.getID());
+		System.err.println(player.getID());
 	}
 	
 	/**

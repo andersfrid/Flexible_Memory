@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JLabel;
+
 import entity.Card;
 import entity.Player;
 
@@ -29,19 +31,23 @@ public class RoundController {
 	private Player player1, player2;
 	private int col, row;
 
+	private int mode;
+	private int level;
+
 	private boolean singleplayer;
 
 	private Player currentPlayer;
-	
+
 	public RoundController(int level, int mode, boolean singleplayer,
 			String p1, String p2, ControllerGUI cGUI) {
-	
+		this.mode = mode;
+
 		this.cGUI = cGUI;
 		this.singleplayer = singleplayer;
-		player1 = new Player(p1);
-		player2 = new Player(p2);
+		player1 = new Player(p1, 1);
+		player2 = new Player(p2, 2);
 		currentPlayer = player1;
-		
+
 		createNewGameBoard(level, mode);
 	}
 
@@ -209,6 +215,31 @@ public class RoundController {
 		return path;
 	}
 
+	public String getModeName(int nbr) {
+		String modeName = "";
+		switch (nbr) {
+		case 0: // Standardläge
+			modeName = "Standard";
+			break;
+		case 1: // flaggor
+			modeName = "Flags";
+			break;
+		case 2: // capitals
+			modeName = "Flags@C";
+			break;
+		case 3:
+			modeName = "Math@M";
+			break;
+		case 4:
+			modeName = "Math@P";
+			break;
+		default:
+			modeName = "Standard";
+			break;
+		}
+		return modeName;
+	}
+
 	/**
 	 * Returnerar spelplanen
 	 * 
@@ -222,7 +253,7 @@ public class RoundController {
 	 * Ritar spelplanen i frame
 	 */
 	public void paintGameBoard() {
-		cGUI.printGameBoard(currentGameBoard, this);
+		cGUI.printGameBoard(currentGameBoard, this, getModeName(this.mode), player1.getName(), player2.getName());
 	}
 
 	public boolean isPair(Card card1, Card card2) {
@@ -232,31 +263,34 @@ public class RoundController {
 		return false;
 	}
 
-	public void winner(){
-		if(singleplayer){
-			System.out.println(player1.getName()+"  klarade memoryt på "+player1.getRoundCount()+ " antal rundor");
+	public void winner() {
+		if (singleplayer) {
+			System.out.println(player1.getName() + "  klarade memoryt på "
+					+ player1.getRoundCount() + " antal rundor");
 			cGUI.winner(player1, null, 1);
-		}else{
-			if(player1.getPairs() == player2.getPairs()){ //Lika
+		} else {
+			if (player1.getPairs() == player2.getPairs()) { // Lika
 				System.out.println("Lika!");
-				System.out.println(player1.getName()+" och "+player2.getName()+" fick: "+player1.getPairs()+" par.");
+				System.out.println(player1.getName() + " och "
+						+ player2.getName() + " fick: " + player1.getPairs()
+						+ " par.");
 				cGUI.winner(player1, player2, 0);
-			}
-			else{
-				if(player1.getPairs() > player2.getPairs()){ //Spelare 1 vann
-					System.out.println(player1.getName()+" Vann!!");
+			} else {
+				if (player1.getPairs() > player2.getPairs()) { // Spelare 1 vann
+					System.out.println(player1.getName() + " Vann!!");
 					cGUI.winner(player1, player2, 1);
-				}
-				else{	//Spelare 2 vann
-					System.out.println(player2.getName()+" Vann!!");
+				} else { // Spelare 2 vann
+					System.out.println(player2.getName() + " Vann!!");
 					cGUI.winner(player1, player2, 2);
-				}				
-				System.out.println(player1.getName()+" fick "+player1.getPairs()+" par");
-				System.out.println(player2.getName()+" fick "+player2.getPairs()+" par");
+				}
+				System.out.println(player1.getName() + " fick "
+						+ player1.getPairs() + " par");
+				System.out.println(player2.getName() + " fick "
+						+ player2.getPairs() + " par");
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param card
@@ -272,43 +306,46 @@ public class RoundController {
 			turn2 = card;
 		}
 
-		System.out.println(currentPlayer.getName()+" : "+currentPlayer.getRoundCount()+" : "+currentPlayer.getPairs());
+		System.out.println(currentPlayer.getName() + " : "
+				+ currentPlayer.getRoundCount() + " : "
+				+ currentPlayer.getPairs());
+		
 		if (turn1 != null && turn2 != null) {
 			if (!turn1.equals(turn2)) {
 				currentPlayer.addRound();
 				if (isPair(turn1, turn2)) {
 					backValue = turn1.getCompareNbr();
 					currentPlayer.addPair();
-					//Lägger till ett par hos spelaren
+					cGUI.updateRoundStat(currentPlayer);
+					// Lägger till ett par hos spelaren
 				} else {
 					backValue = -2;
-					swapPlayer();	
+					cGUI.updateRoundStat(currentPlayer);
+					swapPlayer();
 				}
 
 				turn1 = null;
 				turn2 = null;
-				
+
 			} else {
 				turn2 = null;
-				backValue = -3; //Spelaren klickar på samma kort som redan är uppe.
+				backValue = -3; // Spelaren klickar på samma kort som redan är
+								// uppe.
 			}
 		}
-		
 		return backValue;
 	}
-	
-	public void swapPlayer(){
-		if(!singleplayer){
+
+	public void swapPlayer() {
+		if (!singleplayer) {
 			System.out.println("Försöker swapa");
-			
-			if(currentPlayer.equals(player1)){
+
+			if (currentPlayer.equals(player1)) {
 				currentPlayer = player2;
-			}
-			else if(currentPlayer.equals(player2)){
+			} else if (currentPlayer.equals(player2)) {
 				currentPlayer = player1;
 			}
 		}
 	}
-	
 
 }
