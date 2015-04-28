@@ -19,23 +19,28 @@ public class SoundController extends Thread {
 	private boolean playSound = true;
 	private boolean playMusic = true;
 	private AudioClip music = null;
-
+	private String path = "Music/alcoholic.wav";
+ 
 	/**
 	 * Tråd som spelar upp bakgrundmusiken.
 	 */
-	public void run() {
-		if (music == null) {
-			if (playMusic == true) {
-				try {
-					URL url = new File("Music/alcoholic.wav").toURI().toURL();
-					music = Applet.newAudioClip(url);
-					music.loop();
-
-				} catch (MalformedURLException e) {
-					System.out.println(e);
+	private void music() {
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run(){
+				if (music == null) {
+					if (playMusic == true) {
+						try {
+							URL url = new File(path).toURI().toURL();
+							music = Applet.newAudioClip(url);
+							music.loop();
+							
+						} catch (MalformedURLException e) {
+							System.out.println(e);
+						}
+					}
 				}
 			}
-		}
+		});
 	}
 
 	/**
@@ -168,7 +173,8 @@ public class SoundController extends Thread {
 			music = null;
 		} else
 			playMusic = true;
-		startMusic(1);
+			
+			startMusic(1);
 	}
 
 	public void setSound(boolean playSound) {
@@ -226,11 +232,35 @@ public class SoundController extends Thread {
 	 */
 	public void startMusic(int musicNbr) {
 		if (musicNbr == 1) {
-			run(); // bakgrundsmusiken = nummer 1
+			music(); // bakgrundsmusiken = nummer 1
 		}
 		if (musicNbr == 2) {
 			winnerSound(); // vinnar musik som spelas när vinnarpanelen visas =
 							// nummer 2
+		}
+	}
+	
+	public void musicChooser(int songNumb){
+	
+		switch(songNumb){
+		case 0: 
+			path = "Music/alcoholic.wav";
+			break;
+		case 1:
+			path = "Music/Ambient-voyager-chillout-music.wav";
+			break;
+		case 2:
+			path = "Music/Digital-garden-happy-music.wav";
+			break;
+		case 3:
+			path = "Music/Mistery-of-Danch-unfinished.wav";
+			break;
+		case 4: 
+			path = "Music/Time-traveler-beautiful-melodies-for-fantastic-stories.wav";
+			break;
+		default:
+			path = "Music/alcoholic.wav";
+			break;
 		}
 	}
 

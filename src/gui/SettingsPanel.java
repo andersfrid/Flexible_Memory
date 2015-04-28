@@ -1,20 +1,19 @@
 package gui;
 
 import java.awt.Color;
-
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 
 import controller.ControllerGUI;
 
@@ -27,9 +26,11 @@ import controller.ControllerGUI;
 public class SettingsPanel extends JPanel implements ActionListener {
 	private JPanel panel;
 	private JLabel logo;
-	private JButton musicButton, soundButton, restartButton, mainMenu, exit;
+	private JButton musicButton, soundButton, restartButton, mainMenu, exit, nextSong;
 	private JFrame frame;
 	private ControllerGUI controller;
+	private Random rand = new Random();
+	private int number;
 
 	public SettingsPanel(ControllerGUI controller) {
 		this.controller = controller;
@@ -54,6 +55,9 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		ImageIcon iconAvsluta = new ImageIcon("Images/b_exit_small_300x50.png");
 		exit = new JButton(iconAvsluta);
 		exit.setBounds(50, 250, 300, 50);
+		
+		nextSong = new JButton("Välj ny låt!");
+		nextSong.setBounds(20,337,50,50);
 
 		musicButton = new JButton();
 		musicButton.setBounds(125, 337, 50, 50);
@@ -75,6 +79,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		panel.add(restartButton);
 		panel.add(mainMenu);
 		panel.add(exit);
+		panel.add(nextSong);
 		panel.add(musicButton);
 		panel.add(soundButton);
 
@@ -84,6 +89,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		exit.addActionListener(this);
 		soundButton.addActionListener(this);
 		musicButton.addActionListener(this);
+		nextSong.addActionListener(this);
 		
 		volumePic();
 		musicPic();
@@ -147,7 +153,17 @@ public class SettingsPanel extends JPanel implements ActionListener {
 			controller.stopMusic();
 			musicPic();
 		}
+		if (e.getSource() == nextSong){
+			random();
+			controller.nextSong(number);
+			controller.startMusic(1);
+		}
 
+	}
+	
+	public void random(){
+		number = rand.nextInt(5);
+		
 	}
 	
 	/**
