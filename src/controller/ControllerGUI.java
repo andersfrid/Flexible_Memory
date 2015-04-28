@@ -117,6 +117,10 @@ public class ControllerGUI extends Applet {
 		s.stopMusic();
 	}
 	
+	public void nextSong(int songNumber){
+		s.musicChooser(songNumber);
+	}
+	
 	/**
 	 * Ritar ut våran spelplans panel med de valen som användaren har valt i tematmenyen.
 	 * @param gameBoard
