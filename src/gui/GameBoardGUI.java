@@ -44,7 +44,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 			player1Rounds, player2Rounds;
 	private JPanel mainPanel, northPanel, gameArea, pnlPlayerOne, pnlPlayerTwo,
 			pnlMiddle, pnlNameOne, pnlNameTwo, pnlPlayer1Pairs,
-			pnlPlayer1Rounds;
+			pnlPlayer1Rounds, pnlPlayer2Pairs, pnlPlayer2Rounds;
 	private JFrame frame;
 	private JButton button;
 	private JButton[][] buttons;
@@ -181,7 +181,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		setPlayerName(player2Name, 2);
 
 		// Pairs TWO
-		JPanel pnlPlayer2Pairs = new JPanel();
+		pnlPlayer2Pairs = new JPanel();
 		pnlPlayer2Pairs.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 		pnlPlayer2Pairs.setBounds(10, 50, 380, 45);
 		pnlPlayer2Pairs.setOpaque(false);
@@ -195,7 +195,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		pnlPlayer2Pairs.add(player2Pairs);
 
 		// Rounds TWO
-		JPanel pnlPlayer2Rounds = new JPanel();
+		pnlPlayer2Rounds = new JPanel();
 		pnlPlayer2Rounds.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 		pnlPlayer2Rounds.setBounds(10, 95, 380, 45);
 		pnlPlayer2Rounds.setOpaque(false);
@@ -441,7 +441,17 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 				pnlPlayer1Rounds.add(new JLabel(roundsIcon[i]));
 			}
 		} else {
-			System.out.println("Här kanske?");
+			pnlPlayer2Pairs.removeAll();
+			pnlPlayer2Rounds.removeAll();
+			
+			for (int i = 0; i < pairsIcon.length; i++) {
+				pnlPlayer2Pairs.add(new JLabel(pairsIcon[i]));
+			}
+
+			for (int i = 0; i < roundsIcon.length; i++) {
+				pnlPlayer2Rounds.add(new JLabel(roundsIcon[i]));
+			}
+			
 		}
 		
 		northPanel.repaint();
