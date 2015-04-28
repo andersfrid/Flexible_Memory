@@ -81,7 +81,7 @@ public class ControllerGUI extends Applet {
 		frameSett = new JFrame("Settings");
 		frameSett.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frameSett.setResizable(false);
-		frameSett.add(new SettingsPanel(this));		
+		frameSett.add(new SettingsPanel(this,1));		
 		frameSett.setVisible(true);
 		frameSett.pack();
 	}
@@ -193,6 +193,12 @@ public class ControllerGUI extends Applet {
 		frameWin.setResizable(false);
 		frameWin.pack();
 		frameWin.setVisible(true);
+	}
+	public void repaintSettings(){
+		frameSett.getContentPane().removeAll();
+		frameSett.add(new SettingsPanel(this,0));
+		frameSett.getContentPane().revalidate();
+		frameSett.getContentPane().repaint();
 	}
 
 }

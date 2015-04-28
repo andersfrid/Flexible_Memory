@@ -458,7 +458,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	
 				
 			}
-			
+	
 			else if(!username.contains(check) && singleplayer && username.length() <= 10 && username.length() > 0 && mode && theme){
 				controller.startGame(tf.getText(), null);
 				controller.startSound(5);
@@ -500,6 +500,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 //				lblError2.setBounds(700, 100, 275, 105);
 				
 			}
+			controller.repaintSettings();
 		}
 
 		if (e.getSource() == btnBush) {

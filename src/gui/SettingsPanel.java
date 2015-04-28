@@ -31,9 +31,11 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	private ControllerGUI controller;
 	private Random rand = new Random();
 	private int number;
-
-	public SettingsPanel(ControllerGUI controller) {
+	private int choose = 0;
+	
+	public SettingsPanel(ControllerGUI controller, int choose) {
 		this.controller = controller;
+		this.choose = choose;
 
 		panel = new BgPanel();
 		panel.setLayout(null);
@@ -47,6 +49,12 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		ImageIcon iconStart = new ImageIcon("Images/restartgame_small.jpg");
 		restartButton = new JButton(iconStart);
 		restartButton.setBounds(40, 170, 150, 50);
+		
+		if(choose == 1){
+			restartButton.setEnabled(false);
+			}else{
+				restartButton.setEnabled(true);
+			}
 		
 		ImageIcon iconHome = new ImageIcon("Images/home_small.jpg");
 		mainMenu = new JButton(iconHome);
