@@ -27,10 +27,8 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	private JPanel panel;
 	private JLabel logo;
 	private JButton musicButton, soundButton, restartButton, mainMenu, exit, nextSong;
-	private JFrame frame;
 	private ControllerGUI controller;
 	private Random rand = new Random();
-	private int number;
 	private int choose = 0;
 	
 	public SettingsPanel(ControllerGUI controller, int choose) {
@@ -162,17 +160,16 @@ public class SettingsPanel extends JPanel implements ActionListener {
 			musicPic();
 		}
 		if (e.getSource() == nextSong){
-			random();
 			controller.stopMusic();
-			controller.nextSong(number);
+			controller.nextSong(random(5));
 			
 		}
 
 	}
 	
-	public void random(){
-		number = rand.nextInt(5);
-		
+	public int random(int nbr){
+		int random = rand.nextInt(nbr);
+		return random;
 	}
 	
 	/**

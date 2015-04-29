@@ -236,6 +236,7 @@ public class SoundController extends Thread {
 			music(); // bakgrundsmusiken = nummer 1
 		}
 		if (musicNbr == 2) {
+			music.stop();
 			winnerSound(); // vinnar musik som spelas när vinnarpanelen visas =
 							// nummer 2
 		}

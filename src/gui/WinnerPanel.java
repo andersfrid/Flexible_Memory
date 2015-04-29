@@ -82,17 +82,19 @@ public class WinnerPanel extends JPanel implements ActionListener{
 		
 		add(panel);
 
-		
+		controller.startMusic(2);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startOver){
 			controller.restart();
 			controller.removeWinner();
+			controller.stopMusic();
 			
 		}
 		if(e.getSource() == home){
 			controller.homeWin();
+			controller.stopMusic();
 		}
 	}
 	/**
