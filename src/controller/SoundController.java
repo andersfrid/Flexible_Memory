@@ -171,6 +171,7 @@ public class SoundController extends Thread {
 			playMusic = false;
 			music.stop();
 			music = null;
+			startMusic(1);
 		} else
 			playMusic = true;
 			

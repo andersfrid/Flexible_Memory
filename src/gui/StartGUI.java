@@ -28,7 +28,6 @@ public class StartGUI extends JPanel implements ActionListener{
 	private JButton jbtSingle, jbtMulti, jbtClose, jbtMusic, jbtFx, jbtSettings;
 	private JLabel lblLogo;
 	private JPanel pnlCenter = new JPanel();
-//	private StartBGMusic sm = new StartBGMusic();
 	private ControllerGUI controller;
 	
 	/**
@@ -177,7 +176,7 @@ public class StartGUI extends JPanel implements ActionListener{
 	}
 	/**
 	 * En inre klass som ritar upp bakgrunden på panelen.
-	 * @author Anders Fridh
+	 * @author Anders Frid
 	 *
 	 */
 	private class BgPanel extends JPanel {
