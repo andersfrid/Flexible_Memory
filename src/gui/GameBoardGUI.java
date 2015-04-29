@@ -419,7 +419,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 			}
 		}
 		if (e.getSource() == button) {
-			cg.settings();
+			cg.settingsGame();
 		}
 	}
 
