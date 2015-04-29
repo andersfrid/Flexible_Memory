@@ -79,7 +79,6 @@ public class RoundController {
 				images++;
 			}
 		}
-		System.out.println("Number of images: " + images);
 
 		int nbrOfCards = images / 2;
 		System.out.println(nbrOfCards);
@@ -265,8 +264,6 @@ public class RoundController {
 
 	public void winner() {
 		if (singleplayer) {
-			System.out.println(player1.getName() + "  klarade memoryt på "
-					+ player1.getRoundCount() + " antal rundor");
 			cGUI.winner(player1, null, 1);
 		} else {
 			if (player1.getPairs() == player2.getPairs()) { // Lika
@@ -305,10 +302,6 @@ public class RoundController {
 		} else if (turn2 == null) {
 			turn2 = card;
 		}
-
-		System.out.println(currentPlayer.getName() + " : "
-				+ currentPlayer.getRoundCount() + " : "
-				+ currentPlayer.getPairs());
 		
 		if (turn1 != null && turn2 != null) {
 			if (!turn1.equals(turn2)) {
@@ -338,8 +331,6 @@ public class RoundController {
 
 	public void swapPlayer() {
 		if (!singleplayer) {
-			System.out.println("Försöker swapa");
-
 			if (currentPlayer.equals(player1)) {
 				currentPlayer = player2;
 			} else if (currentPlayer.equals(player2)) {

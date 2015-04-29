@@ -338,9 +338,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 
 				try {
 					Thread.sleep(1000);
-					System.err.println("Kort kvar: " + cardsLeft());
 					if (cardsLeft() <= 0) {
-						System.out.println(" Vi har en vinnare!");
 						rc.winner();
 					}
 				} catch (InterruptedException e) {
@@ -392,24 +390,19 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		for (int i = 0; i < buttons.length; i++) {
 			for (int j = 0; j < buttons[i].length; j++) {
 				if (e.getSource() == buttons[i][j]) {
-					System.out.println("COL:" + i + ", ROW:" + j);
-
-					System.out.println("NY RUNDA!");
+					
 					buttons[i][j].setIcon(gameBoard[i][j].getCardFront());
 
 					int backValue = rc.makeRound(gameBoard[i][j]);
-					System.out.println("BACKVALUE-------------->" + backValue);
 
 					if (backValue == -1) {
 						cg.startSound(1);
-						System.out.println("DU HAR EN TILL RUNDA");
 					} else if (backValue == -2) {
 						cg.startSound(1);
 						cg.startSound(2);
 						clearGameBoard();
 					} else if (backValue == -3) {
 						cg.startSound(4);
-						System.out.println("Du får inte välja samma kort.");
 					} else {
 						cg.startSound(1);
 						cg.startSound(3);
@@ -443,14 +436,12 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		Icon[] pairsIcon = converter.generate("Pairs@" + p);
 		Icon[] roundsIcon = converter.generate("Round@" + r);
 
-		System.out.println("kom hit2?");
 		if (player == 1) {
 			pnlPlayer1Pairs.removeAll();
 			pnlPlayer1Rounds.removeAll();
 			
 			for (int i = 0; i < pairsIcon.length; i++) {
 				pnlPlayer1Pairs.add(new JLabel(pairsIcon[i]));
-				System.out.println("kom hit2?");
 			}
 
 			for (int i = 0; i < roundsIcon.length; i++) {
