@@ -181,7 +181,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	 *
 	 */
 	private class BgPanel extends JPanel {
-	    Image bg = new ImageIcon("Images/mario_1.jpg").getImage();
+	    Image bg = new ImageIcon("Images/SettingsBackground.jpg").getImage();
 	  
 	    public void paintComponent(Graphics g) {
 	        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
