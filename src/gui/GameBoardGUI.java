@@ -424,8 +424,24 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	}
 
 	public void updateStats(int rounds, int pairs, int player) {
-		Icon[] pairsIcon = converter.generate("Pairs@" + pairs);
-		Icon[] roundsIcon = converter.generate("Round@" + rounds);
+		String p = "", r = "";
+		
+		if(pairs == 0){
+			p = "#";
+		}
+		else{
+			p = ""+pairs;
+		}
+		
+		if(rounds == 0){
+			r = "#";
+		}
+		else{
+			r = ""+rounds;
+		}
+		
+		Icon[] pairsIcon = converter.generate("Pairs@" + p);
+		Icon[] roundsIcon = converter.generate("Round@" + r);
 
 		System.out.println("kom hit2?");
 		if (player == 1) {

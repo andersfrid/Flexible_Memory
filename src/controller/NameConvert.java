@@ -11,7 +11,7 @@ import entity.Player;
 public class NameConvert {
 	private Player player1, player2;
 	private ControllerGUI controller;
-	String imagePath ="Images/Letters/";
+	String imagePath ="Images/Char/";
 
 	public NameConvert(){
 		
