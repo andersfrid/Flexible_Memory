@@ -34,7 +34,7 @@ public class ControllerGUI extends Applet {
 
 	private AudioClip audioClip;
 	private JFrame frame;
-	private JFrame frameSett;
+	private JFrame frameSett = new JFrame("Settings");
 	private JFrame frameWin;
 	private int level, mode=0; //Bara ett spelläge än
 	private RoundController rc;
@@ -85,7 +85,6 @@ public class ControllerGUI extends Applet {
 	 * Startar en ny frame med en settingsruta där användaren kan ändra lite inställningar.
 	 */
 	public void settings() {
-		frameSett = new JFrame("Settings");
 		frameSett.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frameSett.setResizable(false);
 		frameSett.add(new SettingsPanel(this,1));		
@@ -219,7 +218,16 @@ public class ControllerGUI extends Applet {
 		frameSett.getContentPane().revalidate();
 		frameSett.getContentPane().repaint();
 		ImageIcon img = new ImageIcon("Images/iconFM.png");
-		frame.setIconImage(img.getImage());
+		frameSett.setIconImage(img.getImage());
+	}
+	public void settingsGame() {
+		frameSett.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frameSett.setResizable(false);
+		frameSett.add(new SettingsPanel(this,0));		
+		frameSett.setVisible(true);
+		frameSett.pack();
+		ImageIcon img = new ImageIcon("Images/iconFM.png");
+		frameSett.setIconImage(img.getImage());
 	}
 
 }
