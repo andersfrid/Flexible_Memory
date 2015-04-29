@@ -171,7 +171,7 @@ public class SoundController extends Thread {
 			playMusic = false;
 			music.stop();
 			music = null;
-			startMusic(1);
+			
 		} else
 			playMusic = true;
 			
@@ -246,21 +246,39 @@ public class SoundController extends Thread {
 		switch(songNumb){
 		case 0: 
 			path = "Music/alcoholic.wav";
+			music = null;
+			playSound = true;
+			startMusic(1);
 			break;
 		case 1:
 			path = "Music/Ambient-voyager-chillout-music.wav";
+			music = null;
+			playSound = true;
+			startMusic(1);
 			break;
 		case 2:
 			path = "Music/Digital-garden-happy-music.wav";
+			music = null;
+			playSound = true;
+			startMusic(1);
 			break;
 		case 3:
 			path = "Music/Mistery-of-Danch-unfinished.wav";
+			music = null;
+			playSound = true;
+			startMusic(1);
 			break;
 		case 4: 
 			path = "Music/Time-traveler-beautiful-melodies-for-fantastic-stories.wav";
+			music = null;
+			playSound = true;
+			startMusic(1);
 			break;
 		default:
 			path = "Music/alcoholic.wav";
+			music = null;
+			playSound = true;
+			startMusic(1);
 			break;
 		}
 	}

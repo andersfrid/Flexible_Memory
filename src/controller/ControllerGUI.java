@@ -145,9 +145,8 @@ public class ControllerGUI extends Applet {
 	}
 	
 	public void updateRoundStat(Player player){
-		System.err.println(player.getName());
 		gameBoardGUI.updateStats(player.getRoundCount(), player.getPairs(), player.getID());
-		System.err.println(player.getID());
+	
 	}
 	
 	/**
