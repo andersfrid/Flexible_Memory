@@ -202,11 +202,10 @@ public class ControllerGUI extends Applet {
 //		frameSett.setVisible(false);
 		frameWin.dispose();
 	}
-	public void winner(Player player1,Player player2, int winnerNbr){
+	public void winner(Player player1,Player player2,boolean singleplayer,int winnerNbr,int level,String mode){
 		frameWin= new JFrame("Winner");
 		frameWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
-		frameWin.add(new WinnerPanel(player1, player2, winnerNbr,this));
+		frameWin.add(new WinnerPanel(player1, player2,singleplayer, winnerNbr,level,mode,this));
 		frameWin.setResizable(false);
 		frameWin.pack();
 		frameWin.setVisible(true);

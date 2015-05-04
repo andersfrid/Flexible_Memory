@@ -24,7 +24,13 @@ public class NameConvert {
 		Icon[] letters = new Icon[word.length()];
 		for(int i =0; i<word.length(); i++){
 			String pathToImage = imagePath;
-			pathToImage += ""+ word.charAt(i) + ".png";
+	
+			char symbol = word.charAt(i);
+			if(symbol == ' '){
+				symbol = '_';
+			}			
+			
+			pathToImage += ""+ symbol + ".png";
 			letters[i] = new ImageIcon(pathToImage);
 		}
 		return letters ;
