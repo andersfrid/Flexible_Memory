@@ -34,37 +34,51 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	public SettingsPanel(ControllerGUI controller, int choose) {
 		this.controller = controller;
 		this.choose = choose;
-
+		
+		//panel som målar upp bakgrunden.
 		panel = new BgPanel();
 		panel.setLayout(null);
 		panel.setPreferredSize(new Dimension(400, 400));
 		panel.setBackground(Color.LIGHT_GRAY);
 
+		//Skapar en label och sätter en logo bild på den.
 		ImageIcon iconLogo = new ImageIcon("Images/logo_smaller_320x75.png");
 		logo = new JLabel(iconLogo);
 		logo.setBounds(40, 40, 320, 50);
 
+		//Knapp som startar om spelet och lägger passande bild på den.
 		ImageIcon iconStart = new ImageIcon("Images/restartgame_small.jpg");
 		restartButton = new JButton(iconStart);
 		restartButton.setBounds(40, 170, 150, 50);
 		
+		// gör så restartknappen inte är klickbar när man inte valt teman och sådan.
 		if(choose == 1){
 			restartButton.setEnabled(false);
 			}else{
 				restartButton.setEnabled(true);
 			}
 		
+		//Skapar en home knapp som tar användaren tillbaka till första sidan.
 		ImageIcon iconHome = new ImageIcon("Images/home_small.jpg");
 		mainMenu = new JButton(iconHome);
 		mainMenu.setBounds(210, 170, 150, 50);
 		
+		// en avsluta knapp som stänger ner settings rutan.
 		ImageIcon iconAvsluta = new ImageIcon("Images/b_exit_small_300x50.png");
 		exit = new JButton(iconAvsluta);
 		exit.setBounds(50, 250, 300, 50);
 		
-		nextSong = new JButton("Välj ny låt!");
+		//knapp som gör att man kan byta bakgrundmusik.
+		ImageIcon iconNextSong = new ImageIcon("Images/nextButton.png");
+		nextSong = new JButton(iconNextSong);
 		nextSong.setBounds(20,337,50,50);
+		nextSong.setBorderPainted(false);
+		nextSong.setBorder(null);
+		nextSong.setFocusable(false);
+		nextSong.setMargin(new Insets(0,0,0,0));
+		nextSong.setContentAreaFilled(false);
 
+		//knapp som stänger av och sätter igång musiken igen.
 		musicButton = new JButton();
 		musicButton.setBounds(125, 337, 50, 50);
 		musicButton.setBorderPainted(false);
@@ -73,6 +87,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		musicButton.setMargin(new Insets(0, 0, 0, 0));
 		musicButton.setContentAreaFilled(false);
 
+		//knapp som stänger av ljudeffekterna och startar dem igen.
 		soundButton = new JButton();
 		soundButton.setBounds(225, 337, 50, 50);
 		soundButton.setBorderPainted(false);
@@ -89,7 +104,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		panel.add(musicButton);
 		panel.add(soundButton);
 
-
+		//lyssnare
 		restartButton.addActionListener(this);
 		mainMenu.addActionListener(this);
 		exit.addActionListener(this);
@@ -167,6 +182,11 @@ public class SettingsPanel extends JPanel implements ActionListener {
 
 	}
 	
+	/**
+	 * Metod som returnerar ett random värde som skickas in när man vill använda den.
+	 * @param nbr
+	 * @return
+	 */
 	public int random(int nbr){
 		int random = rand.nextInt(nbr);
 		return random;

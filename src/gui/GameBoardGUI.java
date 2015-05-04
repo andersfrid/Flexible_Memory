@@ -277,6 +277,10 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		gameMode();
 	}
 
+	/**
+	 * Metod som målar upp vilken nivå som blivit vald med rätt antal knappar och var de skall ligga.
+	 * Sätter även en bild på alla knapparna och ger dem en actionlistener.
+	 */
 	public void gameMode() {
 
 		switch (levelNbr) {
@@ -309,6 +313,10 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metod som returnerar hur många kort som finns kvar på spelplanen, används för att se när någon vunnit.
+	 * @return
+	 */
 	public int cardsLeft() {
 		int count = 0;
 		for (int i = 0; i < gameBoard.length; i++) {
@@ -321,6 +329,11 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		return count;
 	}
 
+	/**
+	 * Metod som tar bort kort när man har lyckts välja rätt par när man spelar.
+	 * Startar även vinnarpanelen när alla kort är borta.
+	 * @param compareNbr
+	 */
 	public void removeCards(int compareNbr) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -348,6 +361,11 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		});
 	}
 
+	/**
+	 * Lägger ut namn på de som spelar.
+	 * @param name
+	 * @param player
+	 */
 	public void setPlayerName(String name, int player) {
 		if (name != null) {
 			Icon[] newName = converter.generate(name);
@@ -365,6 +383,9 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metod som vänder tillbaka korten när de är fel val.
+	 */
 	public void clearGameBoard() {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -386,6 +407,9 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * Metod som lyssnar på när en användare klickar på korten "Knapparna".
+	 */
 	public void actionPerformed(ActionEvent e) {
 		for (int i = 0; i < buttons.length; i++) {
 			for (int j = 0; j < buttons[i].length; j++) {
@@ -416,6 +440,12 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * Metod som updaterar spelarnas poäng och hur många runder de har använts under spelets gång.
+	 * @param rounds
+	 * @param pairs
+	 * @param player
+	 */
 	public void updateStats(int rounds, int pairs, int player) {
 		String p = "", r = "";
 		
@@ -465,6 +495,11 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		northPanel.revalidate();
 	}
 
+	/**
+	 * Inre klass som ritar ut bakgrunden på panelen.
+	 * @author David
+	 *
+	 */
 	private class BackgroundPanel extends JPanel {
 
 		private Image backGround = new ImageIcon("Images/mario_1.jpg")

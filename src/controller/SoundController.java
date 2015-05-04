@@ -19,10 +19,11 @@ public class SoundController extends Thread {
 	private boolean playSound = true;
 	private boolean playMusic = true;
 	private AudioClip music = null;
+	private AudioClip winnerSound = null;
 	private String path = "Music/alcoholic.wav";
 
 	/**
-	 * Tråd som spelar upp bakgrundmusiken.
+	 * Metod som spelar upp bakgrundmusiken.
 	 */
 	private void music() {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -50,7 +51,7 @@ public class SoundController extends Thread {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				if (playMusic == true) {
-					AudioClip winnerSound = null;
+					
 					try {
 						URL url = new File("Music/WinnerSoundFull.wav").toURI()
 								.toURL();
@@ -150,7 +151,10 @@ public class SoundController extends Thread {
 			}
 		}
 	}
-
+	
+	/**
+	 * Metod som spelar upp ljud när man klickar på molnet i tema menyn.
+	 */
 	private void cloudSound() {
 		SwingUtilities.invokeLater(new Runnable() {
 			AudioClip cloudSound = null;
@@ -170,6 +174,9 @@ public class SoundController extends Thread {
 		});
 	}
 
+	/**
+	 * Metod som spelar upp ljud när man klickar på busken i tema menyn.
+	 */
 	private void bushSound() {
 		SwingUtilities.invokeLater(new Runnable() {
 			AudioClip bushSound = null;
@@ -189,6 +196,9 @@ public class SoundController extends Thread {
 		});
 	}
 
+	/**
+	 * Metod som spelar upp ljud när man klickar på röret i tema menyn.
+	 */
 	private void pipeSound() {
 		SwingUtilities.invokeLater(new Runnable() {
 			AudioClip pipeSound = null;
@@ -308,8 +318,12 @@ public class SoundController extends Thread {
 		}
 	}
 
+	/**
+	 * Metod som består av ett antal cases.
+	 * Där man skickar med ett int värde som avgör vilken bakgrundsmusik som skall spelas.
+	 * @param songNumb
+	 */
 	public void musicChooser(int songNumb) {
-
 		switch (songNumb) {
 		case 0:
 			path = "Music/alcoholic.wav";
