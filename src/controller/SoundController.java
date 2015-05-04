@@ -20,20 +20,20 @@ public class SoundController extends Thread {
 	private boolean playMusic = true;
 	private AudioClip music = null;
 	private String path = "Music/alcoholic.wav";
- 
+
 	/**
 	 * Tråd som spelar upp bakgrundmusiken.
 	 */
 	private void music() {
-		SwingUtilities.invokeLater(new Runnable(){
-			public void run(){
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
 				if (music == null) {
 					if (playMusic == true) {
 						try {
 							URL url = new File(path).toURI().toURL();
 							music = Applet.newAudioClip(url);
 							music.loop();
-							
+
 						} catch (MalformedURLException e) {
 							System.out.println(e);
 						}
@@ -151,6 +151,63 @@ public class SoundController extends Thread {
 		}
 	}
 
+	private void cloudSound() {
+		SwingUtilities.invokeLater(new Runnable() {
+			AudioClip cloudSound = null;
+
+			public void run() {
+				try {
+					URL url = new File("Music/lakitu.au").toURI().toURL();
+					cloudSound = Applet.newAudioClip(url);
+
+					cloudSound.play();
+
+				} catch (MalformedURLException e) {
+					System.out.println(e);
+				}
+			}
+
+		});
+	}
+
+	private void bushSound() {
+		SwingUtilities.invokeLater(new Runnable() {
+			AudioClip bushSound = null;
+
+			public void run() {
+				try {
+					URL url = new File("Music/Yoshi.au").toURI().toURL();
+					bushSound = Applet.newAudioClip(url);
+
+					bushSound.play();
+
+				} catch (MalformedURLException e) {
+					System.out.println(e);
+				}
+			}
+
+		});
+	}
+
+	private void pipeSound() {
+		SwingUtilities.invokeLater(new Runnable() {
+			AudioClip pipeSound = null;
+
+			public void run() {
+				try {
+					URL url = new File("Music/mario.au").toURI().toURL();
+					pipeSound = Applet.newAudioClip(url);
+
+					pipeSound.play();
+
+				} catch (MalformedURLException e) {
+					System.out.println(e);
+				}
+			}
+
+		});
+	}
+
 	/**
 	 * Metod som kollar om ljudeffekterna är på eller avstängda.
 	 */
@@ -171,11 +228,11 @@ public class SoundController extends Thread {
 			playMusic = false;
 			music.stop();
 			music = null;
-			
+
 		} else
 			playMusic = true;
-			
-			startMusic(1);
+
+		startMusic(1);
 	}
 
 	public void setSound(boolean playSound) {
@@ -221,6 +278,15 @@ public class SoundController extends Thread {
 			buttonSound(); // klick ljud när man klickar på knapparna i menyerna
 							// = nummer 5
 		}
+		if (soundNbr == 6) {
+			cloudSound(); // ljud som spelas upp när man klickar på molnet. = nummber 6
+		}
+		if (soundNbr == 7) {
+			bushSound(); // ljud som spelas upp när man klickar på busken. = nummer 7
+		}
+		if(soundNbr == 8){
+			pipeSound(); //ljud som spelas upp när man klickar på röret. = nummer 8
+		}
 
 	}
 
@@ -241,11 +307,11 @@ public class SoundController extends Thread {
 							// nummer 2
 		}
 	}
-	
-	public void musicChooser(int songNumb){
-	
-		switch(songNumb){
-		case 0: 
+
+	public void musicChooser(int songNumb) {
+
+		switch (songNumb) {
+		case 0:
 			path = "Music/alcoholic.wav";
 			music = null;
 			playSound = true;
@@ -269,7 +335,7 @@ public class SoundController extends Thread {
 			playSound = true;
 			startMusic(1);
 			break;
-		case 4: 
+		case 4:
 			path = "Music/Time-traveler-beautiful-melodies-for-fantastic-stories.wav";
 			music = null;
 			playSound = true;
