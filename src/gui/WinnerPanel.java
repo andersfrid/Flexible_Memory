@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import controller.ControllerGUI;
+import controller.NameConvert;
 import entity.Player;
 
 /**
@@ -24,65 +26,86 @@ import entity.Player;
  *
  */
 public class WinnerPanel extends JPanel implements ActionListener{
-	private JPanel panel;
-	private JLabel logo, winner;
+	private JPanel pnl_bg;
+	private JLabel logo;
 	private JButton startOver, home;
-	private JFrame frame;
-	private JLabel playerWinner = new JLabel();
-	private JLabel playerLoser = new JLabel();
-	private Font afb20 = new Font("Agency FB", Font.PLAIN, 72);
+	private static JFrame frame;
 	private ControllerGUI controller = new ControllerGUI();
+	private boolean singleplayer;
+	private NameConvert converter;
+	
+	private String modeText;
+	private int Level;
+	
 	/**
 	 * Konstruktor där panelen instansieras.
 	 */
+	
 	public WinnerPanel(Player player1, Player player2, int winnerNbr, ControllerGUI controller){
 		this.controller = controller;
-		if(winnerNbr == 1){
-			playerWinner.setText(player1.getName() + " Par: "+player1.getPairs());
-		}
-		else if(winnerNbr == 2){
-			playerWinner.setText(player2.getName() + " Par: "+player2.getPairs());
+		
+		this.singleplayer = true;
+		this.modeText = "hej";	//Ska läggas i konstruktorn
+		this.Level = 0;
+		
+		pnl_bg = new BgPanel();
+		pnl_bg.setPreferredSize(new Dimension(1000,700));
+		pnl_bg.setLayout(null);
+		
+		if(singleplayer){
+			
+			printSingleplayer(player1);
 		}
 		else{
-			playerWinner.setText("Det blev lika:  "+player1.getPairs());
+			printMultiplayer();
 		}
 		
-		panel = new BgPanel();
-		panel.setPreferredSize(new Dimension(700,700));
-		panel.setLayout(null);
-		
-		playerWinner.setBounds(275, 425, 300, 100);
-		playerWinner.setFont(afb20);
-		playerWinner.setForeground(Color.BLACK);
-		
-		ImageIcon iconLogo = new ImageIcon("Images/logo_small_550x75.png");
+		ImageIcon iconLogo = new ImageIcon("Images/logo_smaller_320x75.png");
 		logo = new JLabel(iconLogo);
-		logo.setBounds(75, 50, 550, 75);
+		logo.setBounds(340, 0, 320, 75);
 		
-		ImageIcon winnerLogo = new ImageIcon("Images/winner1.png");
-		winner = new JLabel(winnerLogo);
-		winner.setBounds(150,100,400,360);
+		ImageIcon restart = new ImageIcon("Images/restartgame.jpg");
+		startOver = new JButton(restart);
+		startOver.setBounds(180, 580, 310, 100);
 		
-		ImageIcon startLogo = new ImageIcon("Images/restartgame.jpg");
-		startOver = new JButton(startLogo);
-		startOver.setBounds(25, 560, 310, 100);
+		ImageIcon homeImg = new ImageIcon("Images/home.jpg");
+		home = new JButton(homeImg);
+		home.setBounds(510, 580, 310, 100);
 		
-		ImageIcon homeLogo = new ImageIcon("Images/home.jpg");
-		home = new JButton(homeLogo);
-		home.setBounds(365, 560, 310, 100);
-		
-		panel.add(winner);
-		panel.add(logo);
-		panel.add(startOver);
-		panel.add(home);
-		panel.add(playerWinner);
+		pnl_bg.add(logo);
+		pnl_bg.add(startOver);
+		pnl_bg.add(home);
 		
 		startOver.addActionListener(this);
 		home.addActionListener(this);
 		
-		add(panel);
+		add(pnl_bg);
 
 		controller.startMusic(2);
+	}
+	
+	//FELLLLLLLL!!!!!!
+	private void printSingleplayer(Player player){
+		player.toString();
+		
+		JPanel pnl_winnerText = new JPanel();
+		pnl_winnerText.setBounds(200, 100, 600, 50);
+		pnl_winnerText.setBackground(new Color(255,255,255));
+		System.out.println(player.getName());
+		
+		Icon[] text = converter.generate("Hej");
+		for (int i = 0; i < text.length; i++) {
+			pnl_winnerText.add(new JLabel(text[i]));
+		}
+		
+		
+		pnl_bg.add(pnl_winnerText);
+
+		controller.startMusic(2);
+	}
+	
+	private void printMultiplayer(){
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -110,5 +133,14 @@ public class WinnerPanel extends JPanel implements ActionListener{
 	    }
 	}
 
+	public static void main(String[] args) {
+		frame = new JFrame("test");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(new WinnerPanel(new Player("Andreas",0), null, 0 , null));
+		frame.setResizable(false);
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
 }
 
