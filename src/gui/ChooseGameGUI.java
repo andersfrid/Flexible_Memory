@@ -61,7 +61,15 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private JLabel lblError = new JLabel();
 	private JLabel lblError2 = new JLabel();
 	private JLabel lblArrow = new JLabel();
+	private JLabel lblArrow2 = new JLabel();
+	private JLabel lblArrow3 = new JLabel();
 	private JLabel lblArrowLeft = new JLabel();
+	private JLabel lblErrorTheme = new JLabel();
+	private JLabel lblErrorTheme2 = new JLabel();
+	private JLabel lblErrorMode = new JLabel();
+	private JLabel lblErrorMode2 = new JLabel();
+	private JLabel lblArrowLeft2 = new JLabel();
+	private JLabel lblArrowLeft3 = new JLabel();
 	private JLabel lbltfBackground = new JLabel();
 	private JLabel lbltfBackground2 = new JLabel();
 	private JLabel lblEnter = new JLabel();
@@ -82,13 +90,13 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private boolean mode = false;
 	private boolean theme = false;
 	private boolean singleplayer;
-	
+
 	public ChooseGameGUI(ControllerGUI controller, boolean singleplayer) {
-		
-		
+
+
 		this.controller = controller;
 		this.singleplayer = singleplayer;
-		
+
 		// primaryPanel
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
@@ -106,12 +114,23 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		lblTheme = new JLabel(iconlblTheme);
 		ImageIcon iconlblArrow = new ImageIcon("Images/Arrow.png");
 		lblArrow = new JLabel(iconlblArrow);
+		lblArrow2 = new JLabel(iconlblArrow);
+		lblArrow3 = new JLabel(iconlblArrow);
+		ImageIcon iconlblErrorMode = new ImageIcon("Images/ErrorMode.png");
+		lblErrorMode = new JLabel(iconlblErrorMode);
+		lblErrorMode2 = new JLabel(iconlblErrorMode);
 		ImageIcon iconlblArrowLeft = new ImageIcon("Images/ArrowLeft.png");
 		lblArrowLeft = new JLabel(iconlblArrowLeft);
+		ImageIcon iconlblArrowLeft2 = new ImageIcon("Images/ArrowLeft3.png");
+		lblArrowLeft2 = new JLabel(iconlblArrowLeft2);
+		lblArrowLeft3 = new JLabel(iconlblArrowLeft2);
 		ImageIcon iconlblError = new ImageIcon("Images/Error.png");
 		lblError = new JLabel(iconlblError);
 		ImageIcon iconlblError2 = new ImageIcon("Images/Error.png");
 		lblError2 = new JLabel(iconlblError2);
+		ImageIcon iconlblErrorTheme = new ImageIcon("Images/ErrorTheme.png");
+		lblErrorTheme = new JLabel(iconlblErrorTheme);
+		lblErrorTheme2 = new JLabel(iconlblErrorTheme);
 		ImageIcon iconlblStandard = new ImageIcon("Images/StandardHeader.png");
 		lblStandard = new JLabel(iconlblStandard);
 		ImageIcon iconbtnStandard = new ImageIcon("Images/Standard.jpg");
@@ -137,7 +156,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnHard = new JButton(iconbtnHard);
 		ImageIcon iconbtnStart = new ImageIcon("Images/Start.jpg");
 		btnStart = new JButton(iconbtnStart);
-	
+
 		btnSettings.setBounds(10, 10, 50, 50);
 		btnCloud.setBounds(60, 300, 51, 43);
 		lblTheme.setBounds(348, 200, 288, 46);
@@ -172,7 +191,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnCloud.setMargin(new Insets(0, 0, 0, 0));
 		btnCloud.setContentAreaFilled(false);
 
-		
+
 		btnBush.setBorderPainted(false);
 		btnBush.setBorder(null);
 		btnBush.setFocusable(false);
@@ -185,7 +204,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnPipe.setMargin(new Insets(0, 0, 0, 0));
 		btnPipe.setContentAreaFilled(false);
 
-		
+
 		// add components
 		contentPanel.add(btnSettings);
 		contentPanel.add(btnCloud);
@@ -218,32 +237,32 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			lblEnter = new JLabel(iconlblEnter);
 			lblEnter.setBounds(70, 90, 228, 64);
 			mainPanel.add(lblEnter);
-		
+
 			ImageIcon icontfBackground = new ImageIcon("Images/TextFieldBackground3.jpg");
 			lbltfBackground = new JLabel(icontfBackground);
 			lbltfBackground.setBounds(108, 127, 150, 50);
 			mainPanel.add(lbltfBackground);
 
 			// set stuff invisible	
-			
+
 			tf.setBounds(113, 127, 140, 50);
 			tf.setFont(afb20);
 			tf.setBorder(null);
 			tf.setMargin(new Insets(0, 0, 0, 0));
 			tf.setOpaque(false);
-		
+
 			tf.setForeground(Color.DARK_GRAY);
 			tf.addFocusListener(new FocusListener(){
-		        public void focusGained(FocusEvent e){
-		            tf.setText("");
-		            tf.setForeground(Color.BLACK);
-		        }
+				public void focusGained(FocusEvent e){
+					tf.setText("");
+					tf.setForeground(Color.BLACK);
+				}
 
 				public void focusLost(FocusEvent arg0) {
 				}
-		    });
+			});
 		}
-		
+
 		// multiplayer
 		else {
 			lblTitle.setBounds(20, 0, 1000, 90);
@@ -263,7 +282,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			mainPanel.add(tfP2);
 			mainPanel.add(lblUsernameP1);
 			mainPanel.add(lblUsernameP2);
-			
+
 			ImageIcon icontfBackground = new ImageIcon("Images/TextFieldBackground3.jpg");
 			lbltfBackground = new JLabel(icontfBackground);
 			lbltfBackground.setBounds(0, 105, 150, 65);
@@ -271,33 +290,33 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			lbltfBackground2.setBounds(220, 105, 150, 65);
 			mainPanel.add(lbltfBackground);
 			mainPanel.add(lbltfBackground2);
-			
+
 			tfP1.setForeground(Color.DARK_GRAY);
 			tfP1.addFocusListener(new FocusListener(){
-		    
+
 				public void focusGained(FocusEvent e){
-		            tfP1.setText("");
-		            tfP1.setForeground(Color.BLACK);
-			        
-		        }
+					tfP1.setText("");
+					tfP1.setForeground(Color.BLACK);
+
+				}
 
 				public void focusLost(FocusEvent notUsed) {
 				}
-		    });
-			
+			});
+
 			tfP2.setForeground(Color.DARK_GRAY);
 			tfP2.addFocusListener(new FocusListener(){
-		        
-	public void focusGained(FocusEvent e){
-			tfP2.setText("");
-		    tfP2.setForeground(Color.BLACK);     
-		    }    
-		 
-	public void focusLost(FocusEvent notUsed2) {
+
+				public void focusGained(FocusEvent e){
+					tfP2.setText("");
+					tfP2.setForeground(Color.BLACK);     
+				}    
+
+				public void focusLost(FocusEvent notUsed2) {
 				}
-		    });					
+			});					
 		}
-		
+
 		// set textfield invisible and bounds
 		tfP1.setFont(afb20);
 		tfP1.setBounds(5, 107, 140, 60);
@@ -324,8 +343,8 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnPlus.addActionListener(this);
 		btnBush.addActionListener(this);
 		btnPipe.addActionListener(this);
-		
-		
+
+
 		add(contentPanel);
 	}
 
@@ -341,7 +360,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnStandard){
-	
+
 			theme = true;
 			controller.setMode(0);
 
@@ -351,68 +370,69 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			btnFlag.setIcon(iconbtnFlag);
 			ImageIcon iconbtnPlus = new ImageIcon("Images/Plus.jpg");
 			btnPlus.setIcon(iconbtnPlus);	
-			
+
 			controller.startSound(5);
 		}
-		
+
 		if(e.getSource() == btnCloud){
+
 			cloud();
 		}
-		
-		
+
+
 		if(e.getSource() == btnFlag){
-	
+
 			theme = true;
 			controller.setMode(1);
-	
+
 			ImageIcon iconbtnFlagSelected = new ImageIcon("Images/FlagSelected.jpg");
 			btnFlag.setIcon(iconbtnFlagSelected);
 			ImageIcon iconbtnStandard = new ImageIcon("Images/Standard.jpg");
 			btnStandard.setIcon(iconbtnStandard);
 			ImageIcon iconbtnPlus = new ImageIcon("Images/Plus.jpg");
 			btnPlus.setIcon(iconbtnPlus);
-			
+
 			controller.startSound(5);
-			
+
 		}
-	
+
 		if(e.getSource() == btnPlus){
-			
+
 			theme = true;
 			controller.setMode(4);
-		
+
 			ImageIcon iconbtnPlusSelected = new ImageIcon("Images/PlusSelected.jpg");
 			btnPlus.setIcon(iconbtnPlusSelected);
 			ImageIcon iconbtnFlag = new ImageIcon("Images/Flag.jpg");
 			btnFlag.setIcon(iconbtnFlag);
 			ImageIcon iconbtnStandard = new ImageIcon("Images/Standard.jpg");
 			btnStandard.setIcon(iconbtnStandard);
-			
+
 			controller.startSound(5);
 		}
-		
+
 		if (e.getSource() == btnSettings) {
 			controller.settings();
 			controller.startSound(5);
 		}
-		
+
 		if (e.getSource() == btnEasy) {
 			ImageIcon iconbtnEasySelected = new ImageIcon("Images/EasySelected.png");
 			mode = true;
-	
+
 			controller.setLevel(0);
 			btnEasy.setIcon(iconbtnEasySelected);
 			ImageIcon iconbtnMedium = new ImageIcon("Images/medium.png");
 			btnMedium.setIcon(iconbtnMedium);
 			ImageIcon iconbtnHard = new ImageIcon("Images/hard.png");
 			btnHard.setIcon(iconbtnHard);
-			
+
 			controller.startSound(5);
 		}
 		if (e.getSource() == btnMedium) {
 			mode = true;
 			controller.setLevel(1);
-			
+
 			ImageIcon iconbtnMediumSelected = new ImageIcon("Images/MediumSelected.png");
 			btnMedium.setIcon(iconbtnMediumSelected);
 			ImageIcon iconbtnEasy = new ImageIcon("Images/easy2.png");
@@ -420,187 +440,212 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			ImageIcon iconbtnHard = new ImageIcon("Images/hard.png");
 			btnHard.setIcon(iconbtnHard);
 			System.out.println(tf.getText());
-			
+
 			controller.startSound(5);
 		}
-		
+
 		if (e.getSource() == btnHard) {
 			mode = true;
 			controller.setLevel(2);
-		
+
 			ImageIcon iconbtnHardSelected = new ImageIcon("Images/HardSelected.png");	
 			btnHard.setIcon(iconbtnHardSelected);
 			ImageIcon iconbtnEasy = new ImageIcon("Images/easy2.png");
 			btnEasy.setIcon(iconbtnEasy);
 			ImageIcon iconbtnMedium = new ImageIcon("Images/medium.png");
 			btnMedium.setIcon(iconbtnMedium);
-			
+
 			controller.startSound(5);
 		}
-		
+
 		if (e.getSource() == btnStart) {
-			
-			
+
 			String check = "Enter your name here";
-			String checkP1 = "Enter Player 1's name";
-			String checkP2 = "Enter Player 2's name";
-					
 			String username = tf.getText();
-			String usernameP1 = tfP1.getText();
-			String usernameP2 = tfP2.getText();
-			
-			if(singleplayer && username.contains(check)) {
-	
-				contentPanel.add(lblArrow);
-				lblArrow.setBounds(300, 155, 80, 80);
-				contentPanel.add(lblError);
-				lblError.setBounds(100, 165, 275, 105);
-	
-				
-			}
-	
-			else if(!username.contains(check) && singleplayer && username.length() <= 10 && username.length() > 0 && mode && theme){
+
+			//Singleplayer logic (move to controller?)
+			if(!username.contains(check) && singleplayer && username.length() <= 10 && username.length() > 0
+					&& mode && theme){
 				controller.startGame(tf.getText(), null);
 				controller.startSound(5);
-				
 			}
-			
-			else if (singleplayer && !username.contains(check) && !mode && theme) {
-				System.out.println("select a mode pls");
+
+			else if(singleplayer && username.contains(check) || username.length() < 1) {
+				lblArrow.setBounds(300, 155, 80, 80);
+				contentPanel.add(lblArrow);
+				contentPanel.add(lblError);
+				lblError.setBounds(100, 165, 275, 105);
 			}
-			
-			else if (singleplayer && !username.contains(check) && mode && !theme){
-				System.out.println("select a theme pls");
+
+			else if (singleplayer && !theme){
+				lblArrow.setIcon(null);
+				lblError.setIcon(null);
+				errorTheme();
 			}
-			
+
+			else if (singleplayer && !mode) {
+				lblArrowLeft3.setIcon(null);
+				lblErrorTheme2.setIcon(null);
+				errorMode();
+			}
+
+
 			else if (singleplayer && !username.contains(check) && !mode && !theme) {
 				System.out.println("select a theme & a mode pls");
 				lblArrow.setIcon(null);
 				lblError.setIcon(null);
 			}
-			
-			if(!usernameP1.contains(checkP1) && !usernameP2.contains(checkP2) && !singleplayer && usernameP1.length() 
-					<= 10 && usernameP2.length() <= 10 && usernameP1.length() > 0 && usernameP2.length() > 0 && !mode && !theme){
+
+
+			//Multiplayer logic (move to controller?)
+			String checkP1 = "Enter Player 1's name";
+			String checkP2 = "Enter Player 2's name";
+			String usernameP1 = tfP1.getText();
+			String usernameP2 = tfP2.getText();
+
+			if(!usernameP1.contains(checkP1) && !usernameP2.contains(checkP2) && !singleplayer && 
+					usernameP1.length() <= 10 && usernameP2.length() <= 10 && usernameP1.length() > 0 && 
+					usernameP2.length() > 0 && mode && theme){
+
 				controller.startGame(tfP1.getText(), tfP2.getText());
 				controller.startSound(5);
 			}
+
+			else if (!singleplayer && !usernameP1.contains(checkP1) && usernameP2.contains(checkP2) && 
+					usernameP1.length() > 0){
+				lblArrow.setIcon(null);
+				lblError.setIcon(null);
+				errortfP2();				
+			}
+
+			else if (!singleplayer && !usernameP2.contains(checkP2) && usernameP1.contains(checkP1) && 
+					usernameP2.length() > 0){
+				lblArrowLeft.setIcon(null);
+				lblError2.setIcon(null);
+				errortfP1();
+			}
+
+			else if (!singleplayer && usernameP1.contains(checkP1) && usernameP2.contains(checkP2)){
+				errortfP1();	
+				errortfP2();
+			}
+
+			else if (!singleplayer && !theme && !usernameP1.contains(checkP1) && !usernameP2.contains(checkP2)
+			&& usernameP1.length() > 0 && usernameP2.length() > 0){
+				lblArrow.setIcon(null);
+				lblError.setIcon(null);
+				lblArrowLeft.setIcon(null);
+				lblError2.setIcon(null);
+				errorTheme();
+			}
+
+
 			
-			else if (!singleplayer && usernameP1.contains(checkP1) && !usernameP2.contains(checkP2)){
-//				contentPanel.add(lblArrow);
-//				lblArrow.setBounds(220, 150, 80, 80);
-//				contentPanel.add(lblError);
-//				lblError.setBounds(20, 165, 275, 105);
-				
+			else if (!singleplayer && !mode && !usernameP1.contains(checkP1) && !usernameP2.contains(checkP2)
+					&& usernameP1.length() > 0 && usernameP2.length() > 0){
+				lblArrowLeft2.setIcon(null);
+				lblErrorTheme.setIcon(null);
+				errorMode();		
 			}
 			
-			else if (!singleplayer && !usernameP1.contains(checkP1) && usernameP2.contains(checkP2)){
-//				contentPanel.add(lblArrowLeft);
-//				lblArrowLeft.setBounds(685, 100, 80, 80);
-//				contentPanel.add(lblError2);
-//				lblError2.setBounds(700, 100, 275, 105);
+
 				
-			}
 			controller.repaintSettings();
 		}
 
 		if (e.getSource() == btnBush) {
-			bush();
-			
+			bush();	
 		}
 
 		if (e.getSource() == btnPipe) {
-			pipe();
-			
+			pipe();	
 		}
-		
-		
 	}
 
 	public void pipe() {
-		
-		SwingUtilities.invokeLater(new Runnable() {
-			AudioClip pipeSound = null;
 
-			public void run() {
-					try {
-						URL url = new File("Music/mario.au").toURI().toURL();
-						pipeSound = Applet.newAudioClip(url);
-						
-						pipeSound.play();
+		controller.startSound(8);
 
-					} catch (MalformedURLException e) {
-						System.out.println(e);
-					}
-				}
-			
-		});
 		ImageIcon iconlblMario = new ImageIcon("Images/Mario.png");
 		lblMario = new JLabel(iconlblMario);
 		lblMario.setBounds(805, 465, 39, 47);
-		
 
-		  
 		contentPanel.add(lblMario);
-		
-	
-		}
-
-	public void bush() {
-		
-		SwingUtilities.invokeLater(new Runnable() {
-			AudioClip bushSound = null;
-
-			public void run() {
-					try {
-						URL url = new File("Music/Yoshi.au").toURI().toURL();
-						bushSound = Applet.newAudioClip(url);
-						
-						bushSound.play();
-
-					} catch (MalformedURLException e) {
-						System.out.println(e);
-					}
-				}
-			
-		});
-		ImageIcon iconlblYoshi = new ImageIcon("Images/Yoshi.png");
-		lblYoshi = new JLabel(iconlblYoshi);
-		
-
-		  
-		contentPanel.add(lblYoshi);
-		lblYoshi.setBounds(160, 555, 39, 47);
-		
-	
-		}
-	
-	public void cloud() {
-		
-		SwingUtilities.invokeLater(new Runnable() {
-			AudioClip bushSound = null;
-
-			public void run() {
-					try {
-						URL url = new File("Music/lakitu.au").toURI().toURL();
-						cloudSound = Applet.newAudioClip(url);
-						
-						cloudSound.play();
-
-					} catch (MalformedURLException e) {
-						System.out.println(e);
-					}
-				}
-			
-		});
-		
-		ImageIcon iconlblLakitu = new ImageIcon("Images/Lakitu.png");
-		lblLakitu = new JLabel(iconlblLakitu);
-		
-		contentPanel.add(lblLakitu);
-		lblLakitu.setBounds(60, 210, 90, 120);
-					
-		
 	}
 
+	public void bush() {
 
+		controller.startSound(7);
+
+		ImageIcon iconlblYoshi = new ImageIcon("Images/Yoshi.png");
+		lblYoshi = new JLabel(iconlblYoshi);
+
+		contentPanel.add(lblYoshi);
+		lblYoshi.setBounds(160, 555, 39, 47);
+	}
+
+	public void cloud() {
+
+		controller.startSound(6);
+
+		ImageIcon iconlblLakitu = new ImageIcon("Images/Lakitu.png");
+		lblLakitu = new JLabel(iconlblLakitu);
+		contentPanel.add(lblLakitu);
+		lblLakitu.setBounds(60, 210, 90, 120);
+	}
+
+	public void errortfP1() {
+		contentPanel.add(lblArrow);
+		lblArrow.setBounds(220, 150, 80, 80);
+		contentPanel.add(lblError);
+		lblError.setBounds(20, 165, 275, 105);
+	}
+
+	public void errortfP2() {
+		
+		contentPanel.add(lblArrowLeft);
+		lblArrowLeft.setBounds(685, 100, 80, 80);
+		contentPanel.add(lblError2);
+		lblError2.setBounds(700, 100, 275, 105);
+		}
+
+	public void errorMode() {
+
+	if(!singleplayer) {
+		System.out.println("asd");
+		contentPanel.add(lblArrow2);
+		lblArrow2.setBounds(215, 430, 80, 80);
+
+		contentPanel.add(lblErrorMode);
+		lblErrorMode.setBounds(100, 455, 150, 93);
+	}
+	
+	else {
+		contentPanel.add(lblArrow3);
+		lblArrow3.setBounds(215, 430, 80, 80);
+
+		contentPanel.add(lblErrorMode2);
+		lblErrorMode2.setBounds(100, 455, 150, 93);	
+	}
+}
+	
+	public void errorTheme() {
+
+		if(!singleplayer) {
+		contentPanel.add(lblArrowLeft2);
+		lblArrowLeft2.setBounds(680, 280, 80, 80);
+
+		contentPanel.add(lblErrorTheme);
+		lblErrorTheme.setBounds(720, 305, 150, 76);
+		}
+	
+	else{
+		contentPanel.add(lblArrowLeft3);
+		lblArrowLeft3.setBounds(680, 280, 80, 80);
+
+		contentPanel.add(lblErrorTheme2);
+		lblErrorTheme2.setBounds(720, 305, 150, 76);
+				
+	}
+	}
 }
