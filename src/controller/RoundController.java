@@ -73,6 +73,7 @@ public class RoundController {
 		// Räknar ut hur många bilder det är i mappen
 		File f = new File(folderPath);
 		int images = 0;
+		
 		for (File file : f.listFiles()) {
 			if ((file.isFile() && (file.getName().endsWith(".txt") || file
 					.getName().endsWith(".jpg")))) {
