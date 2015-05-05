@@ -183,7 +183,7 @@ public class SoundController extends Thread {
 
 			public void run() {
 				try {
-					URL url = new File("Music/Yoshi.au").toURI().toURL();
+					URL url = new File("Music/Yoshi.wav").toURI().toURL();
 					bushSound = Applet.newAudioClip(url);
 
 					bushSound.play();
@@ -205,7 +205,7 @@ public class SoundController extends Thread {
 
 			public void run() {
 				try {
-					URL url = new File("Music/mario.au").toURI().toURL();
+					URL url = new File("Music/mario.wav").toURI().toURL();
 					pipeSound = Applet.newAudioClip(url);
 
 					pipeSound.play();
