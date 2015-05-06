@@ -267,26 +267,35 @@ public class RoundController {
 		if (singleplayer) {
 			cGUI.winner(player1,null,singleplayer,1,level,getModeName(mode));
 		} else {
+			
+			
 			if (player1.getPairs() == player2.getPairs()) { // Lika
 				System.out.println("Lika!");
 				System.out.println(player1.getName() + " och "
 						+ player2.getName() + " fick: " + player1.getPairs()
 						+ " par.");
 				cGUI.winner(player1,player2,singleplayer,0,level,getModeName(mode));
-			} else {
+			}
+			
+			else {
 				
 				if (player1.getPairs() > player2.getPairs()) { // Spelare 1 vann
 					System.out.println(player1.getName() + " Vann!!");
 					cGUI.winner(player1,player2,singleplayer,1,level,getModeName(mode));
-				} else { // Spelare 2 vann
+				}
+				
+				else { // Spelare 2 vann
 					System.out.println(player2.getName() + " Vann!!");
 					cGUI.winner(player1,player2,singleplayer,2,level,getModeName(mode));
 				}
+				
 				
 				System.out.println(player1.getName() + " fick "
 						+ player1.getPairs() + " par");
 				System.out.println(player2.getName() + " fick "
 						+ player2.getPairs() + " par");
+				
+				
 			}
 		}
 	}
