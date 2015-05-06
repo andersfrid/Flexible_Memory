@@ -156,15 +156,16 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == restartButton) {
-			controller.getSound();
+			controller.startSound(5);
 			controller.restart();
 		}
 		if (e.getSource() == mainMenu) {
-			controller.getSound();
+			controller.startSound(5);
 			controller.home();
 		}
 		if (e.getSource() == exit) {
-			controller.removeSettings();
+			controller.startSound(5);
+			System.exit(0);
 		}
 		if (e.getSource() == soundButton) {
 			controller.stopSound();
@@ -175,6 +176,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 			musicPic();
 		}
 		if (e.getSource() == nextSong){
+			controller.startSound(5);
 			controller.stopMusic();
 			controller.nextSong(random(5));
 			

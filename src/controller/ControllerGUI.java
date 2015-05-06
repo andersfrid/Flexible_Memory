@@ -85,7 +85,7 @@ public class ControllerGUI extends Applet {
 	 * Startar en ny frame med en settingsruta där användaren kan ändra lite inställningar.
 	 */
 	public void settings() {
-		frameSett.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frameSett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frameSett.setResizable(false);
 		frameSett.add(new SettingsPanel(this,1));		
 		frameSett.setVisible(true);

@@ -436,6 +436,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 			}
 		}
 		if (e.getSource() == button) {
+			cg.startSound(5);
 			cg.settingsGame();
 		}
 	}

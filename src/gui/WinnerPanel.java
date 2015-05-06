@@ -86,7 +86,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 
 		add(pnl_bg);
 
-		 controller.startMusic(2);
+		controller.startMusic(2);
 	}
 
 	private void printSingleplayer(Player player) {
@@ -290,12 +290,15 @@ public class WinnerPanel extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startOver) {
+			controller.startSound(5);
 			controller.restart();
 			controller.removeWinner();
 			controller.stopMusic();
+			
 
 		}
 		if (e.getSource() == home) {
+			controller.startSound(5);
 			controller.homeWin();
 			controller.stopMusic();
 		}
