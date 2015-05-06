@@ -374,8 +374,10 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 			
 			Icon[] newName;
 			
-			if(player == 1)
+			if(player == 1){
+				pnlNameOne.setLayout((new FlowLayout(FlowLayout.CENTER, -15, 0)));
 				newName = converter.generate(name,1);
+			}
 			else
 				newName = converter.generate(name,0);
 			
@@ -399,20 +401,25 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		
 		if(player == 1){ //Byter till första spelaren grön
 			Icon[] name = converter.generate(this.player1Name,1);
+			pnlNameOne.setLayout((new FlowLayout(FlowLayout.CENTER, -15, 0)));
 			for (int i = 0; i < name.length; i++) {
 				pnlNameOne.add(new JLabel(name[i]));
 			}
+			
 			name = converter.generate(this.player2Name,0);
+			pnlNameTwo.setLayout((new FlowLayout(FlowLayout.CENTER, -19, 0)));
 			for (int i = 0; i < name.length; i++) {
 				pnlNameTwo.add(new JLabel(name[i]));
 			}
 		}
 		else if(player == 2){ //Byter till andra spelaren grön
 			Icon[] name = converter.generate(this.player1Name,0);
+			pnlNameOne.setLayout((new FlowLayout(FlowLayout.CENTER, -19, 0)));
 			for (int i = 0; i < name.length; i++) {
 				pnlNameOne.add(new JLabel(name[i]));
 			}
 			name = converter.generate(this.player2Name,1);
+			pnlNameTwo.setLayout((new FlowLayout(FlowLayout.CENTER, -15, 0)));
 			for (int i = 0; i < name.length; i++) {
 				pnlNameTwo.add(new JLabel(name[i]));
 			}

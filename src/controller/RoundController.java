@@ -41,6 +41,7 @@ public class RoundController {
 	public RoundController(int level, int mode, boolean singleplayer,
 			String p1, String p2, ControllerGUI cGUI) {
 		this.mode = mode;
+		this.level = level;
 
 		this.cGUI = cGUI;
 		this.singleplayer = singleplayer;
