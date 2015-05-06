@@ -30,6 +30,7 @@ public class SoundController extends Thread {
 			public void run() {
 				if (music == null) {
 					if (playMusic == true) {
+						
 						try {
 							URL url = new File(path).toURI().toURL();
 							music = Applet.newAudioClip(url);
@@ -50,16 +51,18 @@ public class SoundController extends Thread {
 	private void winnerSound() {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				if (playMusic == true) {
-					
-					try {
-						URL url = new File("Music/WinnerSoundFull.wav").toURI()
-								.toURL();
-						winnerSound = Applet.newAudioClip(url);
-						winnerSound.play();
+				if (winnerSound == null) {
+					if (playMusic == true) {
+						
+						try {
+							URL url = new File("Music/WinnerSoundFull.wav")
+									.toURI().toURL();
+							winnerSound = Applet.newAudioClip(url);
+							winnerSound.play();
 
-					} catch (MalformedURLException e) {
-						System.out.println(e);
+						} catch (MalformedURLException e) {
+							System.out.println(e);
+						}
 					}
 				}
 			}
@@ -151,7 +154,7 @@ public class SoundController extends Thread {
 			}
 		}
 	}
-	
+
 	/**
 	 * Metod som spelar upp ljud när man klickar på molnet i tema menyn.
 	 */
@@ -244,6 +247,17 @@ public class SoundController extends Thread {
 
 		startMusic(1);
 	}
+	
+	public void stopStopMusic(){
+		music.stop();
+		music = null;
+	}
+	
+	public void stopWinnerSound(){	
+		winnerSound.stop();
+		winnerSound = null;
+		
+	}
 
 	public void setSound(boolean playSound) {
 		this.playSound = playSound;
@@ -289,13 +303,16 @@ public class SoundController extends Thread {
 							// = nummer 5
 		}
 		if (soundNbr == 6) {
-			cloudSound(); // ljud som spelas upp när man klickar på molnet. = nummber 6
+			cloudSound(); // ljud som spelas upp när man klickar på molnet. =
+							// nummber 6
 		}
 		if (soundNbr == 7) {
-			bushSound(); // ljud som spelas upp när man klickar på busken. = nummer 7
+			bushSound(); // ljud som spelas upp när man klickar på busken. =
+							// nummer 7
 		}
-		if(soundNbr == 8){
-			pipeSound(); //ljud som spelas upp när man klickar på röret. = nummer 8
+		if (soundNbr == 8) {
+			pipeSound(); // ljud som spelas upp när man klickar på röret. =
+							// nummer 8
 		}
 
 	}
@@ -312,15 +329,15 @@ public class SoundController extends Thread {
 			music(); // bakgrundsmusiken = nummer 1
 		}
 		if (musicNbr == 2) {
-			music.stop();
 			winnerSound(); // vinnar musik som spelas när vinnarpanelen visas =
 							// nummer 2
 		}
 	}
 
 	/**
-	 * Metod som består av ett antal cases.
-	 * Där man skickar med ett int värde som avgör vilken bakgrundsmusik som skall spelas.
+	 * Metod som består av ett antal cases. Där man skickar med ett int värde
+	 * som avgör vilken bakgrundsmusik som skall spelas.
+	 * 
 	 * @param songNumb
 	 */
 	public void musicChooser(int songNumb) {

@@ -33,7 +33,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 	private JLabel logo;
 	private JButton startOver, home;
 	private static JFrame frame;
-	private ControllerGUI controller = new ControllerGUI();
+	private ControllerGUI controller;
 	private boolean singleplayer;
 	private NameConvert converter = new NameConvert();
 
@@ -86,7 +86,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		home.addActionListener(this);
 
 		add(pnl_bg);
-		
+		controller.stopMusic(2);
 		controller.startMusic(2);
 	}
 
@@ -294,14 +294,15 @@ public class WinnerPanel extends JPanel implements ActionListener {
 			controller.startSound(5);
 			controller.restart();
 			controller.removeWinner();
-			controller.stopMusic();
-			
+			controller.stopMusic(3);
+			controller.startMusic(1);
 
 		}
 		if (e.getSource() == home) {
 			controller.startSound(5);
 			controller.homeWin();
-			controller.stopMusic();
+			controller.stopMusic(3);
+			controller.startMusic(1);
 		}
 	}
 

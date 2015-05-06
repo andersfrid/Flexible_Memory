@@ -172,12 +172,12 @@ public class SettingsPanel extends JPanel implements ActionListener {
 			volumePic();
 		}
 		if (e.getSource() == musicButton) {
-			controller.stopMusic();
+			controller.stopMusic(1);
 			musicPic();
 		}
 		if (e.getSource() == nextSong){
 			controller.startSound(5);
-			controller.stopMusic();
+			controller.stopMusic(1);
 			controller.nextSong(random(5));
 			
 		}

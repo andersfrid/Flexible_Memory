@@ -108,11 +108,20 @@ public class ControllerGUI extends Applet {
 	public void stopSound(){
 		s.stopSound();
 	}
+	
 	public void startMusic(int musicNbr){
 		s.startMusic(musicNbr);
 	}
-	public void stopMusic(){
-		s.stopMusic();
+	public void stopMusic(int nbr){
+		if(nbr == 1){
+			s.stopMusic();			
+		}
+		if(nbr == 2){
+			s.stopStopMusic();
+		}
+		if(nbr == 3){
+			s.stopWinnerSound();
+		}
 	}
 	
 	public void nextSong(int songNumber){
