@@ -47,8 +47,6 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		this.controller = controller;
 		this.singleplayer = singleplayer;
 		this.modeText = modeText; // Ska läggas i konstruktorn
-		level = 0;
-		winnerNbr = 2;
 
 		if (level == 0)
 			levelText = "Easy";
@@ -88,7 +86,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 
 		add(pnl_bg);
 
-		// controller.startMusic(2);
+		 controller.startMusic(2);
 	}
 
 	private void printSingleplayer(Player player) {
@@ -204,8 +202,6 @@ public class WinnerPanel extends JPanel implements ActionListener {
 				winner = player2;
 				loser = player1;
 			}
-			
-			winner.addPair();
 
 			// The Winner Is
 			JPanel pnlTheWinnerIs = new JPanel();
