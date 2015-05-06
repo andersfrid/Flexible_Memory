@@ -7,39 +7,39 @@ import javax.swing.ImageIcon;
 
 import entity.Player;
 
-
 public class NameConvert {
 	private Player player1, player2;
 	private ControllerGUI controller;
-	String imagePath ="Images/Char/";
+	String pathToGreen = "Images/Char_green/";
+	String pathToOrange = "Images/Char/";
 
-	public NameConvert(){
-		
-	}
+	public Icon[] generate(String word, int colorNbr) {
+		// 0 = orange, 1 = green
 
-	public Icon[] generate(String name){
-
-		String word = name;
-		word = word.toUpperCase();
-		Icon[] letters = new Icon[word.length()];
-		for(int i =0; i<word.length(); i++){
-			String pathToImage = imagePath;
-	
-			char symbol = word.charAt(i);
-			if(symbol == ' '){
-				symbol = '_';
-			}			
-			
-			pathToImage += ""+ symbol + ".png";
-			letters[i] = new ImageIcon(pathToImage);
+		String pathToImage = "";
+		if (colorNbr == 0) {
+			pathToImage = pathToOrange;
+		} else {
+			pathToImage = pathToGreen;
 		}
-		return letters ;
+
+		word = word.toUpperCase();
+
+		Icon[] letters = new Icon[word.length()];
+
+		for (int i = 0; i < word.length(); i++) {
+			String imagePath = pathToImage;
+
+			char symbol = word.charAt(i);
+			if (symbol == ' ') {
+				symbol = '_';
+			}
+
+			imagePath += "" + symbol + ".png";
+			
+			letters[i] = new ImageIcon(imagePath);
+
+		}
+		return letters;
 	}
-//	public static void main(String[] arsg) {
-//		NameConvert t = new NameConvert();
-//		Icon[] letters = t.generate("Anders");
-//		for(int i = 0; i< letters.length; i++){
-//			System.out.println(letters[i]);
-//		}
-//	}
 }

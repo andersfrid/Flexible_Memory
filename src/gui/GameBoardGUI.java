@@ -53,6 +53,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	private int levelNbr;
 	private ControllerGUI cg;
 	private NameConvert converter = new NameConvert();
+	private String player1Name, player2Name;
 
 	public GameBoardGUI(int levelNbr, Card[][] gameBoard, ControllerGUI cg,
 			RoundController rc, String modeName, boolean singleplayer,
@@ -62,7 +63,9 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		this.levelNbr = levelNbr;
 		this.gameBoard = gameBoard;
 		this.rc = rc;
-
+		this.player1Name = player1Name;
+		this.player2Name = player2Name;
+		
 		// panels
 		mainPanel = new BackgroundPanel();
 		mainPanel.setLayout(new BorderLayout());
@@ -95,7 +98,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		pnlPlayer1Pairs.setBounds(10, 50, 380, 45);
 		pnlPlayer1Pairs.setOpaque(false);
 
-		Icon[] pairText = converter.generate("Pairs@");
+		Icon[] pairText = converter.generate("Pairs@",0);
 		for (int i = 0; i < pairText.length; i++) {
 			pnlPlayer1Pairs.add(new JLabel(pairText[i]));
 		}
@@ -108,7 +111,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		pnlPlayer1Rounds.setBounds(10, 95, 380, 45);
 		pnlPlayer1Rounds.setOpaque(false);
 
-		Icon[] roundsText = converter.generate("Rounds@");
+		Icon[] roundsText = converter.generate("Rounds@",0);
 		for (int i = 0; i < roundsText.length; i++) {
 			pnlPlayer1Rounds.add(new JLabel(roundsText[i]));
 		}
@@ -138,7 +141,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		pnlMode.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 		pnlMode.setOpaque(false);
 
-		modeText = converter.generate(modeName);
+		modeText = converter.generate(modeName,0);
 		for (int i = 0; i < modeText.length; i++) {
 			pnlMode.add(new JLabel(modeText[i]));
 		}
@@ -155,7 +158,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		else
 			level = "Hard";
 
-		levelText = converter.generate(level);
+		levelText = converter.generate(level,0);
 
 		for (int i = 0; i < levelText.length; i++) {
 			pnlLevel.add(new JLabel(levelText[i]));
@@ -368,7 +371,14 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	 */
 	public void setPlayerName(String name, int player) {
 		if (name != null) {
-			Icon[] newName = converter.generate(name);
+			
+			Icon[] newName;
+			
+			if(player == 1)
+				newName = converter.generate(name,1);
+			else
+				newName = converter.generate(name,0);
+			
 			if (player == 2) {
 				pnlNameTwo.removeAll();
 				for (int i = 0; i < newName.length; i++) {
@@ -383,6 +393,32 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		}
 	}
 
+	public void swapCurrentPlayer(int player){
+		pnlNameOne.removeAll();
+		pnlNameTwo.removeAll();
+		
+		if(player == 1){ //Byter till första spelaren grön
+			Icon[] name = converter.generate(this.player1Name,1);
+			for (int i = 0; i < name.length; i++) {
+				pnlNameOne.add(new JLabel(name[i]));
+			}
+			name = converter.generate(this.player2Name,0);
+			for (int i = 0; i < name.length; i++) {
+				pnlNameTwo.add(new JLabel(name[i]));
+			}
+		}
+		else if(player == 2){ //Byter till andra spelaren grön
+			Icon[] name = converter.generate(this.player1Name,0);
+			for (int i = 0; i < name.length; i++) {
+				pnlNameOne.add(new JLabel(name[i]));
+			}
+			name = converter.generate(this.player2Name,1);
+			for (int i = 0; i < name.length; i++) {
+				pnlNameTwo.add(new JLabel(name[i]));
+			}
+		}
+	}
+	
 	/**
 	 * Metod som vänder tillbaka korten när de är fel val.
 	 */
@@ -464,8 +500,8 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 			r = ""+rounds;
 		}
 		
-		Icon[] pairsIcon = converter.generate("Pairs@" + p);
-		Icon[] roundsIcon = converter.generate("Round@" + r);
+		Icon[] pairsIcon = converter.generate("Pairs@" + p,0);
+		Icon[] roundsIcon = converter.generate("Round@" + r,0);
 
 		if (player == 1) {
 			pnlPlayer1Pairs.removeAll();

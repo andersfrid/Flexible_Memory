@@ -96,7 +96,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		// pnlWinnerText.setBackground(new Color(255,255,255));
 		pnlWinnerText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
-		Icon[] text = converter.generate(player.getName());
+		Icon[] text = converter.generate(player.getName(),1);
 		for (int i = 0; i < text.length; i++) {
 			pnlWinnerText.add(new JLabel(text[i]));
 		}
@@ -110,7 +110,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		pnlModeText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
 		text = null;
-		text = converter.generate("Finished " + modeText);
+		text = converter.generate("Finished " + modeText,0);
 		for (int i = 0; i < text.length; i++) {
 			pnlModeText.add(new JLabel(text[i]));
 		}
@@ -124,7 +124,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		pnlLevelText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
 		text = null;
-		text = converter.generate("on " + levelText);
+		text = converter.generate("on " + levelText,0);
 		for (int i = 0; i < text.length; i++) {
 			pnlLevelText.add(new JLabel(text[i]));
 		}
@@ -138,7 +138,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		pnlRoundsText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
 		text = null;
-		text = converter.generate("in " + player.getRoundCount() + " rounds");
+		text = converter.generate("in " + player.getRoundCount() + " rounds",0);
 		for (int i = 0; i < text.length; i++) {
 			pnlRoundsText.add(new JLabel(text[i]));
 		}
@@ -158,7 +158,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 //			pnlDrawText.setBackground(new Color(255, 255, 255));
 			pnlDrawText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
-			text = converter.generate("It is a Draw");
+			text = converter.generate("It is a Draw",0);
 			for (int i = 0; i < text.length; i++) {
 				pnlDrawText.add(new JLabel(text[i]));
 			}
@@ -171,7 +171,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 //			pnlDrawName.setBackground(new Color(255, 255, 255));
 			pnlDrawName.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
-			text = converter.generate(player1.getName()+" and "+player2.getName());
+			text = converter.generate(player1.getName()+" and "+player2.getName(),0);
 			for (int i = 0; i < text.length; i++) {
 				pnlDrawName.add(new JLabel(text[i]));
 			}
@@ -184,7 +184,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 //			pnlDrawPair.setBackground(new Color(255, 255, 255));
 			pnlDrawPair.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
-			text = converter.generate(player1.getPairs()+" Pairs");
+			text = converter.generate(player1.getPairs()+" Pairs",0);
 			for (int i = 0; i < text.length; i++) {
 				pnlDrawPair.add(new JLabel(text[i]));
 			}
@@ -209,7 +209,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 //			pnlTheWinnerIs.setBackground(new Color(255, 255, 255));
 			pnlTheWinnerIs.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
-			text = converter.generate("The winner is@");
+			text = converter.generate("The winner is@",1);
 			for (int i = 0; i < text.length; i++) {
 				pnlTheWinnerIs.add(new JLabel(text[i]));
 			}
@@ -223,7 +223,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 //			pnlWinnerNameAndPair.setBackground(new Color(100, 100, 100));
 			pnlWinnerNameAndPair.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 			
-			text = converter.generate(winner.getName()+" with "+winner.getPairs()+" Pairs");
+			text = converter.generate(winner.getName()+" with "+winner.getPairs()+" Pairs",1);
 			for (int i = 0; i < text.length; i++) {
 				pnlWinnerNameAndPair.add(new JLabel(text[i]));
 			}
@@ -237,7 +237,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 //			pnlTheLoserIs.setBackground(new Color(255, 255, 255));
 			pnlTheLoserIs.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
-			text = converter.generate("The Loser is@");
+			text = converter.generate("The Loser is@",0);
 			for (int i = 0; i < text.length; i++) {
 				pnlTheLoserIs.add(new JLabel(text[i]));
 			}
@@ -251,7 +251,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 //			pnlLoserNameAndPair.setBackground(new Color(100, 100, 100));
 			pnlLoserNameAndPair.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
-			text = converter.generate(loser.getName()+" with "+loser.getPairs()+" Pairs");
+			text = converter.generate(loser.getName()+" with "+loser.getPairs()+" Pairs",0);
 			for (int i = 0; i < text.length; i++) {
 				pnlLoserNameAndPair.add(new JLabel(text[i]));
 			}
@@ -265,7 +265,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 //			pnlModeText.setBackground(new Color(100, 100, 100));
 			pnlModeText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
-			text = converter.generate("Mode@"+modeText);
+			text = converter.generate("Mode@"+modeText,0);
 			for (int i = 0; i < text.length; i++) {
 				pnlModeText.add(new JLabel(text[i]));
 			}
@@ -278,7 +278,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 //			pnlLevelText.setBackground(new Color(100, 100, 100));
 			pnlLevelText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
-			text = converter.generate("Level@"+levelText);
+			text = converter.generate("Level@"+levelText,0);
 			for (int i = 0; i < text.length; i++) {
 				pnlLevelText.add(new JLabel(text[i]));
 			}

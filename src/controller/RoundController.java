@@ -345,8 +345,10 @@ public class RoundController {
 		if (!singleplayer) {
 			if (currentPlayer.equals(player1)) {
 				currentPlayer = player2;
+				cGUI.swapHighlightPlayer(2);
 			} else if (currentPlayer.equals(player2)) {
 				currentPlayer = player1;
+				cGUI.swapHighlightPlayer(1);
 			}
 		}
 	}

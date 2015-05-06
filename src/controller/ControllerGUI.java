@@ -2,18 +2,8 @@ package controller;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
-
-
-
-
-
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-
-
-
-
 import javax.swing.JLabel;
 
 import entity.Card;
@@ -127,6 +117,10 @@ public class ControllerGUI extends Applet {
 	
 	public void nextSong(int songNumber){
 		s.musicChooser(songNumber);
+	}
+	
+	public void swapHighlightPlayer(int player){
+		gameBoardGUI.swapCurrentPlayer(player);
 	}
 	
 	/**
