@@ -162,6 +162,7 @@ public class StartGUI extends JPanel implements ActionListener{
 			controller.startSound(5);
 		}
 		if(e.getSource() == jbtClose){
+			controller.startSound(5);
 			System.exit(0);
 		}
 		if(e.getSource() == jbtMusic){

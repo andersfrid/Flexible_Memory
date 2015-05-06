@@ -85,7 +85,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		home.addActionListener(this);
 
 		add(pnl_bg);
-
+		
 		controller.startMusic(2);
 	}
 
