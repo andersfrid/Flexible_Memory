@@ -2,15 +2,12 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.LayoutManager;
-import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,14 +16,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-
-import org.omg.CORBA.Current;
-
-import com.sun.xml.internal.bind.api.impl.NameConverter;
 
 import controller.ControllerGUI;
 import controller.NameConvert;
@@ -39,9 +30,7 @@ import entity.Card;
  *
  */
 public class GameBoardGUI extends JPanel implements ActionListener {
-	private JLabel playerOneName, playerTwoName, scorePlayerOne,
-			scorePlayerTwo, level, logo, player1Pairs, player2Pairs,
-			player1Rounds, player2Rounds;
+	private JLabel logo;
 	private JPanel mainPanel, northPanel, gameArea, pnlPlayerOne, pnlPlayerTwo,
 			pnlMiddle, pnlNameOne, pnlNameTwo, pnlPlayer1Pairs,
 			pnlPlayer1Rounds, pnlPlayer2Pairs, pnlPlayer2Rounds;
@@ -82,7 +71,6 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		pnlPlayerOne = new JPanel();
 		pnlPlayerOne.setLayout(null);
 		pnlPlayerOne.setBounds(5, 65, 400, 300);
-
 		pnlPlayerOne.setOpaque(false);
 
 		// pnlNamePlayerOne
@@ -103,7 +91,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 			pnlPlayer1Pairs.add(new JLabel(pairText[i]));
 		}
 
-		player1Pairs = new JLabel(new ImageIcon("Images/Letters/-.png"));
+		JLabel player1Pairs = new JLabel(new ImageIcon("Images/Char/#.png"));
 		pnlPlayer1Pairs.add(player1Pairs);
 
 		pnlPlayer1Rounds = new JPanel();
@@ -116,7 +104,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 			pnlPlayer1Rounds.add(new JLabel(roundsText[i]));
 		}
 
-		player1Rounds = new JLabel(new ImageIcon("Images/Letters/-.png"));
+		JLabel player1Rounds = new JLabel(new ImageIcon("Images/Char/#.png"));
 		pnlPlayer1Rounds.add(player1Rounds);
 
 		pnlPlayerOne.add(pnlNameOne);
@@ -124,7 +112,6 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		pnlPlayerOne.add(pnlPlayer1Pairs);
 
 		// Slut på player1
-		// **************//
 
 		// **Middle_pnl**
 
@@ -192,11 +179,9 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		for (int i = 0; i < pairText.length; i++) {
 			pnlPlayer2Pairs.add(new JLabel(pairText[i]));
 		}
-
-		player2Pairs = new JLabel(new ImageIcon("Images/Letters/-.png"));
-
+		JLabel player2Pairs = new JLabel(new ImageIcon("Images/Char/#.png"));
 		pnlPlayer2Pairs.add(player2Pairs);
-
+		
 		// Rounds TWO
 		pnlPlayer2Rounds = new JPanel();
 		pnlPlayer2Rounds.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
@@ -207,7 +192,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 			pnlPlayer2Rounds.add(new JLabel(roundsText[i]));
 		}
 
-		player2Rounds = new JLabel(new ImageIcon("Images/Letters/-.png"));
+		JLabel player2Rounds = new JLabel(new ImageIcon("Images/Char/#.png"));
 		pnlPlayer2Rounds.add(player2Rounds);
 
 		if (!singleplayer) {
@@ -225,29 +210,10 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		northPanel.add(pnlPlayerTwo);
 		northPanel.add(pnlMiddle);
 
-		// Lägger till namnen:
-
-		// labels
-		ImageIcon iconPlayer1 = new ImageIcon();
-		playerOneName = new JLabel(iconPlayer1);
-		playerOneName.setBackground(new Color(0, 0, 0));
-		playerOneName.setBounds(50, 10, 150, 50);
-
+		// Logo
 		ImageIcon iconLogo = new ImageIcon("Images/logo_small_550x75.png");
 		logo = new JLabel(iconLogo);
 		logo.setBounds(225, 0, 550, 75);
-
-		ImageIcon iconPlayer2 = new ImageIcon("");
-		playerTwoName = new JLabel(iconPlayer2);
-		playerTwoName.setBounds(800, 10, 150, 50);
-
-		ImageIcon iconScore1 = new ImageIcon("");
-		scorePlayerOne = new JLabel(iconScore1);
-		scorePlayerOne.setBounds(50, 100, 150, 50);
-
-		ImageIcon iconScore2 = new ImageIcon("");
-		scorePlayerTwo = new JLabel(iconScore2);
-		scorePlayerTwo.setBounds(800, 100, 150, 50);
 
 		// button
 		ImageIcon iconKogg = new ImageIcon("Images/cog2.png");
@@ -268,11 +234,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		mainPanel.add(gameArea, BorderLayout.CENTER);
 
 		northPanel.add(button);
-		northPanel.add(playerOneName);
 		northPanel.add(logo);
-		northPanel.add(playerTwoName);
-		northPanel.add(scorePlayerOne);
-		northPanel.add(scorePlayerTwo);
 
 		button.addActionListener(this);
 
@@ -395,6 +357,11 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		}
 	}
 
+	
+	/**
+	 * Byter currentplayer (Grön)
+	 * @param player
+	 */
 	public void swapCurrentPlayer(int player){
 		pnlNameOne.removeAll();
 		pnlNameTwo.removeAll();

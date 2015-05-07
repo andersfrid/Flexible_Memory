@@ -14,9 +14,7 @@ public class Card {
 	private Icon cardBack = new ImageIcon("maps/background/Cardback3.jpg");
 	private Icon cardFace;
 	private int compareNbr;
-	private boolean isCompared = false;
 
-	
 	public Card(String fileCardFace, int compareNbr){
 		cardFace = new ImageIcon(fileCardFace);
 		this.compareNbr = compareNbr;
@@ -44,9 +42,5 @@ public class Card {
 	
 	public void setCompareNbr(int compareNbr){
 		this.compareNbr = compareNbr;
-	}
-	
-	//Ska vända kortet?
-	public void turnCard(){
 	}
 }
