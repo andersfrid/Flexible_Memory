@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import controller.ControllerGUI;
@@ -26,12 +25,17 @@ public class WinnerPanel extends JPanel implements ActionListener {
 	private JPanel pnl_bg;
 	private JLabel logo;
 	private JButton startOver, home;
-	private static JFrame frame;
 	private ControllerGUI controller;
 	private boolean singleplayer;
 	private String modeText, levelText;
 	private NameConvert converter = new NameConvert();
+	private Image bg = new ImageIcon("Images/WinnerBackground.jpg").getImage();
 
+	
+	public WinnerPanel(){
+		
+	}
+	
 	/**
 	 * Panelen skapas med rätt resultat.
 	 */
@@ -49,7 +53,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		else
 			levelText = "Hard";
 
-		pnl_bg = new BgPanel();
+		pnl_bg = new WinnerPanel();
 		pnl_bg.setPreferredSize(new Dimension(1000, 700));
 		pnl_bg.setLayout(null);
 
@@ -274,18 +278,11 @@ public class WinnerPanel extends JPanel implements ActionListener {
 			controller.startMusic(1);
 		}
 	}
-
+	
 	/**
-	 * Klass som ritar upp bakgrundsbilden.
-	 * @author David
-	 *
+	 * Metod som ritar ut bakgrunden på vår panel.
 	 */
-	private class BgPanel extends JPanel {
-		Image bg = new ImageIcon("Images/WinnerBackground.jpg").getImage();
-
-		@Override
-		public void paintComponent(Graphics g) {
-			g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
-		}
+	public void paintComponent(Graphics g) {
+		g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 	}
 }

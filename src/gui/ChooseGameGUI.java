@@ -4,16 +4,19 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 import controller.ControllerGUI;
 
 /**
@@ -61,6 +64,12 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 	private boolean mode = false;
 	private boolean theme = false;
 	private boolean singleplayer;
+	private Image bg = new ImageIcon(
+			"Images/retro4.jpg").getImage();
+	
+	public ChooseGameGUI(){
+		
+	}
  /**
   * Constructor to know what mode is chosen in StartGUI, also paints 2 panels, one for the upper part of the screen
   * (singleplayer or multiplayer labels) and one for the lower parts (which always is the same no matter what mode is chosen
@@ -79,7 +88,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		mainPanel.setBounds(311, 30, 460, 400);
 		mainPanel.setOpaque(false);
 
-		contentPanel = new BgPanel();
+		contentPanel = new ChooseGameGUI();
 		contentPanel.setLayout(null);
 		contentPanel.setPreferredSize(new Dimension(1000, 700));
 
@@ -302,18 +311,14 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnPipe.addActionListener(this);
 		add(contentPanel);
 	}
-/** 
- * @author Anders
- * Background class
- *
- */
-	private class BgPanel extends JPanel {
-		private java.awt.Image bg = new ImageIcon(
-				"Images/retro4.jpg").getImage();
-		public void paintComponent(Graphics g) {
-			g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
-		}
+	
+	/**
+	 * Metod som ritar ut bakgrunden på vår panel.
+	 */
+	public void paintComponent(Graphics g) {
+		g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 	}
+	
 	/**
 	 * ActionListeners to register different events, e.g someone clicks the cloud, a sound + a picture should
 	 * pop-up.

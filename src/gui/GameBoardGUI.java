@@ -43,7 +43,12 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	private ControllerGUI cg;
 	private NameConvert converter = new NameConvert();
 	private String player1Name, player2Name;
+	private Image backGround = new ImageIcon("Images/mario_1.jpg")
+	.getImage();
 
+	public GameBoardGUI(){
+		
+	}
 	public GameBoardGUI(int levelNbr, Card[][] gameBoard, ControllerGUI cg,
 			RoundController rc, String modeName, boolean singleplayer,
 			String player1Name, String player2Name) {
@@ -56,7 +61,7 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		this.player2Name = player2Name;
 		
 		// panels
-		mainPanel = new BackgroundPanel();
+		mainPanel = new GameBoardGUI();
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.setPreferredSize(new Dimension(1000, 700));
 
@@ -505,20 +510,12 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 		northPanel.repaint();
 		northPanel.revalidate();
 	}
-
+	
 	/**
-	 * Inre klass som ritar ut bakgrunden på panelen.
-	 * @author David
-	 *
+	 * Metod som ritar ut bakgrunden på vår panel.
 	 */
-	private class BackgroundPanel extends JPanel {
-
-		private Image backGround = new ImageIcon("Images/mario_1.jpg")
-				.getImage();
-
-		public void paintComponent(Graphics g) {
-			g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
-		}
+	public void paintComponent(Graphics g) {
+		g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
 	}
 
 }

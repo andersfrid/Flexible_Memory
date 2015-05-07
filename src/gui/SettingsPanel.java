@@ -27,13 +27,18 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	private ControllerGUI controller;
 	private Random rand = new Random();
 	private int choose = 0;
+	private Image bg = new ImageIcon("Images/SettingsBackground.jpg").getImage();
 
+	public SettingsPanel(){
+		
+	}
+	
 	public SettingsPanel(ControllerGUI controller, int choose) {
 		this.controller = controller;
 		this.choose = choose;
 
 		//Panel som målar upp bakgrunden.
-		panel = new BgPanel();
+		panel = new SettingsPanel();
 		panel.setLayout(null);
 		panel.setPreferredSize(new Dimension(400, 400));
 		panel.setBackground(Color.LIGHT_GRAY);
@@ -192,15 +197,9 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * Inre klass som målar upp bakgrunden på panelen.
-	 * @author David
-	 *
+	 * Metod som ritar ut bakgrunden på vår panel.
 	 */
-	private class BgPanel extends JPanel {
-		Image bg = new ImageIcon("Images/SettingsBackground.jpg").getImage();
-
-		public void paintComponent(Graphics g) {
-			g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
-		}
+	public void paintComponent(Graphics g) {
+		g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 	}
 }

@@ -23,7 +23,12 @@ public class StartGUI extends JPanel implements ActionListener{
 	private JLabel lblLogo;
 	private JPanel pnlCenter = new JPanel();
 	private ControllerGUI controller;
+	private Image bg = new ImageIcon("Images/mario_1.jpg").getImage();
 
+	public StartGUI(){
+		
+	}
+	
 	/**
 	 * Konstruktor som ritar upp panelen och dess komponenter. 
 	 * Har en referens till en kontroller som styr musik och vilka GUI som skall ritas upp.
@@ -33,7 +38,7 @@ public class StartGUI extends JPanel implements ActionListener{
 	public StartGUI(ControllerGUI controller){
 		this.controller = controller;
 
-		JPanel bgPanel = new BgPanel(); 
+		JPanel bgPanel = new StartGUI(); 
 		bgPanel.setPreferredSize(new Dimension(1000,700));
 		bgPanel.setLayout(null);
 
@@ -167,16 +172,11 @@ public class StartGUI extends JPanel implements ActionListener{
 		}
 
 	}
+	
 	/**
-	 * En inre klass som ritar upp bakgrunden på panelen.
-	 * @author Anders Frid
-	 *
+	 * Metod som ritar ut bakgrunden på vår panel.
 	 */
-	private class BgPanel extends JPanel {
-		Image bg = new ImageIcon("Images/mario_1.jpg").getImage();
-		@Override
-		public void paintComponent(Graphics g) {
-			g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
-		}
+	public void paintComponent(Graphics g) {
+		g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
 	}
 }
