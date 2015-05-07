@@ -8,19 +8,16 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import controller.ControllerGUI;
 
 /**
  * Ett GUI som visar en settings panel, där användaren kan stänga av musik och ljud. 
  * Även starta om spelet och gå till startsidan.
- * @author David
+ * @author David Beer
  *
  */
 public class SettingsPanel extends JPanel implements ActionListener {
@@ -30,12 +27,12 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	private ControllerGUI controller;
 	private Random rand = new Random();
 	private int choose = 0;
-	
+
 	public SettingsPanel(ControllerGUI controller, int choose) {
 		this.controller = controller;
 		this.choose = choose;
-		
-		//panel som målar upp bakgrunden.
+
+		//Panel som målar upp bakgrunden.
 		panel = new BgPanel();
 		panel.setLayout(null);
 		panel.setPreferredSize(new Dimension(400, 400));
@@ -50,24 +47,24 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		ImageIcon iconStart = new ImageIcon("Images/restartgame_small.jpg");
 		restartButton = new JButton(iconStart);
 		restartButton.setBounds(40, 170, 150, 50);
-		
-		// gör så restartknappen inte är klickbar när man inte valt teman och sådan.
+
+		// gör så restartknappen inte är klickbar när man inte valt teman.
 		if(choose == 1){
 			restartButton.setEnabled(false);
-			}else{
-				restartButton.setEnabled(true);
-			}
-		
+		}else{
+			restartButton.setEnabled(true);
+		}
+
 		//Skapar en home knapp som tar användaren tillbaka till första sidan.
 		ImageIcon iconHome = new ImageIcon("Images/home_small.jpg");
 		mainMenu = new JButton(iconHome);
 		mainMenu.setBounds(210, 170, 150, 50);
-		
+
 		// en avsluta knapp som stänger ner settings rutan.
 		ImageIcon iconAvsluta = new ImageIcon("Images/b_exit_small_300x50.png");
 		exit = new JButton(iconAvsluta);
 		exit.setBounds(50, 250, 300, 50);
-		
+
 		//knapp som gör att man kan byta bakgrundmusik.
 		ImageIcon iconNextSong = new ImageIcon("Images/nextButton.png");
 		nextSong = new JButton(iconNextSong);
@@ -111,10 +108,10 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		soundButton.addActionListener(this);
 		musicButton.addActionListener(this);
 		nextSong.addActionListener(this);
-		
+
 		volumePic();
 		musicPic();
-		
+
 		add(panel);
 	}
 
@@ -136,7 +133,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * kollar om musik spelar eller inte, byter även bild till den bild som skall visas.
+	 * Kollar om musik spelar eller inte, byter även bild till den bild som skall visas.
 	 */
 	public void musicPic() {
 		boolean playMusic = controller.getMusic();
@@ -179,31 +176,31 @@ public class SettingsPanel extends JPanel implements ActionListener {
 			controller.startSound(5);
 			controller.stopMusic(1);
 			controller.nextSong(random(5));
-			
+
 		}
 
 	}
-	
+
 	/**
 	 * Metod som returnerar ett random värde som skickas in när man vill använda den.
 	 * @param nbr
-	 * @return
+	 * @return random
 	 */
 	public int random(int nbr){
 		int random = rand.nextInt(nbr);
 		return random;
 	}
-	
+
 	/**
 	 * Inre klass som målar upp bakgrunden på panelen.
 	 * @author David
 	 *
 	 */
 	private class BgPanel extends JPanel {
-	    Image bg = new ImageIcon("Images/SettingsBackground.jpg").getImage();
-	  
-	    public void paintComponent(Graphics g) {
-	        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
-	    }
+		Image bg = new ImageIcon("Images/SettingsBackground.jpg").getImage();
+
+		public void paintComponent(Graphics g) {
+			g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+		}
 	}
 }
