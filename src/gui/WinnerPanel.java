@@ -1,31 +1,25 @@
 package gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
 import controller.ControllerGUI;
 import controller.NameConvert;
 import entity.Player;
 
 /**
- * En panel som visar vem som har vunnit efter varje spel. Finns två knappar,
- * restart och home.
- * 
- * @author David
+ * Panelen visar vinnaren (och förloraren)
+ *
+ * @author David, Andréas
  *
  */
 public class WinnerPanel extends JPanel implements ActionListener {
@@ -35,20 +29,19 @@ public class WinnerPanel extends JPanel implements ActionListener {
 	private static JFrame frame;
 	private ControllerGUI controller;
 	private boolean singleplayer;
+	private String modeText, levelText;
 	private NameConvert converter = new NameConvert();
 
-	private String modeText, levelText;
-
 	/**
-	 * Konstruktor där panelen instansieras.
+	 * Panelen skapas med rätt resultat.
 	 */
+	public WinnerPanel(Player player1, Player player2, boolean singleplayer,
+			int winnerNbr, int level, String modeText, ControllerGUI controller) {
 
-	public WinnerPanel(Player player1, Player player2,boolean singleplayer, int winnerNbr, int level,String modeText, ControllerGUI controller) {
 		this.controller = controller;
 		this.singleplayer = singleplayer;
-		this.modeText = modeText; // Ska läggas i konstruktorn
+		this.modeText = modeText;
 
-		System.out.println(""+level);
 		if (level == 0)
 			levelText = "Easy";
 		else if (level == 1)
@@ -60,6 +53,8 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		pnl_bg.setPreferredSize(new Dimension(1000, 700));
 		pnl_bg.setLayout(null);
 
+		// Printar ut singleplayer-vyn eller multiplayer-vyn
+		// beroende av vad som har spelats.
 		if (singleplayer) {
 			printSingleplayer(player1);
 		} else {
@@ -91,55 +86,47 @@ public class WinnerPanel extends JPanel implements ActionListener {
 	}
 
 	private void printSingleplayer(Player player) {
-		// Namnet
+		/* namn på spelaren */
 		JPanel pnlWinnerText = new JPanel();
 		pnlWinnerText.setBounds(200, 120, 600, 50);
-		// pnlWinnerText.setBackground(new Color(255,255,255));
 		pnlWinnerText.setLayout(new FlowLayout(FlowLayout.CENTER, -15, 0));
 
-		Icon[] text = converter.generate(player.getName(),1);
+		Icon[] text = converter.generate(player.getName(), 1);
 		for (int i = 0; i < text.length; i++) {
 			pnlWinnerText.add(new JLabel(text[i]));
 		}
 		pnlWinnerText.setOpaque(false);
 		pnl_bg.add(pnlWinnerText);
 
-		// Finished 'Mode'
+		/* "Finished 'MODE' " */
 		JPanel pnlModeText = new JPanel();
 		pnlModeText.setBounds(200, 170, 600, 50);
-		// pnlModeText.setBackground(new Color(100,100,100));
 		pnlModeText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
-
-		text = null;
-		text = converter.generate("Finished " + modeText,0);
+		text = converter.generate("Finished " + modeText, 0);
 		for (int i = 0; i < text.length; i++) {
 			pnlModeText.add(new JLabel(text[i]));
 		}
 		pnlModeText.setOpaque(false);
 		pnl_bg.add(pnlModeText);
 
-		// On 'Level'
+		/* "On 'LEVEL' " */
 		JPanel pnlLevelText = new JPanel();
 		pnlLevelText.setBounds(200, 220, 600, 50);
-		// pnlLevelText.setBackground(new Color(255,255,255));
 		pnlLevelText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
-
-		text = null;
-		text = converter.generate("on " + levelText,0);
+		text = converter.generate("on " + levelText, 0);
 		for (int i = 0; i < text.length; i++) {
 			pnlLevelText.add(new JLabel(text[i]));
 		}
 		pnlLevelText.setOpaque(false);
 		pnl_bg.add(pnlLevelText);
 
-		// In 'Rounds
+		/* " In 'Rounds' " */
 		JPanel pnlRoundsText = new JPanel();
 		pnlRoundsText.setBounds(200, 270, 600, 50);
 		// pnlRoundsText.setBackground(new Color(100,100,100));
 		pnlRoundsText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
-
-		text = null;
-		text = converter.generate("in " + player.getRoundCount() + " rounds",0);
+		text = converter
+				.generate("in " + player.getRoundCount() + " rounds", 0);
 		for (int i = 0; i < text.length; i++) {
 			pnlRoundsText.add(new JLabel(text[i]));
 		}
@@ -150,52 +137,46 @@ public class WinnerPanel extends JPanel implements ActionListener {
 
 	private void printMultiplayer(Player player1, Player player2, int winnerNbr) {
 		Icon[] text;
-		
+
 		if (winnerNbr == 0) {
 
-			//DRAW
+			/* "It is a draw" */
 			JPanel pnlDrawText = new JPanel();
 			pnlDrawText.setBounds(200, 130, 600, 50);
-//			pnlDrawText.setBackground(new Color(255, 255, 255));
 			pnlDrawText.setLayout(new FlowLayout(FlowLayout.CENTER, -15, 0));
-
-			text = converter.generate("It is a Draw",1);
+			text = converter.generate("It is a Draw", 1);
 			for (int i = 0; i < text.length; i++) {
 				pnlDrawText.add(new JLabel(text[i]));
 			}
 			pnlDrawText.setOpaque(false);
 			pnl_bg.add(pnlDrawText);
-			
-			//Namnen
+
+			/* " 'Player1Name' and 'Player2Name' " */
 			JPanel pnlDrawName = new JPanel();
 			pnlDrawName.setBounds(200, 200, 600, 50);
-//			pnlDrawName.setBackground(new Color(255, 255, 255));
 			pnlDrawName.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
-
-			text = converter.generate(player1.getName()+" and "+player2.getName(),0);
+			text = converter.generate(
+					player1.getName() + " and " + player2.getName(), 0);
 			for (int i = 0; i < text.length; i++) {
 				pnlDrawName.add(new JLabel(text[i]));
 			}
 			pnlDrawName.setOpaque(false);
 			pnl_bg.add(pnlDrawName);
-			
-			//par
+
+			/* " 'PlayersPair' Pairs" */
 			JPanel pnlDrawPair = new JPanel();
 			pnlDrawPair.setBounds(200, 250, 600, 50);
-//			pnlDrawPair.setBackground(new Color(255, 255, 255));
 			pnlDrawPair.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
-
-			text = converter.generate(player1.getPairs()+" Pairs",0);
+			text = converter.generate(player1.getPairs() + " Pairs", 0);
 			for (int i = 0; i < text.length; i++) {
 				pnlDrawPair.add(new JLabel(text[i]));
 			}
 			pnlDrawPair.setOpaque(false);
 			pnl_bg.add(pnlDrawPair);
-			
-		} else {
 
+		} else {
 			Player winner, loser;
-			
+
 			if (winnerNbr == 1) {
 				winner = player1;
 				loser = player2;
@@ -204,89 +185,78 @@ public class WinnerPanel extends JPanel implements ActionListener {
 				loser = player1;
 			}
 
-			// The Winner Is
+			/* "The winner is:" */
 			JPanel pnlTheWinnerIs = new JPanel();
 			pnlTheWinnerIs.setBounds(200, 120, 600, 50);
-//			pnlTheWinnerIs.setBackground(new Color(255, 255, 255));
 			pnlTheWinnerIs.setLayout(new FlowLayout(FlowLayout.CENTER, -15, 0));
-
-			text = converter.generate("The winner is@",1);
+			text = converter.generate("The winner is@", 1);
 			for (int i = 0; i < text.length; i++) {
 				pnlTheWinnerIs.add(new JLabel(text[i]));
 			}
 			pnlTheWinnerIs.setOpaque(false);
 			pnl_bg.add(pnlTheWinnerIs);
 
-			// Vinnaren + antal par
-
+			/* " 'WinnerName' with 'WinnerPairs' Pairs" */
 			JPanel pnlWinnerNameAndPair = new JPanel();
 			pnlWinnerNameAndPair.setBounds(200, 170, 600, 50);
-//			pnlWinnerNameAndPair.setBackground(new Color(100, 100, 100));
-			pnlWinnerNameAndPair.setLayout(new FlowLayout(FlowLayout.CENTER, -15, 0));
-			
-			text = converter.generate(winner.getName()+" with "+winner.getPairs()+" Pairs",1);
+			pnlWinnerNameAndPair.setLayout(new FlowLayout(FlowLayout.CENTER,
+					-15, 0));
+			text = converter.generate(
+					winner.getName() + " with " + winner.getPairs() + " Pairs",
+					1);
 			for (int i = 0; i < text.length; i++) {
 				pnlWinnerNameAndPair.add(new JLabel(text[i]));
 			}
 			pnlWinnerNameAndPair.setOpaque(false);
-			
 			pnl_bg.add(pnlWinnerNameAndPair);
-			
-			//The Loser Is
+
+			/* "The Loser is:" */
 			JPanel pnlTheLoserIs = new JPanel();
 			pnlTheLoserIs.setBounds(200, 250, 600, 50);
-//			pnlTheLoserIs.setBackground(new Color(255, 255, 255));
 			pnlTheLoserIs.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
-
-			text = converter.generate("The Loser is@",0);
+			text = converter.generate("The Loser is@", 0);
 			for (int i = 0; i < text.length; i++) {
 				pnlTheLoserIs.add(new JLabel(text[i]));
 			}
 			pnlTheLoserIs.setOpaque(false);
 			pnl_bg.add(pnlTheLoserIs);
-			
-			
-			//Förloraren + antal par
+
+			/* " 'LoserName' with 'LoserPairs' Pairs " */
 			JPanel pnlLoserNameAndPair = new JPanel();
 			pnlLoserNameAndPair.setBounds(200, 300, 600, 50);
-//			pnlLoserNameAndPair.setBackground(new Color(100, 100, 100));
-			pnlLoserNameAndPair.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
-
-			text = converter.generate(loser.getName()+" with "+loser.getPairs()+" Pairs",0);
+			pnlLoserNameAndPair.setLayout(new FlowLayout(FlowLayout.CENTER,
+					-19, 0));
+			text = converter
+					.generate(loser.getName() + " with " + loser.getPairs()
+							+ " Pairs", 0);
 			for (int i = 0; i < text.length; i++) {
 				pnlLoserNameAndPair.add(new JLabel(text[i]));
 			}
 			pnlLoserNameAndPair.setOpaque(false);
 			pnl_bg.add(pnlLoserNameAndPair);
 		}
-			
-			//Mode
-			JPanel pnlModeText = new JPanel();
-			pnlModeText.setBounds(200, 400, 600, 50);
-//			pnlModeText.setBackground(new Color(100, 100, 100));
-			pnlModeText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
-			text = converter.generate("Mode@"+modeText,0);
-			for (int i = 0; i < text.length; i++) {
-				pnlModeText.add(new JLabel(text[i]));
-			}
-			pnlModeText.setOpaque(false);
-			pnl_bg.add(pnlModeText);
-			
-			//Level
-			JPanel pnlLevelText = new JPanel();
-			pnlLevelText.setBounds(200, 450, 600, 50);
-//			pnlLevelText.setBackground(new Color(100, 100, 100));
-			pnlLevelText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
+		/* "Mode: 'MODE'" */
+		JPanel pnlModeText = new JPanel();
+		pnlModeText.setBounds(200, 400, 600, 50);
+		pnlModeText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
+		text = converter.generate("Mode@" + modeText, 0);
+		for (int i = 0; i < text.length; i++) {
+			pnlModeText.add(new JLabel(text[i]));
+		}
+		pnlModeText.setOpaque(false);
+		pnl_bg.add(pnlModeText);
 
-			text = converter.generate("Level@"+levelText,0);
-			for (int i = 0; i < text.length; i++) {
-				pnlLevelText.add(new JLabel(text[i]));
-			}
-			pnlLevelText.setOpaque(false);
-			pnl_bg.add(pnlLevelText);
-			
-
+		/* "Level: 'Level'" */
+		JPanel pnlLevelText = new JPanel();
+		pnlLevelText.setBounds(200, 450, 600, 50);
+		pnlLevelText.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
+		text = converter.generate("Level@" + levelText, 0);
+		for (int i = 0; i < text.length; i++) {
+			pnlLevelText.add(new JLabel(text[i]));
+		}
+		pnlLevelText.setOpaque(false);
+		pnl_bg.add(pnlLevelText);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -296,7 +266,6 @@ public class WinnerPanel extends JPanel implements ActionListener {
 			controller.removeWinner();
 			controller.stopMusic(3);
 			controller.startMusic(1);
-
 		}
 		if (e.getSource() == home) {
 			controller.startSound(5);
@@ -307,8 +276,7 @@ public class WinnerPanel extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * Innre klass som ritar upp bakgrunden på panelen.
-	 * 
+	 * Klass som ritar upp bakgrundsbilden.
 	 * @author David
 	 *
 	 */

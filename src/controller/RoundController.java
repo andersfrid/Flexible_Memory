@@ -1,54 +1,40 @@
 package controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Random;
-
-import javax.swing.JLabel;
-
 import entity.Card;
 import entity.Player;
 
 /**
- * Klassen ska sköta logiken som sker under rundan Exempelvis ska den skapa
- * spelplanen. Kolla om två vända är likadana.
  * 
- * @author Andreas
+ * Klassen ska sköta mestadels av logiken som sker när man spelar en runda.
+ * 
+ * @author Andréas
  *
  */
 public class RoundController {
-	// temp
-	private String background = "/maps/background/background_0";
-
+	
 	private Card[][] currentGameBoard;
 	private Random rand = new Random();
 	private ControllerGUI cGUI;
-
-	// temp
-	private Card turn1 = null;
-	private Card turn2 = null;
-
+	private Card turn1;
+	private Card turn2;
 	private Player player1, player2;
+	private Player currentPlayer;
 	private int col, row;
-
 	private int mode;
 	private int level;
-
 	private boolean singleplayer;
 
-	private Player currentPlayer;
-
 	public RoundController(int level, int mode, boolean singleplayer,
-			String p1, String p2, ControllerGUI cGUI) {
+			String player1Name, String player2Name, ControllerGUI cGUI) {
 		this.mode = mode;
 		this.level = level;
-
 		this.cGUI = cGUI;
 		this.singleplayer = singleplayer;
-		player1 = new Player(p1, 1);
-		player2 = new Player(p2, 2);
+		player1 = new Player(player1Name, 1);
+		player2 = new Player(player2Name, 2);
 		currentPlayer = player1;
-
 		createNewGameBoard(level, mode);
 	}
 
@@ -67,14 +53,10 @@ public class RoundController {
 		String imagePath = getModePath(mode);
 		String folderPath = imagePath.substring(0,
 				imagePath.lastIndexOf('/') + 1);
-
-		System.out.println(imagePath);
-		System.out.println(folderPath);
-
+		
 		// Räknar ut hur många bilder det är i mappen
 		File f = new File(folderPath);
 		int images = 0;
-		
 		for (File file : f.listFiles()) {
 			if ((file.isFile() && (file.getName().endsWith(".txt") || file
 					.getName().endsWith(".jpg")))) {
@@ -83,7 +65,6 @@ public class RoundController {
 		}
 
 		int nbrOfCards = images / 2;
-		System.out.println(nbrOfCards);
 
 		int[] alreadyPlaced = new int[20];
 		for (int i = 0; i < alreadyPlaced.length; i++) {
@@ -91,7 +72,6 @@ public class RoundController {
 		}
 
 		int count = 0;
-
 		while (!isFilled(currentGameBoard)) {
 
 			int pairNbr = rand.nextInt(nbrOfCards);
@@ -122,11 +102,15 @@ public class RoundController {
 			}
 
 		}
-
 		paintGameBoard();
-
 	}
 
+	/**
+	 * Kontrollerar om nuffran som skickas in finns i arrayen.
+	 * @param array
+	 * @param nbr
+	 * @return om nuffran finns i arrayen
+	 */
 	public boolean alreadyPlaced(int[] array, int nbr) {
 		for (int i = 0; i < array.length; i++) {
 			if (array[i] == nbr) {
@@ -137,9 +121,9 @@ public class RoundController {
 	}
 
 	/**
-	 * 
+	 * Kontrollerar om arrayen är helt fylld
 	 * @param array
-	 * @return
+	 * @return är arrayen fylld.
 	 */
 	public boolean isFilled(Card[][] array) {
 		for (int i = 0; i < array.length; i++) {
@@ -192,7 +176,7 @@ public class RoundController {
 	public String getModePath(int mode) {
 		String path = "";
 		switch (mode) {
-		case 0: // Standardläge
+		case 0: // standard
 			path = "maps/standard/standard_";
 			break;
 		case 1: // flaggor
@@ -201,13 +185,13 @@ public class RoundController {
 		case 2: // capitals
 			path = "maps/capital/flag_";
 			break;
-		case 3:
+		case 3:	// multi
 			path = "maps/mult/mult_";
 			break;
-		case 4:
+		case 4:	//plus
 			path = "maps/plus/plus_";
 			break;
-		default:
+		default: //standard
 			path = "maps/standard/standard_";
 			break;
 
@@ -216,6 +200,11 @@ public class RoundController {
 		return path;
 	}
 
+	/**
+	 * Får namnet som de spelläget heter.
+	 * @param nbr
+	 * @return
+	 */
 	public String getModeName(int nbr) {
 		String modeName = "";
 		switch (nbr) {
@@ -242,21 +231,18 @@ public class RoundController {
 	}
 
 	/**
-	 * Returnerar spelplanen
-	 * 
-	 * @return
-	 */
-	public Card[][] getGameBoard() {
-		return this.currentGameBoard;
-	}
-
-	/**
-	 * Ritar spelplanen i frame
+	 * Ritar spelplanen i GameBoardGUI
 	 */
 	public void paintGameBoard() {
 		cGUI.printGameBoard(currentGameBoard, this, getModeName(this.mode), player1.getName(), player2.getName());
 	}
 
+	/**
+	 * Kontrollerar om det är ett par.
+	 * @param card1
+	 * @param card2
+	 * @return om de är ett par.
+	 */
 	public boolean isPair(Card card1, Card card2) {
 		if (card1.getCompareNbr() == card2.getCompareNbr()) {
 			return true;
@@ -264,44 +250,33 @@ public class RoundController {
 		return false;
 	}
 
+	/**
+	 * Spelet är över det finns inga kort kvar.
+	 * Den här metoden räknar ut vem som är vinnaren och skickar vidare
+	 * det till Winnerpanel så de kan skrivas ut. (går genom controllerGUI.
+	 */
 	public void winner() {
 		if (singleplayer) {
 			cGUI.winner(player1,null,singleplayer,1,level,getModeName(mode));
 		} else {
-			
-			
 			if (player1.getPairs() == player2.getPairs()) { // Lika
-				System.out.println("Lika!");
-				System.out.println(player1.getName() + " och "
-						+ player2.getName() + " fick: " + player1.getPairs()
-						+ " par.");
 				cGUI.winner(player1,player2,singleplayer,0,level,getModeName(mode));
 			}
-			
 			else {
-				
 				if (player1.getPairs() > player2.getPairs()) { // Spelare 1 vann
-					System.out.println(player1.getName() + " Vann!!");
 					cGUI.winner(player1,player2,singleplayer,1,level,getModeName(mode));
 				}
-				
 				else { // Spelare 2 vann
-					System.out.println(player2.getName() + " Vann!!");
 					cGUI.winner(player1,player2,singleplayer,2,level,getModeName(mode));
 				}
-				
-				
-				System.out.println(player1.getName() + " fick "
-						+ player1.getPairs() + " par");
-				System.out.println(player2.getName() + " fick "
-						+ player2.getPairs() + " par");
-				
-				
 			}
 		}
 	}
 
 	/**
+	 * Någon har gjort ett drag.
+	 * Metoden kollar vem som gjort draget lägger på antal rundor samt ev ger poäng
+	 * om det är ett par.
 	 * 
 	 * @param card
 	 * @return -1 Första rundan -2 inte samma compare. -3 tryckt på samma kort.
@@ -342,6 +317,9 @@ public class RoundController {
 		return backValue;
 	}
 
+	/**
+	 * Byter spelarens tur.
+	 */
 	public void swapPlayer() {
 		if (!singleplayer) {
 			if (currentPlayer.equals(player1)) {
