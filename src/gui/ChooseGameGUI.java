@@ -149,7 +149,6 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		btnBush.setBounds(140, 570, 102, 36);
 		btnStart.setBounds(336, 500, 312, 59);
 
-
 		// set things invisible
 		btnSettings.setBorderPainted(false);
 		btnSettings.setBorder(null);
@@ -194,7 +193,6 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		contentPanel.add(mainPanel);
 
 		if (singleplayer == true) {
-
 			ImageIcon iconlblTitle = new ImageIcon("Images/Title.png");
 			lblTitle = new JLabel(iconlblTitle);
 			lblTitle.setBounds(0, 0, 380, 90);
@@ -211,7 +209,6 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 			mainPanel.add(lbltfBackground);
 
 			// set stuff invisible	
-
 			tf.setBounds(113, 127, 140, 50);
 			tf.setFont(afb20);
 			tf.setBorder(null);
@@ -421,19 +418,42 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 				controller.startSound(5);
 			}
 			else if(singleplayer && username.contains(check) || username.length() < 1) {
+				ImageIcon iconlblArrow = new ImageIcon("Images/Arrow.png");
+				lblArrow.setIcon(iconlblArrow);
+				ImageIcon iconlblError = new ImageIcon("Images/Error.png");
+				lblError.setIcon(iconlblError);
 				lblArrow.setBounds(300, 155, 80, 80);
 				contentPanel.add(lblArrow);
  				contentPanel.add(lblError);
 				lblError.setBounds(100, 165, 275, 105);
-			}
-			else if (singleplayer && !theme){
+				System.out.println("namn = fel");	}
+			else if (singleplayer && username.length() > 10) {
+				ImageIcon iconlblArrow = new ImageIcon("Images/Arrow.png");
+				lblArrow.setIcon(iconlblArrow);
+				ImageIcon iconlblError = new ImageIcon("Images/Error.png");
+				lblError.setIcon(iconlblError);
+				lblArrow.setBounds(300, 155, 80, 80);
+				contentPanel.add(lblArrow);
+ 				contentPanel.add(lblError);
+				lblError.setBounds(100, 165, 275, 105);
+				System.out.println("namn = fel");
+				}
+			else if (singleplayer && username.length() < 10 && !username.contains(check) && username.length() > 0 && !theme) {
 				lblArrow.setIcon(null);
 				lblError.setIcon(null);
+				lblArrow.setIcon(null);
+				lblError.setIcon(null);
+				lblArrowLeft2.setIcon(null);
 				errorTheme();
+				System.out.println("theme = fel");
 			}
-			else if (singleplayer && !mode) {
+			else if (singleplayer && username.length() < 10 && !username.contains(check) && username.length() > 0 && theme && !mode) {
+				
+				lblArrow.setIcon(null);
+				lblError.setIcon(null);
 				lblArrowLeft3.setIcon(null);
 				lblErrorTheme2.setIcon(null);
+				
 				errorMode();
 			}
 			else if (singleplayer && !username.contains(check) && !mode && !theme) {
@@ -469,7 +489,7 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 				errortfP2();
 			}
 			else if (!singleplayer && !theme && !usernameP1.contains(checkP1) && !usernameP2.contains(checkP2)
-			&& usernameP1.length() > 0 && usernameP2.length() > 0){
+			&& usernameP1.length() > 0 && usernameP2.length() > 0) {
 				lblArrow.setIcon(null);
 				lblError.setIcon(null);
 				lblArrowLeft.setIcon(null);
@@ -526,18 +546,17 @@ public class ChooseGameGUI extends JPanel implements ActionListener {
 		}
 	public void errorMode() {
 	if(!singleplayer) {
-		System.out.println("asd");
 		contentPanel.add(lblArrow2);
 		lblArrow2.setBounds(215, 430, 80, 80);
 		contentPanel.add(lblErrorMode);
 		lblErrorMode.setBounds(100, 455, 150, 93);
 	}	
-	else {
+	else 
 		contentPanel.add(lblArrow3);
 		lblArrow3.setBounds(215, 430, 80, 80);
 		contentPanel.add(lblErrorMode2);
 		lblErrorMode2.setBounds(100, 455, 150, 93);	
-	}
+	
 }	
 	public void errorTheme() {
 		if(!singleplayer) {
