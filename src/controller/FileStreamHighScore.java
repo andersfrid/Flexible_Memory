@@ -16,10 +16,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import entity.Player;
+import gui.HighScoreGui;
 
 public class FileStreamHighScore implements Serializable {
 	private String path;
 	private ControllerGUI cGUI = new ControllerGUI();
+	private HighScoreGui hSG = new HighScoreGui();
 	private Player player = new Player(null, 0);
 	private ArrayList<String> test = new ArrayList<String>();
 
@@ -35,11 +37,14 @@ public class FileStreamHighScore implements Serializable {
 	}
 
 	public void read() {
-		try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("HighScore/easy.txt")))){
+		try (ObjectInputStream ois = new ObjectInputStream(
+				new BufferedInputStream(new FileInputStream(
+						"HighScore/easy.txt")))){
 			while(true){
 				try{
 					String test = ois.readUTF();
-					System.out.println(test);
+					hSG.fillList(test);
+//					System.out.println(test);
 				} catch(IOException e1){
 					break;
 				}
