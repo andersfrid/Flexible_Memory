@@ -17,7 +17,7 @@ import javax.swing.SwingUtilities;
 public class highScoreGui extends JPanel{
 	
 	private JLabel[] name;
-	private JLabel logo;
+	private JLabel logo, user, points, turn;
 	private JPanel main, north, center;
 	
 	private JFrame frame;
@@ -44,13 +44,27 @@ public class highScoreGui extends JPanel{
 	
 	private JPanel north(){
 		north = new JPanel();
-		north.setPreferredSize(new Dimension(700,100));
+		north.setPreferredSize(new Dimension(700,170));
 		north.setBackground(Color.BLUE);
+		north.setLayout(null);
 		
 		ImageIcon iconLogo = new ImageIcon("Images/logo_small_550x75.png");
 		logo = new JLabel(iconLogo);
-		logo.setBounds(55, 20, 550, 75);;
+		logo.setBounds(55, 10, 550, 75);;
+		
+		user = new JLabel("Användarnamn");
+		user.setBounds(55, 120, 70, 70);
+		
+		points = new JLabel("Poäng");
+		points.setBounds(300, 120, 70, 70);
+		
+		turn = new JLabel("Antal drag");
+		turn.setBounds(500, 120, 70, 70);
+		
 		north.add(logo);
+		north.add(user);
+		north.add(points);
+		north.add(turn);
 		
 		return north;
 	}
