@@ -30,10 +30,10 @@ public class FileStreamHighScore implements Serializable {
 		test.add("Erik");
 		test.add("David");
 		test.add("Erika");
-		test.add("Davida");
-		test.add("Enis");
-		test.add("Dennis");
-		test.add("Klas");
+//		test.add("Davida");
+//		test.add("Enis");
+//		test.add("Dennis");
+//		test.add("Klas");
 	}
 
 	public void read() {
@@ -64,6 +64,7 @@ public class FileStreamHighScore implements Serializable {
 						"HighScore/easy.txt")))) {
 			for (String test : test) {
 				oos.writeUTF(test);
+				oos.writeUTF("\n");
 			}
 			oos.flush();
 
@@ -94,7 +95,7 @@ public class FileStreamHighScore implements Serializable {
 			break;
 		}
 	}
-
+	
 	public static void main(String[] args) {
 		FileStreamHighScore fshs = new FileStreamHighScore();
 		fshs.write();

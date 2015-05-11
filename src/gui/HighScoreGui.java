@@ -22,7 +22,7 @@ public class HighScoreGui extends JPanel {
 	private JPanel main, north, center;
 
 	private JFrame frame;
-	private String[] score;
+	private String[] score = { "David", "Joakim", "Nils" };
 	private ArrayList<String> score2 = new ArrayList<String>();
 
 	public HighScoreGui() {
@@ -53,10 +53,9 @@ public class HighScoreGui extends JPanel {
 		ImageIcon iconLogo = new ImageIcon("Images/logo_small_550x75.png");
 		logo = new JLabel(iconLogo);
 		logo.setBounds(55, 10, 550, 75);
-		;
 
 		user = new JLabel("Användarnamn");
-		user.setBounds(55, 120, 70, 70);
+		user.setBounds(55, 120, 110, 70);
 
 		points = new JLabel("Poäng");
 		points.setBounds(300, 120, 70, 70);
@@ -73,25 +72,30 @@ public class HighScoreGui extends JPanel {
 	}
 
 	private JPanel center() {
-		center = new JPanel(new GridLayout(10, 0));
+		center = new JPanel(new GridLayout(10, 10));
 		center.setBackground(Color.GREEN);
-		for (int i = 0; i < score.length; i++) {
-			name[i] = new JLabel(score[i]);
-			center.add(name[i]);
-		}
+//		for (int i = 0; i < score.length; i++) {
+//			name[i] = new JLabel();
+//			name[i].setText("hej");
+//			center.add(name[i]);
+//		}
+		
 		return center;
 	}
 
 	public void fillList(String name) {
 		score2.add(name);
-		System.out.println(name);
 
 		score = new String[score2.size()];
 		score = score2.toArray(score);
 
-		for (String s : score)
-			System.out.println(s);
+	}
 
+	private JLabel[] createLabels(){
+		for (int i = 0; i < score.length; i++) {
+			name[i] = new JLabel("David" + i);
+		}
+		return name;
 	}
 
 	public static void main(String[] args) {

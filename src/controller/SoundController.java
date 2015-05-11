@@ -249,13 +249,18 @@ public class SoundController extends Thread {
 	}
 	
 	public void stopStopMusic(){
-		music.stop();
-		music = null;
+		if(playMusic == true){
+			music.stop();
+			music = null;
+		}
+
 	}
 	
 	public void stopWinnerSound(){	
-		winnerSound.stop();
-		winnerSound = null;
+		if(winnerSound != null){
+			winnerSound.stop();
+			winnerSound = null;
+		}
 		
 	}
 
