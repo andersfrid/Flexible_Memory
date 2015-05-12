@@ -206,7 +206,7 @@ public class ControllerGUI extends Applet {
 	public void removeWinner(){
 		frameWin.remove(this);
 		frameWin.getContentPane().removeAll();
-//		frameSett.setVisible(false);
+		frameSett.setVisible(false);
 		frameWin.dispose();
 	}
 	public void winner(Player player1,Player player2,boolean singleplayer,int winnerNbr,int level,String mode){
@@ -226,7 +226,7 @@ public class ControllerGUI extends Applet {
 		frameSett.setIconImage(img.getImage());
 	}
 	public void settingsGame() {
-		frameSett.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frameSett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frameSett.setResizable(false);
 		frameSett.add(new SettingsPanel(this,0));		
 		frameSett.setVisible(true);
