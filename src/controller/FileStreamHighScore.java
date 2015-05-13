@@ -22,7 +22,6 @@ public class FileStreamHighScore implements Serializable {
 	private String path;
 	private ControllerGUI cGUI = new ControllerGUI();
 	private HighScoreGui hSG = new HighScoreGui();
-	private Player player = new Player(null, 0);
 	private ArrayList<String> test = new ArrayList<String>();
 
 	public FileStreamHighScore() {
@@ -103,7 +102,3 @@ public class FileStreamHighScore implements Serializable {
 	}
 
 }
-
-// String name = player.getName();
-// int pairs = player.getPairs();
-// int rounds = player.getRoundCount();
