@@ -5,11 +5,7 @@ import java.io.File;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import entity.Player;
-
 public class NameConvert {
-	private Player player1, player2;
-	private ControllerGUI controller;
 	String pathToGreen = "Images/Char_green/";
 	String pathToOrange = "Images/Char/";
 
