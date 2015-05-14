@@ -258,6 +258,7 @@ public class RoundController {
 	public void winner() {
 		if (singleplayer) {
 			cGUI.winner(player1,null,singleplayer,1,level,getModeName(mode));
+			cGUI.fileStream(player1, level);
 		} else {
 			if (player1.getPairs() == player2.getPairs()) { // Lika
 				cGUI.winner(player1,player2,singleplayer,0,level,getModeName(mode));

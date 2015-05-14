@@ -34,6 +34,7 @@ public class ControllerGUI extends Applet {
 	private String p1,p2;
 	private GameBoardGUI gameBoardGUI;
 	
+	
 	/**
 	 * Byter panel till singelplayer när användaren väljer singelplayer.
 	 */
@@ -233,6 +234,9 @@ public class ControllerGUI extends Applet {
 		frameSett.pack();
 		ImageIcon img = new ImageIcon("Images/iconFM.png");
 		frameSett.setIconImage(img.getImage());
+	}
+	public void fileStream(Player player1, int level){
+		new FileStreamHighScore(player1, level);
 	}
 
 }

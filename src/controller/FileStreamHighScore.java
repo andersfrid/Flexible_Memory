@@ -7,11 +7,11 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -19,31 +19,30 @@ import entity.Player;
 import gui.HighScoreGui;
 
 public class FileStreamHighScore implements Serializable {
-	private String path;
+	
 	private ControllerGUI cGUI = new ControllerGUI();
 	private HighScoreGui hSG = new HighScoreGui();
-	private ArrayList<String> test = new ArrayList<String>();
+	private ArrayList<String> name = new ArrayList<String>();
+	private ArrayList<Integer> move = new ArrayList<Integer>();
+	private int level;
+	private String highScore;
+	
 
-	public FileStreamHighScore() {
-		test.add("David");
-		test.add("Erik");
-		test.add("David");
-		test.add("Erika");
-//		test.add("Davida");
-//		test.add("Enis");
-//		test.add("Dennis");
-//		test.add("Klas");
+	public FileStreamHighScore(Player player1, int level) {
+		this.level = level;
+		path();
+		whatToPrint(player1);
+
 	}
 
 	public void read() {
-		try (ObjectInputStream ois = new ObjectInputStream(
-				new BufferedInputStream(new FileInputStream(
-						"HighScore/easy.txt")))){
+		try (BufferedReader br = new BufferedReader(new FileReader(
+						path()))){
 			while(true){
 				try{
-					String test = ois.readUTF();
+					String test = br.readLine();
 					hSG.fillList(test);
-//					System.out.println(test);
+
 				} catch(IOException e1){
 					break;
 				}
@@ -57,17 +56,14 @@ public class FileStreamHighScore implements Serializable {
 		}
 	}
 
-	public void write() {
-		try (ObjectOutputStream oos = new ObjectOutputStream(
-				new BufferedOutputStream(new FileOutputStream(
-						"HighScore/easy.txt")))) {
-			for (String test : test) {
-				oos.writeUTF(test);
-				oos.writeUTF("\n");
-			}
-			oos.flush();
-
-			read();
+	public void write(String s) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(
+						path(), true))) {
+			
+			bw.write(s);
+			bw.write("\n");
+			
+			bw.flush();
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -75,10 +71,20 @@ public class FileStreamHighScore implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void whatToPrint(Player player1){
+		String names = player1.getName();
+		int moves = player1.getRoundCount();
+		
+		
+		highScore = names +  " " + moves;
+		write(highScore);
+	}
 
-	public void path() {
-		int lvlNbr = cGUI.getLevel();
-
+	public String path() {
+		int lvlNbr = level;
+		String path = "";
+		
 		switch (lvlNbr) {
 
 		case 0:
@@ -93,12 +99,13 @@ public class FileStreamHighScore implements Serializable {
 			path = "HighScore/hard.txt";
 			break;
 		}
+		return path;
 	}
 	
-	public static void main(String[] args) {
-		FileStreamHighScore fshs = new FileStreamHighScore();
-		fshs.write();
-
-	}
+//	public static void main(String[] args) {
+//		FileStreamHighScore fshs = new FileStreamHighScore();
+//		fshs.write();
+//
+//	}
 
 }

@@ -1,29 +1,26 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 public class HighScoreGui extends JPanel {
 
 	private JLabel[] name = new JLabel[10];
-	private JLabel[] point = new JLabel[10];
 	private JLabel[] turns = new JLabel[10];
-	private JLabel logo, user, points, turn;
-	private JPanel main, north, center;
+	private JLabel logo, user, turn;
+	private JPanel main, north, east, west;
 	private static JFrame frame;
 	private String[] score = new String[10];
 	private ArrayList<String> score2 = new ArrayList<String>();
@@ -41,7 +38,8 @@ public class HighScoreGui extends JPanel {
 		main = new HighScoreGui();
 		main.setLayout(new BorderLayout());
 		main.add(north(), BorderLayout.NORTH);
-		main.add(center(), BorderLayout.CENTER);
+		main.add(west(), BorderLayout.WEST);
+		main.add(east(), BorderLayout.EAST);
 
 		return main;
 	}
@@ -61,48 +59,50 @@ public class HighScoreGui extends JPanel {
 		user = new JLabel(iconUserName);
 		user.setBounds(30, 120, 170, 50);
 
-		ImageIcon iconPoints = new ImageIcon("Images/points.png");
-		points = new JLabel(iconPoints);
-		points.setBounds(300, 120, 70, 50);
-
 		ImageIcon iconMoves = new ImageIcon("Images/antalDrag.png");
 		turn = new JLabel(iconMoves);
-		turn.setBounds(500, 120, 120, 50);
+		turn.setBounds(520, 120, 120, 50);
 
 		north.add(logo);
 		north.add(user);
-		north.add(points);
 		north.add(turn);
 
 		return north;
 	}
 
-	private synchronized JPanel center() {
-		center = new JPanel();
-		center.setLayout(new GridLayout(10, 3));
-		center.setPreferredSize(new Dimension (700, 700));
-		center.setOpaque(false);
-
+	private synchronized JPanel west() {
+		west = new JPanel();
+		west.setLayout(new GridLayout(10, 1));
+		west.setPreferredSize(new Dimension (233, 700));
+		west.setOpaque(false);
+		
 		for (int i = 0; i < score.length; i++) {
 			name[i] = new JLabel();
-			name[i].setText("hejsan");
-			center.add(name[i]);
+			name[i].setText("David");
+			name[i].setHorizontalAlignment(JLabel.CENTER);
+			west.add(name[i]);
 		}
 		
-		for (int i = 0; i < score.length; i++){
-			point[i] = new JLabel();
-			point[i].setText("0");
-			center.add(point[i]);
-		}
+		return west;
+	}
+		
+	private synchronized JPanel east() {
+		east = new JPanel();
+		east.setLayout(new GridLayout(10, 1));
+		east.setPreferredSize(new Dimension (233, 700));
+		east.setOpaque(false);
 		
 		for (int i = 0; i < score.length; i++){
 			turns[i] = new JLabel();
 			turns[i].setText("20");
-			center.add(turns[i]);
+			turns[i].setHorizontalAlignment(JLabel.CENTER);
+			east.add(turns[i]);
 		}
 		
-		return center;
+		return east;
 	}
+	
+	
 
 	public String[] fillList(String name) {
 		score2.add(name);
