@@ -20,6 +20,8 @@ import javax.swing.SwingUtilities;
 public class HighScoreGui extends JPanel {
 
 	private JLabel[] name = new JLabel[10];
+	private JLabel[] point = new JLabel[10];
+	private JLabel[] turns = new JLabel[10];
 	private JLabel logo, user, points, turn;
 	private JPanel main, north, center;
 	private static JFrame frame;
@@ -75,9 +77,9 @@ public class HighScoreGui extends JPanel {
 		return north;
 	}
 
-	private JPanel center() {
+	private synchronized JPanel center() {
 		center = new JPanel();
-		center.setLayout(new GridLayout(10,1));
+		center.setLayout(new GridLayout(10, 3));
 		center.setPreferredSize(new Dimension (700, 700));
 		center.setOpaque(false);
 
@@ -85,6 +87,18 @@ public class HighScoreGui extends JPanel {
 			name[i] = new JLabel();
 			name[i].setText("hejsan");
 			center.add(name[i]);
+		}
+		
+		for (int i = 0; i < score.length; i++){
+			point[i] = new JLabel();
+			point[i].setText("0");
+			center.add(point[i]);
+		}
+		
+		for (int i = 0; i < score.length; i++){
+			turns[i] = new JLabel();
+			turns[i].setText("20");
+			center.add(turns[i]);
 		}
 		
 		return center;
