@@ -22,14 +22,35 @@ import gui.HighScoreGui;
 
 public class FileStreamHighScore implements Serializable {
 
-	private ControllerGUI cGUI = new ControllerGUI();
-	private HighScoreGui hSG = new HighScoreGui();
-	
-	
 	public FileStreamHighScore(Player player, int level) {
 		writeAndSort(player, level);
-		
+	}
+	
+	public FileStreamHighScore(){}
 
+	public String[][] getScore(int level) {
+		File file = getPath(level);
+		int count = 0;
+
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			while (br.readLine() != null) {
+				count++;
+			}
+		} catch (Exception e) {
+		}
+
+		String[][] score = new String[count][2];
+
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			String read;
+			for(int i = 0; i < score.length; i++){
+				read = br.readLine();
+				score[i][0] = read.substring(0, read.indexOf("."));
+				score[i][1] = read.substring(read.indexOf(".") + 1);
+			}
+		} catch (Exception e) {}
+
+		return score;
 	}
 
 	public File getPath(int level) {
@@ -49,7 +70,7 @@ public class FileStreamHighScore implements Serializable {
 		case 2:
 			path = new File("HighScore/hard.txt");
 			break;
-			
+
 		default:
 			path = new File("HighScore/easy.txt");
 			break;
@@ -65,7 +86,6 @@ public class FileStreamHighScore implements Serializable {
 
 			while ((read = br.readLine()) != null) {
 				count++;
-
 			}
 		} catch (IOException e) {
 
