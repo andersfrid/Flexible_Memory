@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,99 +14,135 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import entity.Player;
 import gui.HighScoreGui;
 
 public class FileStreamHighScore implements Serializable {
-	
+
 	private ControllerGUI cGUI = new ControllerGUI();
 	private HighScoreGui hSG = new HighScoreGui();
-	private ArrayList<String> name = new ArrayList<String>();
-	private ArrayList<Integer> move = new ArrayList<Integer>();
-	private int level;
-	private String highScore;
 	
-
-	public FileStreamHighScore(Player player1, int level) {
-		this.level = level;
-		path();
-		whatToPrint(player1);
-
-	}
-
-	public void read() {
-		try (BufferedReader br = new BufferedReader(new FileReader(
-						path()))){
-			while(true){
-				try{
-					String test = br.readLine();
-					hSG.fillList(test);
-
-				} catch(IOException e1){
-					break;
-				}
-			}
-				
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e2) {
-			
-			e2.printStackTrace();
-		}
-	}
-
-	public void write(String s) {
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(
-						path(), true))) {
-			
-			bw.write(s);
-			bw.write("\n");
-			
-			bw.flush();
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 	
-	public void whatToPrint(Player player1){
-		String names = player1.getName();
-		int moves = player1.getRoundCount();
+	public FileStreamHighScore(Player player, int level) {
+		writeAndSort(player, level);
 		
-		
-		highScore = names +  " " + moves;
-		write(highScore);
+
 	}
 
-	public String path() {
+	public File getPath(int level) {
 		int lvlNbr = level;
-		String path = "";
-		
+		File path;
+
 		switch (lvlNbr) {
 
 		case 0:
-			path = "HighScore/easy.txt";
+			path = new File("HighScore/easy.txt");
 			break;
 
 		case 1:
-			path = "HighScore/medium.txt";
+			path = new File("HighScore/medium.txt");
 			break;
 
 		case 2:
-			path = "HighScore/hard.txt";
+			path = new File("HighScore/hard.txt");
+			break;
+			
+		default:
+			path = new File("HighScore/easy.txt");
 			break;
 		}
 		return path;
 	}
-	
-//	public static void main(String[] args) {
-//		FileStreamHighScore fshs = new FileStreamHighScore();
-//		fshs.write();
-//
-//	}
+
+	public void writeAndSort(Player player, int level) {
+		File file = getPath(level);
+		String read;
+		int count = 0;
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+
+			while ((read = br.readLine()) != null) {
+				count++;
+
+			}
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			String readName;
+			String[][] name = new String[count + 1][2];
+			for (int i = 0; i < name.length - 1; i++) {
+				readName = br.readLine();
+				name[i][0] = readName.substring(0, readName.indexOf("."));
+				System.out.println(name[i][0]);
+				name[i][1] = readName.substring(readName.indexOf(".") + 1);
+				System.out.println(name[i][1]);
+			}
+
+			name[name.length - 1][0] = player.getName();
+			name[name.length - 1][1] = "" + player.getRoundCount();
+
+			for (int i = 0; i < name.length; i++) {
+				System.out.println(name[i][0] + " har poäng: " + name[i][1]);
+			}
+
+			System.out.println("-------------------------");
+			file.delete();
+			File newFile = new File("HighScore/easy.txt");
+			newFile.createNewFile();
+
+			// Sortera
+
+			boolean flag = true;
+			String temp1;
+			String temp2;
+			while (flag) {
+				flag = false;
+				for (int i = 0; i < name.length - 1; i++) {
+
+					if (Integer.parseInt(name[i][1]) > Integer
+							.parseInt(name[i + 1][1])) { // change to > for
+															// ascending sort
+						temp1 = name[i][0];
+						temp2 = name[i][1];
+						name[i][0] = name[i + 1][0];
+						name[i][1] = name[i + 1][1];
+
+						name[i + 1][0] = temp1;
+						name[i + 1][1] = temp2;
+						flag = true;
+					}
+
+				}
+
+			}
+			for (int i = 0; i < name.length; i++) {
+				System.out.println(name[i][0] + " har poäng: " + name[i][1]);
+			}
+
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(newFile,
+					true))) {
+				for (int i = 0; i < name.length; i++) {
+					bw.write(name[i][0] + "." + name[i][1] + "\n");
+				}
+			}
+
+		} catch (IOException e) {
+
+		}
+
+	}
+
+	public static void main(String[] args) {
+		Player david = new Player("andoifgndsoifns", 1);
+		david.addRound();
+		david.addRound();
+		david.addRound();
+		FileStreamHighScore fshs = new FileStreamHighScore(david, 0);
+
+	}
 
 }
