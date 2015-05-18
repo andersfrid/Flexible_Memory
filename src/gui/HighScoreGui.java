@@ -39,6 +39,7 @@ public class HighScoreGui extends JPanel {
 		main.setLayout(new BorderLayout());
 		main.add(north(), BorderLayout.NORTH);
 		main.add(center(), BorderLayout.CENTER);
+		main.setOpaque(false);
 
 		return main;
 	}
@@ -47,20 +48,20 @@ public class HighScoreGui extends JPanel {
 		north = new JPanel();
 		north.setPreferredSize(new Dimension(1000, 170));
 		north.setLayout(null);
-		// north.setOpaque(false);
-		north.setBackground(Color.BLUE);
+		north.setOpaque(false);
+//		north.setBackground(Color.BLUE);
 
 		ImageIcon iconLogo = new ImageIcon("Images/logo_small_550x75.png");
 		logo = new JLabel(iconLogo);
 		logo.setBounds(225, 20, 550, 75);
 
-		ImageIcon iconUserName = new ImageIcon("Images/anvNamn.png");
+		ImageIcon iconUserName = new ImageIcon("Images/namesHigh.png");
 		user = new JLabel(iconUserName);
-		user.setBounds(30, 120, 170, 50);
+		user.setBounds(200, 120, 250, 50);
 
-		ImageIcon iconMoves = new ImageIcon("Images/antalDrag.png");
+		ImageIcon iconMoves = new ImageIcon("Images/roundsHigh.png");
 		turn = new JLabel(iconMoves);
-		turn.setBounds(520, 120, 120, 50);
+		turn.setBounds(650, 120, 250, 50);
 
 		north.add(logo);
 		north.add(user);
@@ -73,9 +74,10 @@ public class HighScoreGui extends JPanel {
 		center = new JPanel();
 		center.setLayout(null);
 		center.setOpaque(true);
-		center.setBackground(Color.RED);
+//		center.setBackground(Color.RED);
 		center.setPreferredSize(new Dimension(100, 500));
 		center.add(nameList());
+		center.setOpaque(false);
 		return center;
 	}
 
@@ -85,8 +87,8 @@ public class HighScoreGui extends JPanel {
 		String[][] score = fshs.getScore(0);
 		panel.setLayout(null);
 		panel.setBounds(150, 10, 700, 500);
-		panel.setBackground(new Color(123, 123, 123));
-
+//		panel.setBackground(new Color(123, 123, 123));
+		
 		JPanel namePanel;
 		JPanel placePanel;
 		JPanel roundsPanel;
@@ -94,7 +96,7 @@ public class HighScoreGui extends JPanel {
 		
 		for (int i = 0; i < 8; i++) {
 			placePanel = new JPanel();
-			placePanel.setBackground(new Color(244, 210, 210));
+//			placePanel.setBackground(new Color(244, 210, 210));
 			placePanel.setBounds(15, i * 60 + 10, 50, 50);
 			placePanel.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
@@ -107,7 +109,7 @@ public class HighScoreGui extends JPanel {
 			panel.add(placePanel);
 
 			namePanel = new JPanel();
-			namePanel.setBackground(new Color(200, 255, 100));
+//			namePanel.setBackground(new Color(200, 255, 100));
 			namePanel.setBounds(110, i * 60 + 10, 410, 50);
 			namePanel.setLayout(new FlowLayout(FlowLayout.CENTER, -12, 0));
 
@@ -121,7 +123,7 @@ public class HighScoreGui extends JPanel {
 			panel.add(namePanel);
 
 			roundsPanel = new JPanel();
-			roundsPanel.setBackground(new Color(230, 210, 1));
+//			roundsPanel.setBackground(new Color(230, 210, 1));
 			roundsPanel.setBounds(550, i * 60 + 10, 120, 50);
 			roundsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, -12, 0));
 			panel.add(roundsPanel);
@@ -134,7 +136,7 @@ public class HighScoreGui extends JPanel {
 			}
 
 		}
-
+		panel.setOpaque(false);
 		return panel;
 	}
 
