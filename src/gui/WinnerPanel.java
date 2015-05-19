@@ -4,13 +4,16 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import controller.ControllerGUI;
 import controller.NameConvert;
 import entity.Player;
@@ -24,7 +27,7 @@ import entity.Player;
 public class WinnerPanel extends JPanel implements ActionListener {
 	private JPanel pnl_bg;
 	private JLabel logo;
-	private JButton startOver, home;
+	private JButton startOver, home, highScore;
 	private ControllerGUI controller;
 	private boolean singleplayer;
 	private String modeText, levelText;
@@ -76,13 +79,24 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		ImageIcon homeImg = new ImageIcon("Images/home.jpg");
 		home = new JButton(homeImg);
 		home.setBounds(510, 580, 310, 100);
+		
+		ImageIcon score = new ImageIcon("Images/greenHighScore.png");
+		highScore = new JButton(score);
+		highScore.setBounds(350, 350, 300, 200);
+		highScore.setBorderPainted(false);
+		highScore.setBorder(null);
+		highScore.setFocusable(false);
+		highScore.setMargin(new Insets(0, 0, 0, 0));
+		highScore.setContentAreaFilled(false);
 
 		pnl_bg.add(logo);
 		pnl_bg.add(startOver);
 		pnl_bg.add(home);
+		pnl_bg.add(highScore);
 
 		startOver.addActionListener(this);
 		home.addActionListener(this);
+		highScore.addActionListener(this);
 
 		add(pnl_bg);
 		controller.stopMusic(2);
@@ -276,6 +290,9 @@ public class WinnerPanel extends JPanel implements ActionListener {
 			controller.homeWin();
 			controller.stopMusic(3);
 			controller.startMusic(1);
+		}
+		if (e.getSource() == highScore){
+			controller.highScoreGUI();
 		}
 	}
 	

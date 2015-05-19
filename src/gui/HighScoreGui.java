@@ -154,20 +154,20 @@ public class HighScoreGui extends JPanel {
 	public void paintComponent(Graphics g) {
 		g.drawImage(backGround, 0, 0, getWidth(), getHeight(), this);
 	}
-
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				frame = new JFrame();
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setPreferredSize(new Dimension(1000, 700));
-				frame.setResizable(false);
-				frame.add(new HighScoreGui());
-				frame.setVisible(true);
-				frame.pack();
-
-			}
-		});
-
-	}
+//
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(new Runnable() {
+//			public void run() {
+//				frame = new JFrame();
+//				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//				frame.setPreferredSize(new Dimension(1000, 700));
+//				frame.setResizable(false);
+//				frame.add(new HighScoreGui());
+//				frame.setVisible(true);
+//				frame.pack();
+//
+//			}
+//		});
+//
+//	}
 }

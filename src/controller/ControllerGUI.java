@@ -2,6 +2,7 @@ package controller;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,6 +11,7 @@ import entity.Card;
 import entity.Player;
 import gui.ChooseGameGUI;
 import gui.GameBoardGUI;
+import gui.HighScoreGui;
 import gui.SettingsPanel;
 import gui.StartGUI;
 import gui.WinnerPanel;
@@ -23,7 +25,7 @@ import gui.WinnerPanel;
 public class ControllerGUI extends Applet {
 
 	private AudioClip audioClip;
-	private JFrame frame;
+	private JFrame frame, highScore;
 	private JFrame frameSett = new JFrame("Settings");
 	private JFrame frameWin;
 	private int level, mode=0; //Bara ett spelläge än
@@ -237,6 +239,15 @@ public class ControllerGUI extends Applet {
 	}
 	public void fileStream(Player player1, int level){
 		new FileStreamHighScore(player1, level);
+	}
+	
+	public void highScoreGUI(){
+		highScore = new JFrame();
+		highScore.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		highScore.add(new HighScoreGui());
+		highScore.setResizable(false);
+		highScore.pack();
+		highScore.setVisible(true);
 	}
 
 }
