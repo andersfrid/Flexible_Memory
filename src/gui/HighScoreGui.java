@@ -21,7 +21,7 @@ import controller.NameConvert;
 
 public class HighScoreGui extends JPanel {
 
-	private JLabel logo, user, turn;
+	private JLabel logo, user, turn, pos;
 	private JPanel main, north, center;
 	private static JFrame frame;
 	private NameConvert converter = new NameConvert();
@@ -57,7 +57,11 @@ public class HighScoreGui extends JPanel {
 
 		ImageIcon iconUserName = new ImageIcon("Images/namesHigh.png");
 		user = new JLabel(iconUserName);
-		user.setBounds(200, 120, 250, 50);
+		user.setBounds(350, 120, 250, 50);
+		
+		ImageIcon iconPos = new ImageIcon("Images/#.png");
+		pos = new JLabel(iconPos);
+		pos.setBounds(70, 120, 250, 50);
 
 		ImageIcon iconMoves = new ImageIcon("Images/roundsHigh.png");
 		turn = new JLabel(iconMoves);
@@ -66,6 +70,7 @@ public class HighScoreGui extends JPanel {
 		north.add(logo);
 		north.add(user);
 		north.add(turn);
+		north.add(pos);
 
 		return north;
 	}
@@ -100,6 +105,7 @@ public class HighScoreGui extends JPanel {
 			placePanel.setBounds(15, i * 60 + 10, 50, 50);
 			placePanel.setLayout(new FlowLayout(FlowLayout.CENTER, -19, 0));
 
+			placePanel.setOpaque(false);
 			if (i < score.length) {
 				text = converter.generate("" + (i + 1), 1);
 				for (int j = 0; j < text.length; j++) {
@@ -113,6 +119,7 @@ public class HighScoreGui extends JPanel {
 			namePanel.setBounds(110, i * 60 + 10, 410, 50);
 			namePanel.setLayout(new FlowLayout(FlowLayout.CENTER, -12, 0));
 
+			namePanel.setOpaque(false);
 			if (i < score.length) {
 				text = converter.generate(score[i][0], 1);
 				for (int j = 0; j < text.length; j++) {
@@ -128,6 +135,7 @@ public class HighScoreGui extends JPanel {
 			roundsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, -12, 0));
 			panel.add(roundsPanel);
 
+			roundsPanel.setOpaque(false);
 			if (i < score.length) {
 				text = converter.generate(score[i][1], 1);
 				for (int j = 0; j < text.length; j++) {
