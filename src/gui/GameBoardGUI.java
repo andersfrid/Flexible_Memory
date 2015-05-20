@@ -25,8 +25,8 @@ import controller.RoundController;
 import entity.Card;
 
 /**
- * 
- * @author David
+ * En klass som representerar själva spelplanen, här ritas alla kort ut och lite annat smått och gott.
+ * @author David, Andreas
  *
  */
 public class GameBoardGUI extends JPanel implements ActionListener {
@@ -49,6 +49,10 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	public GameBoardGUI(){
 		
 	}
+	
+	/**
+	 * En konstruktor som ritar upp våran spelplan.
+	 */
 	public GameBoardGUI(int levelNbr, Card[][] gameBoard, ControllerGUI cg,
 			RoundController rc, String modeName, boolean singleplayer,
 			String player1Name, String player2Name) {

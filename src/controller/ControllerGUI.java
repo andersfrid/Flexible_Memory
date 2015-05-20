@@ -5,7 +5,6 @@ import java.applet.AudioClip;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import entity.Card;
 import entity.Player;
@@ -154,6 +153,10 @@ public class ControllerGUI extends Applet {
 		frame.setIconImage(img.getImage());
 	}
 	
+	/**
+	 * Metod som uppdaterar rundans statistik i gameBoardGUI.
+	 * @param player
+	 */
 	public void updateRoundStat(Player player){
 		gameBoardGUI.updateStats(player.getRoundCount(), player.getPairs(), player.getID());
 	
@@ -173,6 +176,10 @@ public class ControllerGUI extends Applet {
 		frame.setIconImage(img.getImage());
 
 	}
+	
+	/**
+	 * Metod som startar om spelet när användaren väljer att starta om spelet.
+	 */
 	public void restart(){
 		frame.getContentPane().removeAll();
 		frame.getContentPane().revalidate();
@@ -181,6 +188,10 @@ public class ControllerGUI extends Applet {
 		frame.setIconImage(img.getImage());
 		startGame(p1, p2);
 	}
+	
+	/**
+	 * Metod som tar användaren till StartGUI där han kan välja om han vill spela multi eller singleplayer eller avsluta.
+	 */
 	public void home(){
 		removeSettings();
 		frame.getContentPane().removeAll();
@@ -191,6 +202,10 @@ public class ControllerGUI extends Applet {
 		frame.setIconImage(img.getImage());
 		
 	}
+	
+	/**
+	 * Metod som tar användaren till home när han har vunnit om han nu vill det.
+	 */
 	public void homeWin(){
 		removeWinner();
 		frame.getContentPane().removeAll();
@@ -201,17 +216,33 @@ public class ControllerGUI extends Applet {
 		frame.setIconImage(img.getImage());
 	}
 
+	/**
+	 * Metod som tar bort settingsrutan när användaren klickar på x:et.
+	 */
 	public void removeSettings(){
-		
 		frameSett.dispose();
 		frameSett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
+	
+	/**
+	 * Metod som tar bort vinnarrutan när användaren har klickat sig vidare i spelet.
+	 */
 	public void removeWinner(){
 		frameWin.remove(this);
 		frameWin.getContentPane().removeAll();
 		frameSett.setVisible(false);
 		frameWin.dispose();
 	}
+	
+	/**
+	 * Metod som ritar upp vinnarpanelen. Får in ett antal olika värden som används för att visa vem som vunnit och dylikt.
+	 * @param player1
+	 * @param player2
+	 * @param singleplayer
+	 * @param winnerNbr
+	 * @param level
+	 * @param mode
+	 */
 	public void winner(Player player1,Player player2,boolean singleplayer,int winnerNbr,int level,String mode){
 		frameWin= new JFrame("Winner");
 		frameWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -220,6 +251,10 @@ public class ControllerGUI extends Applet {
 		frameWin.pack();
 		frameWin.setVisible(true);
 	}
+	
+	/**
+	 * Metod som används för att rita om settings.
+	 */
 	public void repaintSettings(){
 		frameSett.getContentPane().removeAll();
 		frameSett.add(new SettingsPanel(this,0));
@@ -228,6 +263,10 @@ public class ControllerGUI extends Applet {
 		ImageIcon img = new ImageIcon("Images/iconFM.png");
 		frameSett.setIconImage(img.getImage());
 	}
+	
+	/**
+	 * Metod som startar settings rutan i spelet.
+	 */
 	public void settingsGame() {
 		frameSett.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frameSett.setResizable(false);
@@ -237,10 +276,19 @@ public class ControllerGUI extends Applet {
 		ImageIcon img = new ImageIcon("Images/iconFM.png");
 		frameSett.setIconImage(img.getImage());
 	}
+	
+	/**
+	 * Vi skickar in en player och vilken level till Filstream klassen så den vet till vilken fil den skall skriva till och vem som spelet.
+	 * @param player1
+	 * @param level
+	 */
 	public void fileStream(Player player1, int level){
 		new FileStreamHighScore(player1, level);
 	}
 	
+	/**
+	 * Metod som startar ett HighScoreGUI när användaren väljer att klicka på den knappen.
+	 */
 	public void highScoreGUI(){
 		highScore = new JFrame();
 		highScore.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

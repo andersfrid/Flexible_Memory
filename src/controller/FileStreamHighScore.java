@@ -20,14 +20,28 @@ import java.util.ArrayList;
 import entity.Player;
 import gui.HighScoreGui;
 
+
+/**
+ * En klass som skriver användarens namn och hur många drag han behövde för att klara en nivå till en fil.
+ * Beroende på vilken nivå användaren har valt att spela på.
+ * @author David, Andreas
+ *
+ */
 public class FileStreamHighScore implements Serializable {
 
 	public FileStreamHighScore(Player player, int level) {
 		writeAndSort(player, level);
 	}
 	
-	public FileStreamHighScore(){}
+	public FileStreamHighScore(){
+		
+	}
 
+	/**
+	 * Metod som hämtar det som finns på filerna och kan användas då för att se vad som finns på filen.
+	 * @param level
+	 * @return en array med värdena från filen.
+	 */
 	public String[][] getScore(int level) {
 		File file = getPath(level);
 		int count = 0;
@@ -53,6 +67,11 @@ public class FileStreamHighScore implements Serializable {
 		return score;
 	}
 
+	/**
+	 * Metod som väljer vilken typ av fil som skall användas när det skall läsas och skrivas till fil.
+	 * @param level
+	 * @return en sökväg.
+	 */
 	public File getPath(int level) {
 		int lvlNbr = level;
 		File path;
@@ -78,6 +97,11 @@ public class FileStreamHighScore implements Serializable {
 		return path;
 	}
 
+	/**
+	 * En metod som skriver och sorterar användaren efter deras poäng till rätt fil.
+	 * @param player
+	 * @param level
+	 */
 	public void writeAndSort(Player player, int level) {
 		File file = getPath(level);
 		String read;
@@ -97,19 +121,14 @@ public class FileStreamHighScore implements Serializable {
 			for (int i = 0; i < name.length - 1; i++) {
 				readName = br.readLine();
 				name[i][0] = readName.substring(0, readName.indexOf("."));
-				System.out.println(name[i][0]);
 				name[i][1] = readName.substring(readName.indexOf(".") + 1);
-				System.out.println(name[i][1]);
+				
 			}
 
 			name[name.length - 1][0] = player.getName();
 			name[name.length - 1][1] = "" + player.getRoundCount();
 
-			for (int i = 0; i < name.length; i++) {
-				System.out.println(name[i][0] + " har poäng: " + name[i][1]);
-			}
-
-			System.out.println("-------------------------");
+			
 			file.delete();
 			File newFile = new File("HighScore/easy.txt");
 			newFile.createNewFile();
@@ -124,8 +143,8 @@ public class FileStreamHighScore implements Serializable {
 				for (int i = 0; i < name.length - 1; i++) {
 
 					if (Integer.parseInt(name[i][1]) > Integer
-							.parseInt(name[i + 1][1])) { // change to > for
-															// ascending sort
+							.parseInt(name[i + 1][1])) { 
+															
 						temp1 = name[i][0];
 						temp2 = name[i][1];
 						name[i][0] = name[i + 1][0];
@@ -139,10 +158,7 @@ public class FileStreamHighScore implements Serializable {
 				}
 
 			}
-			for (int i = 0; i < name.length; i++) {
-				System.out.println(name[i][0] + " har poäng: " + name[i][1]);
-			}
-
+			
 			try (BufferedWriter bw = new BufferedWriter(new FileWriter(newFile,
 					true))) {
 				for (int i = 0; i < name.length; i++) {
@@ -155,14 +171,4 @@ public class FileStreamHighScore implements Serializable {
 		}
 
 	}
-
-	public static void main(String[] args) {
-		Player david = new Player("andoifgndsoifns", 1);
-		david.addRound();
-		david.addRound();
-		david.addRound();
-		FileStreamHighScore fshs = new FileStreamHighScore(david, 0);
-
-	}
-
 }

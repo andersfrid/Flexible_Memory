@@ -79,24 +79,15 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		ImageIcon homeImg = new ImageIcon("Images/home.jpg");
 		home = new JButton(homeImg);
 		home.setBounds(510, 580, 310, 100);
-		
-		ImageIcon score = new ImageIcon("Images/greenHighScore.png");
-		highScore = new JButton(score);
-		highScore.setBounds(350, 350, 300, 200);
-		highScore.setBorderPainted(false);
-		highScore.setBorder(null);
-		highScore.setFocusable(false);
-		highScore.setMargin(new Insets(0, 0, 0, 0));
-		highScore.setContentAreaFilled(false);
 
 		pnl_bg.add(logo);
 		pnl_bg.add(startOver);
 		pnl_bg.add(home);
-		pnl_bg.add(highScore);
+		
 
 		startOver.addActionListener(this);
 		home.addActionListener(this);
-		highScore.addActionListener(this);
+		
 
 		add(pnl_bg);
 		controller.stopMusic(2);
@@ -150,6 +141,19 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		}
 		pnlRoundsText.setOpaque(false);
 		pnl_bg.add(pnlRoundsText);
+		
+		ImageIcon score = new ImageIcon("Images/greenHighScore.png");
+		highScore = new JButton(score);
+		highScore.setBounds(350, 350, 300, 200);
+		highScore.setBorderPainted(false);
+		highScore.setBorder(null);
+		highScore.setFocusable(false);
+		highScore.setMargin(new Insets(0, 0, 0, 0));
+		highScore.setContentAreaFilled(false);
+		
+		highScore.addActionListener(this);
+		
+		pnl_bg.add(highScore);
 
 	}
 
