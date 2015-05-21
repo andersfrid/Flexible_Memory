@@ -33,6 +33,11 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		
 	}
 	
+	/**
+	 * Konstruktor i settingsPanel som ritar upp settings panelen.
+	 * @param controller
+	 * @param choose
+	 */
 	public SettingsPanel(ControllerGUI controller, int choose) {
 		this.controller = controller;
 		this.choose = choose;

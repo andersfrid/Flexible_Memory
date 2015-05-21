@@ -248,6 +248,9 @@ public class SoundController extends Thread {
 		startMusic(1);
 	}
 	
+	/**
+	 * En metod som stoppar musik
+	 */
 	public void stopStopMusic(){
 		if(playMusic == true){
 			music.stop();
@@ -256,6 +259,9 @@ public class SoundController extends Thread {
 
 	}
 	
+	/**
+	 * En metod som stoppar winnarmusiken.
+	 */
 	public void stopWinnerSound(){	
 		if(winnerSound != null){
 			winnerSound.stop();

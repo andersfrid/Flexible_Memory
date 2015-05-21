@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -14,7 +13,6 @@ import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -34,7 +32,6 @@ public class GameBoardGUI extends JPanel implements ActionListener {
 	private JPanel mainPanel, northPanel, gameArea, pnlPlayerOne, pnlPlayerTwo,
 			pnlMiddle, pnlNameOne, pnlNameTwo, pnlPlayer1Pairs,
 			pnlPlayer1Rounds, pnlPlayer2Pairs, pnlPlayer2Rounds;
-	private JFrame frame;
 	private JButton button;
 	private JButton[][] buttons;
 	private Card[][] gameBoard;

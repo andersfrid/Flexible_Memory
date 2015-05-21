@@ -26,6 +26,15 @@ public class RoundController {
 	private int level;
 	private boolean singleplayer;
 
+	/**
+	 * Konstruktor som får in ett antal olika värden och startar metoden som skapar ett nytt gameboard.
+	 * @param level
+	 * @param mode
+	 * @param singleplayer
+	 * @param player1Name
+	 * @param player2Name
+	 * @param cGUI
+	 */
 	public RoundController(int level, int mode, boolean singleplayer,
 			String player1Name, String player2Name, ControllerGUI cGUI) {
 		this.mode = mode;

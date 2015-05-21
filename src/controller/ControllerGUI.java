@@ -134,6 +134,10 @@ public class ControllerGUI extends Applet {
 		s.musicChooser(songNumber);
 	}
 	
+	/**
+	 * Metod som visar vems tur det är som skall spela i multiplayer.
+	 * @param player
+	 */
 	public void swapHighlightPlayer(int player){
 		gameBoardGUI.swapCurrentPlayer(player);
 	}

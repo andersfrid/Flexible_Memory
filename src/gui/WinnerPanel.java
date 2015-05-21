@@ -94,6 +94,10 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		controller.startMusic(2);
 	}
 
+	/**
+	 * Metod som skriver ut resltat i winnerpanel, när det är singelplayer läget aktiverat.
+	 * @param player
+	 */
 	private void printSingleplayer(Player player) {
 		/* namn på spelaren */
 		JPanel pnlWinnerText = new JPanel();
@@ -157,6 +161,12 @@ public class WinnerPanel extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * Metod som skriver ut vinneren och förloraren av rundorna i mutliplayerläget.
+	 * @param player1
+	 * @param player2
+	 * @param winnerNbr
+	 */
 	private void printMultiplayer(Player player1, Player player2, int winnerNbr) {
 		Icon[] text;
 
@@ -281,6 +291,9 @@ public class WinnerPanel extends JPanel implements ActionListener {
 		pnl_bg.add(pnlLevelText);
 	}
 
+	/**
+	 * Metod som hanterar våra knapptryck.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == startOver) {
 			controller.startSound(5);
